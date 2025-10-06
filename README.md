@@ -33,7 +33,7 @@ The portal supports role-based access for administrators, faculty, and students,
 
 
 
-##### 📊 Examination \& Results
+### 📊 Examination \& Results
 
 * Exam scheduling
 * Marks entry by faculty
@@ -42,7 +42,7 @@ The portal supports role-based access for administrators, faculty, and students,
 
 
 
-##### 📚 Library Module
+### 📚 Library Module
 
 * Book catalog management
 * Issue and return tracking
@@ -50,7 +50,7 @@ The portal supports role-based access for administrators, faculty, and students,
 
 
 
-##### 💰 Finance
+### 💰 Finance
 
 * Fee collection and tracking
 * Payment status monitoring
@@ -58,7 +58,7 @@ The portal supports role-based access for administrators, faculty, and students,
 
 
 
-##### ⚙️ Modules Included
+### ⚙️ Modules Included
 
 * Student Management
 * Faculty Management
@@ -73,7 +73,7 @@ The portal supports role-based access for administrators, faculty, and students,
 
 
 
-##### 🚀 Getting Started
+### 🚀 Getting Started
 
 * Clone or download the project files.
 * Import the database schema into your preferred SQL server.
@@ -82,7 +82,7 @@ The portal supports role-based access for administrators, faculty, and students,
 
 
 
-##### 👥 User Roles
+### 👥 User Roles
 
 * Admin – Full system access (add/remove users, manage modules).
 * Faculty – Limited access for managing classes, attendance, and results.
@@ -90,7 +90,7 @@ The portal supports role-based access for administrators, faculty, and students,
 
 
 
-##### 📌 Future Enhancements
+### 📌 Future Enhancements
 
 * Mobile-friendly responsive UI
 * Online payment gateway integration
