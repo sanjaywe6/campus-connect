@@ -89,9 +89,9 @@
 				<!-- Field: Department -->
 				<div class="form-group students_table-department">
 					<hr class="hidden-md hidden-lg">
-					<label class="control-label col-lg-3" for="department">Department</label>
+					<label class="control-label col-lg-3" for="department" data-parent_link="view_parent_modal">Department</label>
 					<div class="col-lg-9">
-						<input maxlength="255" type="text" class="form-control" name="department" id="department" value="<%%VALUE(department)%%>">
+						<div class="lookup-flex"><%%COMBO(department)%%><%%PLINK(department)%%><%%ADDNEW(departments_table)%%></div>
 					</div>
 				</div>
 

@@ -33,8 +33,45 @@
 	// drop-downs config
 	$lookups = [
 		'students_table' => [
+			'department' => [
+				'parent_table' => 'departments_table',
+				'parent_pk_field' => 'id',
+				'parent_caption' => 'IF(CHAR_LENGTH(`departments_table`.`department_name`) || CHAR_LENGTH(`departments_table`.`hod`), CONCAT_WS(\'\', `departments_table`.`department_name`, \'-\', `departments_table`.`hod`), \'\')',
+				'parent_from' => '`departments_table` ',
+				'filterers' => [],
+				'custom_query' => '',
+				'inherit_permissions' => false,
+				'list_type' => 0,
+				'not_null' => false,
+			],
 		],
 		'faculty_table' => [
+			'department' => [
+				'parent_table' => 'departments_table',
+				'parent_pk_field' => 'id',
+				'parent_caption' => 'IF(CHAR_LENGTH(`departments_table`.`department_name`) || CHAR_LENGTH(`departments_table`.`hod`), CONCAT_WS(\'\', `departments_table`.`department_name`, \'-\', `departments_table`.`hod`), \'\')',
+				'parent_from' => '`departments_table` ',
+				'filterers' => [],
+				'custom_query' => '',
+				'inherit_permissions' => false,
+				'list_type' => 0,
+				'not_null' => false,
+			],
+		],
+		'departments_table' => [
+		],
+		'courses_table' => [
+			'department' => [
+				'parent_table' => 'departments_table',
+				'parent_pk_field' => 'id',
+				'parent_caption' => 'IF(CHAR_LENGTH(`departments_table`.`department_name`) || CHAR_LENGTH(`departments_table`.`hod`), CONCAT_WS(\'\', `departments_table`.`department_name`, \'-\', `departments_table`.`hod`), \'\')',
+				'parent_from' => '`departments_table` ',
+				'filterers' => [],
+				'custom_query' => '',
+				'inherit_permissions' => false,
+				'list_type' => 0,
+				'not_null' => false,
+			],
 		],
 	];
 

@@ -26,7 +26,7 @@
 		"`faculty_table`.`phone`" => "phone",
 		"`faculty_table`.`address`" => "address",
 		"if(`faculty_table`.`hire_date`,date_format(`faculty_table`.`hire_date`,'%d/%m/%Y'),'')" => "hire_date",
-		"`faculty_table`.`department`" => "department",
+		"IF(    CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') /* Department */" => "department",
 		"`faculty_table`.`designation`" => "designation",
 		"`faculty_table`.`created_by`" => "created_by",
 		"`faculty_table`.`created_at`" => "created_at",
@@ -65,7 +65,7 @@
 		"`faculty_table`.`phone`" => "phone",
 		"`faculty_table`.`address`" => "address",
 		"if(`faculty_table`.`hire_date`,date_format(`faculty_table`.`hire_date`,'%d/%m/%Y'),'')" => "hire_date",
-		"`faculty_table`.`department`" => "department",
+		"IF(    CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') /* Department */" => "department",
 		"`faculty_table`.`designation`" => "designation",
 		"`faculty_table`.`created_by`" => "created_by",
 		"`faculty_table`.`created_at`" => "created_at",
@@ -84,7 +84,7 @@
 		"`faculty_table`.`phone`" => "Phone",
 		"`faculty_table`.`address`" => "Address",
 		"`faculty_table`.`hire_date`" => "Hired Date",
-		"`faculty_table`.`department`" => "Department",
+		"IF(    CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') /* Department */" => "Department",
 		"`faculty_table`.`designation`" => "Designation",
 		"`faculty_table`.`created_by`" => "Created by",
 		"`faculty_table`.`created_at`" => "Created At",
@@ -104,7 +104,7 @@
 		"`faculty_table`.`phone`" => "phone",
 		"`faculty_table`.`address`" => "address",
 		"if(`faculty_table`.`hire_date`,date_format(`faculty_table`.`hire_date`,'%d/%m/%Y'),'')" => "hire_date",
-		"`faculty_table`.`department`" => "department",
+		"IF(    CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') /* Department */" => "department",
 		"`faculty_table`.`designation`" => "designation",
 		"`faculty_table`.`created_by`" => "created_by",
 		"`faculty_table`.`created_at`" => "created_at",
@@ -115,9 +115,9 @@
 	];
 
 	// Lookup fields that can be used as filterers
-	$x->filterers = [];
+	$x->filterers = ['department' => 'Department', ];
 
-	$x->QueryFrom = "`faculty_table` ";
+	$x->QueryFrom = "`faculty_table` LEFT JOIN `departments_table` as departments_table1 ON `departments_table1`.`id`=`faculty_table`.`department` ";
 	$x->QueryWhere = '';
 	$x->QueryOrder = '';
 

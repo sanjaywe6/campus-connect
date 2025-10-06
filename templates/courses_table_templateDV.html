@@ -1,93 +1,44 @@
-<!-- To change the layout of the detail view form, we recommend using JS code in hooks/faculty_table-dv.js rather than editing this file -->
+<!-- To change the layout of the detail view form, we recommend using JS code in hooks/courses_table-dv.js rather than editing this file -->
 
 <div id="detail-view"></div>
 <div class="panel-heading"><h3 class="panel-title"><strong><%%DETAIL_VIEW_TITLE%%></strong></h3></div>
 
-<div id="faculty_table_dv_container-loading" class="text-center text-info text-bold vspacer-lg"><i class="glyphicon glyphicon-refresh loop-rotate"></i> <%%TRANSLATION(Loading ...)%%></div>
+<div id="courses_table_dv_container-loading" class="text-center text-info text-bold vspacer-lg"><i class="glyphicon glyphicon-refresh loop-rotate"></i> <%%TRANSLATION(Loading ...)%%></div>
 
-<div class="panel-body hidden" id="faculty_table_dv_container">
+<div class="panel-body hidden" id="courses_table_dv_container">
 	<!-- child links -->
 	<div class="row vspacer-md">
 		<div class="col-xs-12 children-links">
 			<div class="clearfix"></div>
 		</div>
 	</div>
+	<hr class="hidden-xs hidden-sm">
 
 	<div class="row">
 		<!-- form inputs -->
-		<div class="col-md-8 col-lg-10" id="faculty_table_dv_form">
+		<div class="col-md-8 col-lg-10" id="courses_table_dv_form">
 			<fieldset class="form-horizontal">
 
-				<!-- Field: Name -->
-				<div class="form-group faculty_table-name">
+				<!-- Field: ID -->
+				<div class="form-group courses_table-id">
 					<hr class="hidden-md hidden-lg">
-					<label class="control-label col-lg-3" for="name">Name</label>
+					<label class="control-label col-lg-3" for="id">ID</label>
 					<div class="col-lg-9">
-						<input maxlength="255" type="text" class="form-control" name="name" id="name" value="<%%VALUE(name)%%>">
+						<div class="form-control-static" id="id"><%%VALUE(id)%%></div>
 					</div>
 				</div>
 
-				<!-- Field: Gender -->
-				<div class="form-group faculty_table-gender">
+				<!-- Field: Course Name -->
+				<div class="form-group courses_table-course_name">
 					<hr class="hidden-md hidden-lg">
-					<label class="control-label col-lg-3" for="gender">Gender</label>
+					<label class="control-label col-lg-3" for="course_name">Course Name</label>
 					<div class="col-lg-9">
-						<%%COMBO(gender)%%>
-					</div>
-				</div>
-
-				<!-- Field: Dob -->
-				<div class="form-group faculty_table-dob">
-					<hr class="hidden-md hidden-lg">
-					<label class="control-label col-lg-3" for="dob-dd">Dob</label>
-					<div class="col-lg-9">
-						<%%COMBO(dob)%%>
-					</div>
-				</div>
-
-				<!-- Field: Email -->
-				<div class="form-group faculty_table-email">
-					<hr class="hidden-md hidden-lg">
-					<label class="control-label col-lg-3" for="email">Email</label>
-					<div class="col-lg-9">
-						<div class="input-group">
-							<input maxlength="80" type="text" class="form-control" name="email" id="email" value="<%%VALUE(email)%%>">
-							<span class="input-group-btn">
-								<button id="email-link" class="btn btn-default" type="button" title="<%%VALUE(email)%%>" onclick="if(this.title) window.open(`mailto:${this.title}`, '_blank')"><i class="glyphicon glyphicon-envelope"></i></button>
-							</span>
-						</div>
-					</div>
-				</div>
-
-				<!-- Field: Phone -->
-				<div class="form-group faculty_table-phone">
-					<hr class="hidden-md hidden-lg">
-					<label class="control-label col-lg-3" for="phone">Phone</label>
-					<div class="col-lg-9">
-						<input maxlength="255" type="text" class="form-control" name="phone" id="phone" value="<%%VALUE(phone)%%>">
-					</div>
-				</div>
-
-				<!-- Field: Address -->
-				<div class="form-group faculty_table-address">
-					<hr class="hidden-md hidden-lg">
-					<label class="control-label col-lg-3" for="address">Address</label>
-					<div class="col-lg-9 has-nicedit">
-						<%%HTMLAREA(address)%%>
-					</div>
-				</div>
-
-				<!-- Field: Hired Date -->
-				<div class="form-group faculty_table-hire_date">
-					<hr class="hidden-md hidden-lg">
-					<label class="control-label col-lg-3" for="hire_date-dd">Hired Date</label>
-					<div class="col-lg-9">
-						<%%COMBO(hire_date)%%>
+						<input maxlength="255" type="text" class="form-control" name="course_name" id="course_name" value="<%%VALUE(course_name)%%>">
 					</div>
 				</div>
 
 				<!-- Field: Department -->
-				<div class="form-group faculty_table-department">
+				<div class="form-group courses_table-department">
 					<hr class="hidden-md hidden-lg">
 					<label class="control-label col-lg-3" for="department" data-parent_link="view_parent_modal">Department</label>
 					<div class="col-lg-9">
@@ -95,12 +46,39 @@
 					</div>
 				</div>
 
-				<!-- Field: Designation -->
-				<div class="form-group faculty_table-designation">
+				<!-- Field: Starting Date -->
+				<div class="form-group courses_table-starting_date">
 					<hr class="hidden-md hidden-lg">
-					<label class="control-label col-lg-3" for="designation">Designation</label>
+					<label class="control-label col-lg-3" for="starting_date-dd">Starting Date</label>
 					<div class="col-lg-9">
-						<input maxlength="255" type="text" class="form-control" name="designation" id="designation" value="<%%VALUE(designation)%%>">
+						<%%COMBO(starting_date)%%>
+					</div>
+				</div>
+
+				<!-- Field: Ending Date -->
+				<div class="form-group courses_table-ending_date">
+					<hr class="hidden-md hidden-lg">
+					<label class="control-label col-lg-3" for="ending_date-dd">Ending Date</label>
+					<div class="col-lg-9">
+						<%%COMBO(ending_date)%%>
+					</div>
+				</div>
+
+				<!-- Field: Duration (In Year/Semester) -->
+				<div class="form-group courses_table-duration">
+					<hr class="hidden-md hidden-lg">
+					<label class="control-label col-lg-3" for="duration">Duration (In Year/Semester)</label>
+					<div class="col-lg-9">
+						<input maxlength="255" type="text" class="form-control" name="duration" id="duration" value="<%%VALUE(duration)%%>">
+					</div>
+				</div>
+
+				<!-- Field: Credits -->
+				<div class="form-group courses_table-credits">
+					<hr class="hidden-md hidden-lg">
+					<label class="control-label col-lg-3" for="credits">Credits</label>
+					<div class="col-lg-9">
+						<input maxlength="255" type="text" class="form-control" name="credits" id="credits" value="<%%VALUE(credits)%%>">
 					</div>
 				</div>
 
@@ -109,7 +87,7 @@
 
 		<!-- DV action buttons -->
 		<hr class="hidden-md hidden-lg">
-		<div class="col-md-4 col-lg-2 dv-action-buttons" id="faculty_table_dv_action_buttons">
+		<div class="col-md-4 col-lg-2 dv-action-buttons" id="courses_table_dv_action_buttons">
 			<div class="btn-toolbar">
 				<div class="btn-group-vertical btn-group-lg" style="width: 100%;">
 					<%%UPDATE_BUTTON%%>
@@ -141,22 +119,13 @@
 				setTimeout(AppGini.closeParentModal, 2000);
 			}
 
-			AppGini.once({
-				condition: function() { return bkLib != undefined; },
-				action: function() {
-					if($j('textarea#address').length) new nicEditor({ fullPanel : true }).panelInstance('address');
-				}
-			});
 
 			/* enable DV action buttons to float on scrolling down the form */
 			enable_dvab_floating();
 
-			$j('#faculty_table_dv_container-loading').addClass('hidden');
-			$j('#faculty_table_dv_container').removeClass('hidden');
-			if(!$j('.table_view').length || $j('[name=SelectedID]').val().length) AppGini.focusFormElement('faculty_table', 'name');
-
-			// try to detect rich text changes by adding 'input' handler after nicedit is loaded ...
-			AppGini.detectContentEditableChanges();
+			$j('#courses_table_dv_container-loading').addClass('hidden');
+			$j('#courses_table_dv_container').removeClass('hidden');
+			if(!$j('.table_view').length || $j('[name=SelectedID]').val().length) AppGini.focusFormElement('courses_table', 'course_name');
 
 			$j('a[href="<%%BASE_UPLOAD_PATH%%>"]').click(function() { return false; });
 
@@ -177,7 +146,7 @@
 							localStorage.removeItem(pt + '_last_added_id');
 							AppGini.lookupText({
 								id: new_id,
-								table: 'faculty_table',
+								table: 'courses_table',
 								field: field_id,
 								callback: function(data) {
 									$j('#' + field_id + '-container').select2('data', data, true);
@@ -237,21 +206,21 @@
 				}
 			});
 
-			faculty_tableUniqueFields.forEach(fieldName => enforce_uniqueness('faculty_table', fieldName));
+			courses_tableUniqueFields.forEach(fieldName => enforce_uniqueness('courses_table', fieldName));
 
 			/* load admin tools for admin user */
 			if(!add_new_mode) {
 				$j('body').append('<div id="admin-tools-appendix"></div>');
 				$j('#admin-tools-appendix').load(
-					'ajax_admin_tools.php?table=faculty_table&id=<%%URLVALUE(id)%%>',
+					'ajax_admin_tools.php?table=courses_table&id=<%%URLVALUE(id)%%>',
 					function(resp) {
 						if(!resp.length) return;
-						$j.ajax('ajax_admin_tools.php?action=get_admin_tools_js&table=faculty_table&id=<%%URLVALUE(id)%%>');
+						$j.ajax('ajax_admin_tools.php?action=get_admin_tools_js&table=courses_table&id=<%%URLVALUE(id)%%>');
 					}
 				);
 			}
 		});
 
-		var faculty_tableUniqueFields = [
+		var courses_tableUniqueFields = [
 		];
 	</script>

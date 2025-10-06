@@ -47,6 +47,42 @@ faculty_table_delete1Tip=["",spacer+"This option allows each member of the group
 faculty_table_delete2Tip=["",spacer+"This option allows each member of the group to delete any record owned by any member of the group in the 'Faculty App' table."];
 faculty_table_delete3Tip=["",spacer+"This option allows each member of the group to delete any records in the 'Faculty App' table."];
 
+// departments_table table
+departments_table_addTip=["",spacer+"This option allows all members of the group to add records to the 'Departments App' table. A member who adds a record to the table becomes the 'owner' of that record."];
+
+departments_table_view0Tip=["",spacer+"This option prohibits all members of the group from viewing any record in the 'Departments App' table."];
+departments_table_view1Tip=["",spacer+"This option allows each member of the group to view only his own records in the 'Departments App' table."];
+departments_table_view2Tip=["",spacer+"This option allows each member of the group to view any record owned by any member of the group in the 'Departments App' table."];
+departments_table_view3Tip=["",spacer+"This option allows each member of the group to view all records in the 'Departments App' table."];
+
+departments_table_edit0Tip=["",spacer+"This option prohibits all members of the group from modifying any record in the 'Departments App' table."];
+departments_table_edit1Tip=["",spacer+"This option allows each member of the group to edit only his own records in the 'Departments App' table."];
+departments_table_edit2Tip=["",spacer+"This option allows each member of the group to edit any record owned by any member of the group in the 'Departments App' table."];
+departments_table_edit3Tip=["",spacer+"This option allows each member of the group to edit any records in the 'Departments App' table, regardless of their owner."];
+
+departments_table_delete0Tip=["",spacer+"This option prohibits all members of the group from deleting any record in the 'Departments App' table."];
+departments_table_delete1Tip=["",spacer+"This option allows each member of the group to delete only his own records in the 'Departments App' table."];
+departments_table_delete2Tip=["",spacer+"This option allows each member of the group to delete any record owned by any member of the group in the 'Departments App' table."];
+departments_table_delete3Tip=["",spacer+"This option allows each member of the group to delete any records in the 'Departments App' table."];
+
+// courses_table table
+courses_table_addTip=["",spacer+"This option allows all members of the group to add records to the 'Courses App' table. A member who adds a record to the table becomes the 'owner' of that record."];
+
+courses_table_view0Tip=["",spacer+"This option prohibits all members of the group from viewing any record in the 'Courses App' table."];
+courses_table_view1Tip=["",spacer+"This option allows each member of the group to view only his own records in the 'Courses App' table."];
+courses_table_view2Tip=["",spacer+"This option allows each member of the group to view any record owned by any member of the group in the 'Courses App' table."];
+courses_table_view3Tip=["",spacer+"This option allows each member of the group to view all records in the 'Courses App' table."];
+
+courses_table_edit0Tip=["",spacer+"This option prohibits all members of the group from modifying any record in the 'Courses App' table."];
+courses_table_edit1Tip=["",spacer+"This option allows each member of the group to edit only his own records in the 'Courses App' table."];
+courses_table_edit2Tip=["",spacer+"This option allows each member of the group to edit any record owned by any member of the group in the 'Courses App' table."];
+courses_table_edit3Tip=["",spacer+"This option allows each member of the group to edit any records in the 'Courses App' table, regardless of their owner."];
+
+courses_table_delete0Tip=["",spacer+"This option prohibits all members of the group from deleting any record in the 'Courses App' table."];
+courses_table_delete1Tip=["",spacer+"This option allows each member of the group to delete only his own records in the 'Courses App' table."];
+courses_table_delete2Tip=["",spacer+"This option allows each member of the group to delete any record owned by any member of the group in the 'Courses App' table."];
+courses_table_delete3Tip=["",spacer+"This option allows each member of the group to delete any records in the 'Courses App' table."];
+
 /*
 	Style syntax:
 	-------------

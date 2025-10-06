@@ -1,0 +1,78 @@
+<!-- Edit this file to change the layout of the detail view print preview page -->
+
+
+<div class="panel-heading"><h3 class="panel-title">
+	<strong><%%DETAIL_VIEW_TITLE%%></strong>
+	<div class="hidden-print pull-right">
+		<div class="btn-group">
+			<button type="button" id="print" onclick="window.print();" title="<%%TRANSLATION(Print)%%>" class="btn btn-primary"><i class="glyphicon glyphicon-print"></i> <%%TRANSLATION(Print)%%></button>
+			<button type="submit" id="back" title="<%%TRANSLATION(Cancel Printing)%%>" class="btn btn-default"><i class="glyphicon glyphicon-remove-circle"></i> <%%TRANSLATION(Cancel Printing)%%></button>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+</h3></div>
+
+<div class="panel-body">
+	<fieldset class="form-horizontal">
+		<!-- Field: ID -->
+		<div class="form-group courses_table-id" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">ID</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(id)%%></div>
+			</div>
+		</div>
+		<!-- Field: Course Name -->
+		<div class="form-group courses_table-course_name" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Course Name</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(course_name)%%></div>
+			</div>
+		</div>
+		<!-- Field: Department -->
+		<div class="form-group courses_table-department" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Department</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><span id="department<%%RND1%%>"><%%COMBOTEXT(department)%%></span></div>
+			</div>
+		</div>
+		<!-- Field: Starting Date -->
+		<div class="form-group courses_table-starting_date" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Starting Date</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%COMBOTEXT(starting_date)%%></div>
+			</div>
+		</div>
+		<!-- Field: Ending Date -->
+		<div class="form-group courses_table-ending_date" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Ending Date</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%COMBOTEXT(ending_date)%%></div>
+			</div>
+		</div>
+		<!-- Field: Duration (In Year/Semester) -->
+		<div class="form-group courses_table-duration" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Duration (In Year/Semester)</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(duration)%%></div>
+			</div>
+		</div>
+		<!-- Field: Credits -->
+		<div class="form-group courses_table-credits" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Credits</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(credits)%%></div>
+			</div>
+		</div>
+	</fieldset>
+</div>
+<script>
+	$j(function() {
+		// render read-only checkboxes in DVP
+		$j('form input[type=checkbox]:not(.hidden):checked')
+			.addClass('hidden')
+			.after('<i class="glyphicon glyphicon-check"></i>');
+		$j('form input[type=checkbox]:not(.hidden):not(:checked)')
+			.addClass('hidden')
+			.after('<i class="glyphicon glyphicon-unchecked"></i>')
+	})
+</script>

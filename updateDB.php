@@ -10,8 +10,22 @@
 	if($thisMD5 != $prevMD5) {
 		// set up tables
 		setupTable('students_table', []);
+		setupIndexes('students_table', ['department',]);
 
 		setupTable('faculty_table', []);
+		setupIndexes('faculty_table', ['department',]);
+
+		setupTable('departments_table', []);
+
+		setupTable('courses_table', [
+				"ALTER TABLE courses_table ADD `field1` VARCHAR(40)",
+				"ALTER TABLE `courses_table` CHANGE `date` `date` DATE NULL ",
+				"ALTER TABLE `courses_table` CHANGE `field1` `starting_date` DATE NULL ",
+				"ALTER TABLE courses_table ADD `field1` VARCHAR(40)",
+				"ALTER TABLE `courses_table` CHANGE `date` `date` DATE NULL ",
+				"ALTER TABLE `courses_table` CHANGE `field1` `ending_date` DATE NULL ",
+			]);
+		setupIndexes('courses_table', ['department',]);
 
 
 

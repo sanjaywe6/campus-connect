@@ -4,7 +4,7 @@
 ?>
 <script>
 	$j(function() {
-		var tn = 'students_table';
+		var tn = 'courses_table';
 
 		/* data for selected record, or defaults if none is selected */
 		var data = {

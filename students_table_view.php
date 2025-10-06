@@ -26,7 +26,7 @@
 		"`students_table`.`phone`" => "phone",
 		"`students_table`.`address`" => "address",
 		"if(`students_table`.`admission_date`,date_format(`students_table`.`admission_date`,'%d/%m/%Y'),'')" => "admission_date",
-		"`students_table`.`department`" => "department",
+		"IF(    CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') /* Department */" => "department",
 		"`students_table`.`course`" => "course",
 		"`students_table`.`year`" => "year",
 		"`students_table`.`created_by`" => "created_by",
@@ -67,7 +67,7 @@
 		"`students_table`.`phone`" => "phone",
 		"`students_table`.`address`" => "address",
 		"if(`students_table`.`admission_date`,date_format(`students_table`.`admission_date`,'%d/%m/%Y'),'')" => "admission_date",
-		"`students_table`.`department`" => "department",
+		"IF(    CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') /* Department */" => "department",
 		"`students_table`.`course`" => "course",
 		"`students_table`.`year`" => "year",
 		"`students_table`.`created_by`" => "created_by",
@@ -87,7 +87,7 @@
 		"`students_table`.`phone`" => "Phone",
 		"`students_table`.`address`" => "Address",
 		"`students_table`.`admission_date`" => "Admission Date",
-		"`students_table`.`department`" => "Department",
+		"IF(    CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') /* Department */" => "Department",
 		"`students_table`.`course`" => "Course",
 		"`students_table`.`year`" => "Year",
 		"`students_table`.`created_by`" => "Created by",
@@ -108,7 +108,7 @@
 		"`students_table`.`phone`" => "phone",
 		"`students_table`.`address`" => "address",
 		"if(`students_table`.`admission_date`,date_format(`students_table`.`admission_date`,'%d/%m/%Y'),'')" => "admission_date",
-		"`students_table`.`department`" => "department",
+		"IF(    CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') /* Department */" => "department",
 		"`students_table`.`course`" => "course",
 		"`students_table`.`year`" => "year",
 		"`students_table`.`created_by`" => "created_by",
@@ -120,9 +120,9 @@
 	];
 
 	// Lookup fields that can be used as filterers
-	$x->filterers = [];
+	$x->filterers = ['department' => 'Department', ];
 
-	$x->QueryFrom = "`students_table` ";
+	$x->QueryFrom = "`students_table` LEFT JOIN `departments_table` as departments_table1 ON `departments_table1`.`id`=`students_table`.`department` ";
 	$x->QueryWhere = '';
 	$x->QueryOrder = '';
 

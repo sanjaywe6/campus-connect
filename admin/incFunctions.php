@@ -119,6 +119,20 @@
 					'group' => $tg[0],
 					'homepageShowCount' => 1
 				],
+				'departments_table' => [
+					'Caption' => 'Departments App',
+					'Description' => '',
+					'tableIcon' => 'table.gif',
+					'group' => $tg[0],
+					'homepageShowCount' => 1
+				],
+				'courses_table' => [
+					'Caption' => 'Courses App',
+					'Description' => '',
+					'tableIcon' => 'table.gif',
+					'group' => $tg[0],
+					'homepageShowCount' => 1
+				],
 		];
 
 		if($skip_authentication || getLoggedAdmin()) return $all_tables;
@@ -137,6 +151,8 @@
 			/* 'table_name' => ['table caption', 'homepage description', 'icon', 'table group name'] */   
 			'students_table' => ['Students App', '', 'table.gif', 'Core Apps'],
 			'faculty_table' => ['Faculty App', '', 'table.gif', 'Core Apps'],
+			'departments_table' => ['Departments App', '', 'table.gif', 'Core Apps'],
+			'courses_table' => ['Courses App', '', 'table.gif', 'Core Apps'],
 		];
 
 		if($skip_authentication || getLoggedAdmin()) {
@@ -949,7 +965,7 @@
 						],
 					],
 					'department' => [
-						'appgini' => "VARCHAR(255) NULL",
+						'appgini' => "INT UNSIGNED NULL",
 						'info' => [
 							'caption' => 'Department',
 							'description' => '',
@@ -1070,7 +1086,7 @@
 						],
 					],
 					'department' => [
-						'appgini' => "VARCHAR(255) NULL",
+						'appgini' => "INT UNSIGNED NULL",
 						'info' => [
 							'caption' => 'Department',
 							'description' => '',
@@ -1080,6 +1096,171 @@
 						'appgini' => "VARCHAR(255) NULL",
 						'info' => [
 							'caption' => 'Designation',
+							'description' => '',
+						],
+					],
+					'created_by' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Created by',
+							'description' => '',
+						],
+					],
+					'created_at' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Created At',
+							'description' => '',
+						],
+					],
+					'last_updated_by' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Last Updated by',
+							'description' => '',
+						],
+					],
+					'last_updated_at' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Last Updated At',
+							'description' => '',
+						],
+					],
+					'created_by_username' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Created by username',
+							'description' => '',
+						],
+					],
+					'last_updated_by_username' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Last Updated By',
+							'description' => '',
+						],
+					],
+				],
+				'departments_table' => [
+					'id' => [
+						'appgini' => "INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT",
+						'info' => [
+							'caption' => 'ID',
+							'description' => '',
+						],
+					],
+					'department_name' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Department Name',
+							'description' => '',
+						],
+					],
+					'hod' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Head of Department (HOD)',
+							'description' => '',
+						],
+					],
+					'contact' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Contact',
+							'description' => '',
+						],
+					],
+					'created_by' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Created by',
+							'description' => '',
+						],
+					],
+					'created_at' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Created At',
+							'description' => '',
+						],
+					],
+					'last_updated_by' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Last Updated by',
+							'description' => '',
+						],
+					],
+					'last_updated_at' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Last Updated At',
+							'description' => '',
+						],
+					],
+					'created_by_username' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Created by username',
+							'description' => '',
+						],
+					],
+					'last_updated_by_username' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Last Updated By',
+							'description' => '',
+						],
+					],
+				],
+				'courses_table' => [
+					'id' => [
+						'appgini' => "INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT",
+						'info' => [
+							'caption' => 'ID',
+							'description' => '',
+						],
+					],
+					'course_name' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Course Name',
+							'description' => '',
+						],
+					],
+					'department' => [
+						'appgini' => "INT UNSIGNED NULL",
+						'info' => [
+							'caption' => 'Department',
+							'description' => '',
+						],
+					],
+					'starting_date' => [
+						'appgini' => "DATE NULL",
+						'info' => [
+							'caption' => 'Starting Date',
+							'description' => '',
+						],
+					],
+					'ending_date' => [
+						'appgini' => "DATE NULL",
+						'info' => [
+							'caption' => 'Ending Date',
+							'description' => '',
+						],
+					],
+					'duration' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Duration (In Year/Semester)',
+							'description' => '',
+						],
+					],
+					'credits' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Credits',
 							'description' => '',
 						],
 					],
@@ -2294,6 +2475,15 @@
 		 *             'parent table' => [main lookup fields in child]
 		 */
 		$parents = [
+			'students_table' => [
+				'departments_table' => ['department'],
+			],
+			'faculty_table' => [
+				'departments_table' => ['department'],
+			],
+			'courses_table' => [
+				'departments_table' => ['department'],
+			],
 		];
 
 		return isset($parents[$table]) ? $parents[$table] : [];
@@ -2350,6 +2540,66 @@
 					WHERE %TABLENAME%.id = %ID%;',
 			],
 			'faculty_table' => [
+				'created_by' => 'SELECT CONCAT(
+					  
+					membership_users.memberID, \' : \',
+					  
+					membership_users.custom1
+					
+					)
+					
+					FROM membership_users
+					
+					INNER JOIN %TABLENAME%
+					  
+					ON membership_users.memberID = %TABLENAME%.created_by_username
+					WHERE %TABLENAME%.id = %ID%;',
+				'last_updated_by' => 'SELECT CONCAT(
+					  
+					membership_users.memberID, \' : \',
+					  
+					membership_users.custom1
+					
+					)
+					
+					FROM membership_users
+					
+					INNER JOIN %TABLENAME%
+					  
+					ON membership_users.memberID = %TABLENAME%.last_updated_by_username
+					WHERE %TABLENAME%.id = %ID%;',
+			],
+			'departments_table' => [
+				'created_by' => 'SELECT CONCAT(
+					  
+					membership_users.memberID, \' : \',
+					  
+					membership_users.custom1
+					
+					)
+					
+					FROM membership_users
+					
+					INNER JOIN %TABLENAME%
+					  
+					ON membership_users.memberID = %TABLENAME%.created_by_username
+					WHERE %TABLENAME%.id = %ID%;',
+				'last_updated_by' => 'SELECT CONCAT(
+					  
+					membership_users.memberID, \' : \',
+					  
+					membership_users.custom1
+					
+					)
+					
+					FROM membership_users
+					
+					INNER JOIN %TABLENAME%
+					  
+					ON membership_users.memberID = %TABLENAME%.last_updated_by_username
+					WHERE %TABLENAME%.id = %ID%;',
+			],
+			'courses_table' => [
 				'created_by' => 'SELECT CONCAT(
 					  
 					membership_users.memberID, \' : \',
@@ -2503,8 +2753,15 @@
 		*/
 		$lookupQuery = [
 			'students_table' => [
+				'department' => 'SELECT `departments_table`.`id`, IF(CHAR_LENGTH(`departments_table`.`department_name`) || CHAR_LENGTH(`departments_table`.`hod`), CONCAT_WS(\'\', `departments_table`.`department_name`, \'-\', `departments_table`.`hod`), \'\') FROM `departments_table` ORDER BY 2',
 			],
 			'faculty_table' => [
+				'department' => 'SELECT `departments_table`.`id`, IF(CHAR_LENGTH(`departments_table`.`department_name`) || CHAR_LENGTH(`departments_table`.`hod`), CONCAT_WS(\'\', `departments_table`.`department_name`, \'-\', `departments_table`.`hod`), \'\') FROM `departments_table` ORDER BY 2',
+			],
+			'departments_table' => [
+			],
+			'courses_table' => [
+				'department' => 'SELECT `departments_table`.`id`, IF(CHAR_LENGTH(`departments_table`.`department_name`) || CHAR_LENGTH(`departments_table`.`hod`), CONCAT_WS(\'\', `departments_table`.`department_name`, \'-\', `departments_table`.`hod`), \'\') FROM `departments_table` ORDER BY 2',
 			],
 		];
 
