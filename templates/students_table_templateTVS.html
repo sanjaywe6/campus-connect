@@ -1,0 +1,22 @@
+<!-- Edit this file to change the layout of each record in the table view -->
+<!-- To disable clicking of a field, remove the <%%SELECT%%> and <%%ENDSELECT%%> formatters around it-->
+
+<!-- If you wish to hide the table view header that contains the column titles, -->
+<!-- add the following to the students_table_init() hook (in hooks/students_table.php file) -->
+<!--     $options->ShowTableHeader = 0;     -->
+
+		<td id="students_table-id-<%%VALUE(id)%%>" class="students_table-id text-right text-bold"><%%VALUE(id)%%></td>
+		<td id="students_table-name-<%%VALUE(id)%%>" class="students_table-name text-bold"><%%VALUE(name)%%></td>
+		<td id="students_table-gender-<%%VALUE(id)%%>" class="students_table-gender text-bold"><%%VALUE(gender)%%></td>
+		<td id="students_table-dob-<%%VALUE(id)%%>" class="students_table-dob text-bold"><%%VALUE(dob)%%></td>
+		<td id="students_table-email-<%%VALUE(id)%%>" class="students_table-email text-bold"><a href="mailto:<%%VALUE(email)%%>" title="<%%VALUE(email)%%>" class="btn btn-default"><i class="glyphicon glyphicon-envelope text-info"></i></a></td>
+		<td id="students_table-phone-<%%VALUE(id)%%>" class="students_table-phone text-bold"><%%VALUE(phone)%%></td>
+		<td id="students_table-address-<%%VALUE(id)%%>" class="students_table-address text-bold"><%%VALUE(address)%%></td>
+		<td id="students_table-admission_date-<%%VALUE(id)%%>" class="students_table-admission_date text-bold"><%%VALUE(admission_date)%%></td>
+		<td id="students_table-department-<%%VALUE(id)%%>" class="students_table-department text-bold"><%%VALUE(department)%%></td>
+		<td id="students_table-course-<%%VALUE(id)%%>" class="students_table-course text-bold"><%%VALUE(course)%%></td>
+		<td id="students_table-year-<%%VALUE(id)%%>" class="students_table-year text-bold"><%%VALUE(year)%%></td>
+		<td id="students_table-created_by-<%%VALUE(id)%%>" class="students_table-created_by text-bold"><%%VALUE(created_by)%%></td>
+		<td id="students_table-created_at-<%%VALUE(id)%%>" class="students_table-created_at text-bold"><%%VALUE(created_at)%%></td>
+		<td id="students_table-last_updated_by-<%%VALUE(id)%%>" class="students_table-last_updated_by text-bold"><%%VALUE(last_updated_by)%%></td>
+		<td id="students_table-last_updated_at-<%%VALUE(id)%%>" class="students_table-last_updated_at text-bold"><%%VALUE(last_updated_at)%%></td>

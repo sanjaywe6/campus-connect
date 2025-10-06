@@ -1,0 +1,99 @@
+<!-- Edit this file to change the layout of the detail view print preview page -->
+
+
+<div class="panel-heading"><h3 class="panel-title">
+	<strong><%%DETAIL_VIEW_TITLE%%></strong>
+	<div class="hidden-print pull-right">
+		<div class="btn-group">
+			<button type="button" id="print" onclick="window.print();" title="<%%TRANSLATION(Print)%%>" class="btn btn-primary"><i class="glyphicon glyphicon-print"></i> <%%TRANSLATION(Print)%%></button>
+			<button type="submit" id="back" title="<%%TRANSLATION(Cancel Printing)%%>" class="btn btn-default"><i class="glyphicon glyphicon-remove-circle"></i> <%%TRANSLATION(Cancel Printing)%%></button>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+</h3></div>
+
+<div class="panel-body">
+	<fieldset class="form-horizontal">
+		<!-- Field: Name -->
+		<div class="form-group students_table-name" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Name</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(name)%%></div>
+			</div>
+		</div>
+		<!-- Field: Gender -->
+		<div class="form-group students_table-gender" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Gender</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%COMBOTEXT(gender)%%></div>
+			</div>
+		</div>
+		<!-- Field: Dob -->
+		<div class="form-group students_table-dob" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Dob</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%COMBOTEXT(dob)%%></div>
+			</div>
+		</div>
+		<!-- Field: Email -->
+		<div class="form-group students_table-email" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Email</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(email)%%></div>
+			</div>
+		</div>
+		<!-- Field: Phone -->
+		<div class="form-group students_table-phone" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Phone</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(phone)%%></div>
+			</div>
+		</div>
+		<!-- Field: Address -->
+		<div class="form-group students_table-address" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Address</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(address)%%></div>
+			</div>
+		</div>
+		<!-- Field: Admission Date -->
+		<div class="form-group students_table-admission_date" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Admission Date</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%COMBOTEXT(admission_date)%%></div>
+			</div>
+		</div>
+		<!-- Field: Department -->
+		<div class="form-group students_table-department" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Department</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(department)%%></div>
+			</div>
+		</div>
+		<!-- Field: Course -->
+		<div class="form-group students_table-course" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Course</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%VALUE(course)%%></div>
+			</div>
+		</div>
+		<!-- Field: Year -->
+		<div class="form-group students_table-year" style="border-bottom: dotted 1px #DDD;">
+			<label class="col-xs-3 control-label">Year</label>
+			<div class="col-xs-9">
+				<div class="form-control-static"><%%COMBOTEXT(year)%%></div>
+			</div>
+		</div>
+	</fieldset>
+</div>
+<script>
+	$j(function() {
+		// render read-only checkboxes in DVP
+		$j('form input[type=checkbox]:not(.hidden):checked')
+			.addClass('hidden')
+			.after('<i class="glyphicon glyphicon-check"></i>');
+		$j('form input[type=checkbox]:not(.hidden):not(:checked)')
+			.addClass('hidden')
+			.after('<i class="glyphicon glyphicon-unchecked"></i>')
+	})
+</script>

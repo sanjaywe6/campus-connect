@@ -1,0 +1,21 @@
+<!-- Edit this file to change the layout of each record in the table view -->
+<!-- To disable clicking of a field, remove the <%%SELECT%%> and <%%ENDSELECT%%> formatters around it-->
+
+<!-- If you wish to hide the table view header that contains the column titles, -->
+<!-- add the following to the faculty_table_init() hook (in hooks/faculty_table.php file) -->
+<!--     $options->ShowTableHeader = 0;     -->
+
+		<td id="faculty_table-id-<%%VALUE(id)%%>" class="faculty_table-id text-right"><%%SELECT%%><%%VALUE(id)%%><%%ENDSELECT%%></td>
+		<td id="faculty_table-name-<%%VALUE(id)%%>" class="faculty_table-name"><%%SELECT%%><%%VALUE(name)%%><%%ENDSELECT%%></td>
+		<td id="faculty_table-gender-<%%VALUE(id)%%>" class="faculty_table-gender"><%%SELECT%%><%%VALUE(gender)%%><%%ENDSELECT%%></td>
+		<td id="faculty_table-dob-<%%VALUE(id)%%>" class="faculty_table-dob"><%%SELECT%%><%%VALUE(dob)%%><%%ENDSELECT%%></td>
+		<td id="faculty_table-email-<%%VALUE(id)%%>" class="faculty_table-email"><a href="mailto:<%%VALUE(email)%%>" title="<%%VALUE(email)%%>" class="btn btn-default"><i class="glyphicon glyphicon-envelope text-info"></i></a></td>
+		<td id="faculty_table-phone-<%%VALUE(id)%%>" class="faculty_table-phone"><%%SELECT%%><%%VALUE(phone)%%><%%ENDSELECT%%></td>
+		<td id="faculty_table-address-<%%VALUE(id)%%>" class="faculty_table-address"><%%SELECT%%><%%VALUE(address)%%><%%ENDSELECT%%></td>
+		<td id="faculty_table-hire_date-<%%VALUE(id)%%>" class="faculty_table-hire_date"><%%SELECT%%><%%VALUE(hire_date)%%><%%ENDSELECT%%></td>
+		<td id="faculty_table-department-<%%VALUE(id)%%>" class="faculty_table-department"><%%SELECT%%><%%VALUE(department)%%><%%ENDSELECT%%></td>
+		<td id="faculty_table-designation-<%%VALUE(id)%%>" class="faculty_table-designation"><%%SELECT%%><%%VALUE(designation)%%><%%ENDSELECT%%></td>
+		<td id="faculty_table-created_by-<%%VALUE(id)%%>" class="faculty_table-created_by"><%%SELECT%%><%%VALUE(created_by)%%><%%ENDSELECT%%></td>
+		<td id="faculty_table-created_at-<%%VALUE(id)%%>" class="faculty_table-created_at"><%%SELECT%%><%%VALUE(created_at)%%><%%ENDSELECT%%></td>
+		<td id="faculty_table-last_updated_by-<%%VALUE(id)%%>" class="faculty_table-last_updated_by"><%%SELECT%%><%%VALUE(last_updated_by)%%><%%ENDSELECT%%></td>
+		<td id="faculty_table-last_updated_at-<%%VALUE(id)%%>" class="faculty_table-last_updated_at"><%%SELECT%%><%%VALUE(last_updated_at)%%><%%ENDSELECT%%></td>
