@@ -8,7 +8,7 @@ The portal supports role-based access for administrators, faculty, and students,
 
 
 
-##### ✨ Features
+### ✨ Features
 
 
 🔐 Authentication \& Access
