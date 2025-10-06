@@ -8,11 +8,11 @@ The portal supports role-based access for administrators, faculty, and students,
 
 
 
-## ✨ Features
+✨ Features
 
-
-🔐 Authentication \& Access
 ---
+
+### 🔐 Authentication \& Access
 
 * User Login – Secure login system for students, faculty, and admins.
 * User Registration – New users can register with unique credentials.
@@ -23,7 +23,7 @@ The portal supports role-based access for administrators, faculty, and students,
 
 
 
-###### 🏫 Academic Management
+### 🏫 Academic Management
 
 * Student admission and profile management
 * Faculty records with department allocation
