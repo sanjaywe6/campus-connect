@@ -8,7 +8,7 @@ The portal supports role-based access for administrators, faculty, and students,
 
 
 
-### ✨ Features
+## ✨ Features
 
 
 🔐 Authentication \& Access
@@ -23,7 +23,7 @@ The portal supports role-based access for administrators, faculty, and students,
 
 
 
-##### 🏫 Academic Management
+### 🏫 Academic Management
 
 * Student admission and profile management
 * Faculty records with department allocation
