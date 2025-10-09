@@ -20,28 +20,34 @@
 		setupTable('courses_table', []);
 		setupIndexes('courses_table', ['department',]);
 
-		setupTable('subject_table', [
-				"ALTER TABLE `table5` RENAME `subject_table`",
-				"UPDATE `membership_userrecords` SET `tableName`='subject_table' WHERE `tableName`='table5'",
-				"UPDATE `membership_userpermissions` SET `tableName`='subject_table' WHERE `tableName`='table5'",
-				"UPDATE `membership_grouppermissions` SET `tableName`='subject_table' WHERE `tableName`='table5'",
-				"ALTER TABLE subject_table ADD `field1` VARCHAR(40)",
-				"ALTER TABLE `subject_table` CHANGE `id` `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ",
-				"ALTER TABLE `subject_table` CHANGE `field1` `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ",
-				"ALTER TABLE subject_table ADD `field1` VARCHAR(40)",
-				"ALTER TABLE `subject_table` CHANGE `field1` `subject_name` VARCHAR(255) NULL ",
-				"ALTER TABLE subject_table ADD `field1` VARCHAR(40)",
-				"ALTER TABLE `subject_table` CHANGE `field1` `course_details` VARCHAR(255) NULL ",
-				"ALTER TABLE subject_table ADD `field1` VARCHAR(40)",
-				"ALTER TABLE `subject_table` CHANGE `field1` `faculty_details` VARCHAR(255) NULL ",
-				"ALTER TABLE `subject_table` ADD `created_by` VARCHAR(255) NULL ",
-				"ALTER TABLE `subject_table` ADD `created_at` VARCHAR(255) NULL ",
-				"ALTER TABLE `subject_table` ADD `last_updated_by` VARCHAR(255) NULL ",
-				"ALTER TABLE `subject_table` ADD `last_updated_at` VARCHAR(255) NULL ",
-				"ALTER TABLE `subject_table` ADD `created_by_username` VARCHAR(255) NULL ",
-				"ALTER TABLE `subject_table` ADD `last_updated_by_username` VARCHAR(255) NULL ",
-			]);
+		setupTable('subject_table', []);
 		setupIndexes('subject_table', ['course_details','faculty_details',]);
+
+		setupTable('enrollment_table', [
+				"ALTER TABLE `table6` RENAME `enrollment_table`",
+				"UPDATE `membership_userrecords` SET `tableName`='enrollment_table' WHERE `tableName`='table6'",
+				"UPDATE `membership_userpermissions` SET `tableName`='enrollment_table' WHERE `tableName`='table6'",
+				"UPDATE `membership_grouppermissions` SET `tableName`='enrollment_table' WHERE `tableName`='table6'",
+				"ALTER TABLE enrollment_table ADD `field1` VARCHAR(40)",
+				"ALTER TABLE `enrollment_table` CHANGE `id` `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ",
+				"ALTER TABLE `enrollment_table` CHANGE `field1` `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ",
+				"ALTER TABLE enrollment_table ADD `field1` VARCHAR(40)",
+				"ALTER TABLE `enrollment_table` CHANGE `field1` `student_details` VARCHAR(255) NULL ",
+				"ALTER TABLE enrollment_table ADD `field1` VARCHAR(40)",
+				"ALTER TABLE `enrollment_table` CHANGE `field1` `course_details` VARCHAR(255) NULL ",
+				"ALTER TABLE enrollment_table ADD `field1` VARCHAR(40)",
+				"ALTER TABLE `enrollment_table` CHANGE `field1` `subject_details` VARCHAR(255) NULL ",
+				"ALTER TABLE enrollment_table ADD `field1` VARCHAR(40)",
+				"ALTER TABLE `enrollment_table` CHANGE `field1` `semester` VARCHAR(255) NULL ",
+				"ALTER TABLE enrollment_table ADD `field1` VARCHAR(40)",
+				"ALTER TABLE `enrollment_table` CHANGE `field1` `year` VARCHAR(255) NULL ",
+				"ALTER TABLE `enrollment_table` ADD `created_by` VARCHAR(255) NULL ",
+				"ALTER TABLE `enrollment_table` ADD `created_at` VARCHAR(255) NULL ",
+				"ALTER TABLE `enrollment_table` ADD `last_updated_by` VARCHAR(255) NULL ",
+				"ALTER TABLE `enrollment_table` ADD `created_by_username` VARCHAR(255) NULL ",
+				"ALTER TABLE `enrollment_table` ADD `last_updated_by_username` VARCHAR(255) NULL ",
+			]);
+		setupIndexes('enrollment_table', ['student_details','course_details','subject_details',]);
 
 
 

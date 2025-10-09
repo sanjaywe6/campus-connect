@@ -1,0 +1,15 @@
+<!-- Edit this file to change the layout of each record in the table view -->
+<!-- To disable clicking of a field, remove the <%%SELECT%%> and <%%ENDSELECT%%> formatters around it-->
+
+<!-- If you wish to hide the table view header that contains the column titles, -->
+<!-- add the following to the enrollment_table_init() hook (in hooks/enrollment_table.php file) -->
+<!--     $options->ShowTableHeader = 0;     -->
+
+		<td id="enrollment_table-student_details-<%%VALUE(id)%%>" class="enrollment_table-student_details"><%%SELECT%%><%%VALUE(student_details)%%><%%ENDSELECT%%></td>
+		<td id="enrollment_table-course_details-<%%VALUE(id)%%>" class="enrollment_table-course_details"><%%SELECT%%><%%VALUE(course_details)%%><%%ENDSELECT%%></td>
+		<td id="enrollment_table-subject_details-<%%VALUE(id)%%>" class="enrollment_table-subject_details"><%%SELECT%%><%%VALUE(subject_details)%%><%%ENDSELECT%%></td>
+		<td id="enrollment_table-semester-<%%VALUE(id)%%>" class="enrollment_table-semester"><%%SELECT%%><%%VALUE(semester)%%><%%ENDSELECT%%></td>
+		<td id="enrollment_table-year-<%%VALUE(id)%%>" class="enrollment_table-year"><%%SELECT%%><%%VALUE(year)%%><%%ENDSELECT%%></td>
+		<td id="enrollment_table-created_by-<%%VALUE(id)%%>" class="enrollment_table-created_by"><%%SELECT%%><%%VALUE(created_by)%%><%%ENDSELECT%%></td>
+		<td id="enrollment_table-created_at-<%%VALUE(id)%%>" class="enrollment_table-created_at"><%%SELECT%%><%%VALUE(created_at)%%><%%ENDSELECT%%></td>
+		<td id="enrollment_table-last_updated_by-<%%VALUE(id)%%>" class="enrollment_table-last_updated_by"><%%SELECT%%><%%VALUE(last_updated_by)%%><%%ENDSELECT%%></td>

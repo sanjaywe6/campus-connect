@@ -20,7 +20,7 @@
 	$x->QueryFieldsTV = [
 		"`courses_table`.`id`" => "id",
 		"`courses_table`.`course_name`" => "course_name",
-		"IF(    CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') /* Department */" => "department",
+		"IF(    CHAR_LENGTH(`departments_table1`.`id`) || CHAR_LENGTH(`departments_table1`.`department_name`), CONCAT_WS('',   `departments_table1`.`id`, '-', `departments_table1`.`department_name`), '') /* Department */" => "department",
 		"if(`courses_table`.`starting_date`,date_format(`courses_table`.`starting_date`,'%d/%m/%Y'),'')" => "starting_date",
 		"if(`courses_table`.`ending_date`,date_format(`courses_table`.`ending_date`,'%d/%m/%Y'),'')" => "ending_date",
 		"`courses_table`.`duration`" => "duration",
@@ -53,7 +53,7 @@
 	$x->QueryFieldsCSV = [
 		"`courses_table`.`id`" => "id",
 		"`courses_table`.`course_name`" => "course_name",
-		"IF(    CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') /* Department */" => "department",
+		"IF(    CHAR_LENGTH(`departments_table1`.`id`) || CHAR_LENGTH(`departments_table1`.`department_name`), CONCAT_WS('',   `departments_table1`.`id`, '-', `departments_table1`.`department_name`), '') /* Department */" => "department",
 		"if(`courses_table`.`starting_date`,date_format(`courses_table`.`starting_date`,'%d/%m/%Y'),'')" => "starting_date",
 		"if(`courses_table`.`ending_date`,date_format(`courses_table`.`ending_date`,'%d/%m/%Y'),'')" => "ending_date",
 		"`courses_table`.`duration`" => "duration",
@@ -69,7 +69,7 @@
 	$x->QueryFieldsFilters = [
 		"`courses_table`.`id`" => "ID",
 		"`courses_table`.`course_name`" => "Course Name",
-		"IF(    CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') /* Department */" => "Department",
+		"IF(    CHAR_LENGTH(`departments_table1`.`id`) || CHAR_LENGTH(`departments_table1`.`department_name`), CONCAT_WS('',   `departments_table1`.`id`, '-', `departments_table1`.`department_name`), '') /* Department */" => "Department",
 		"`courses_table`.`starting_date`" => "Starting Date",
 		"`courses_table`.`ending_date`" => "Ending Date",
 		"`courses_table`.`duration`" => "Duration (In Year/Semester)",
@@ -86,7 +86,7 @@
 	$x->QueryFieldsQS = [
 		"`courses_table`.`id`" => "id",
 		"`courses_table`.`course_name`" => "course_name",
-		"IF(    CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') /* Department */" => "department",
+		"IF(    CHAR_LENGTH(`departments_table1`.`id`) || CHAR_LENGTH(`departments_table1`.`department_name`), CONCAT_WS('',   `departments_table1`.`id`, '-', `departments_table1`.`department_name`), '') /* Department */" => "department",
 		"if(`courses_table`.`starting_date`,date_format(`courses_table`.`starting_date`,'%d/%m/%Y'),'')" => "starting_date",
 		"if(`courses_table`.`ending_date`,date_format(`courses_table`.`ending_date`,'%d/%m/%Y'),'')" => "ending_date",
 		"`courses_table`.`duration`" => "duration",
@@ -126,7 +126,7 @@
 	$x->QuickSearch = 1;
 	$x->QuickSearchText = $Translation['quick search'];
 	$x->ScriptFileName = 'courses_table_view.php';
-	$x->TableTitle = 'Courses App';
+	$x->TableTitle = 'Courses - App';
 	$x->TableIcon = 'table.gif';
 	$x->PrimaryKey = '`courses_table`.`id`';
 

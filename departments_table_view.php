@@ -111,7 +111,7 @@
 	$x->QuickSearch = 1;
 	$x->QuickSearchText = $Translation['quick search'];
 	$x->ScriptFileName = 'departments_table_view.php';
-	$x->TableTitle = 'Departments App';
+	$x->TableTitle = 'Departments - App';
 	$x->TableIcon = 'table.gif';
 	$x->PrimaryKey = '`departments_table`.`id`';
 

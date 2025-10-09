@@ -36,6 +36,13 @@
 
 			return $data;
 		},
+		'enrollment_table' => function($data, $options = []) {
+			if(isset($data['student_details'])) $data['student_details'] = pkGivenLookupText($data['student_details'], 'enrollment_table', 'student_details');
+			if(isset($data['course_details'])) $data['course_details'] = pkGivenLookupText($data['course_details'], 'enrollment_table', 'course_details');
+			if(isset($data['subject_details'])) $data['subject_details'] = pkGivenLookupText($data['subject_details'], 'enrollment_table', 'subject_details');
+
+			return $data;
+		},
 	];
 
 	// accept a record as an assoc array, return a boolean indicating whether to import or skip record
@@ -45,6 +52,7 @@
 		'departments_table' => function($data, $options = []) { return true; },
 		'courses_table' => function($data, $options = []) { return true; },
 		'subject_table' => function($data, $options = []) { return true; },
+		'enrollment_table' => function($data, $options = []) { return true; },
 	];
 
 	/*

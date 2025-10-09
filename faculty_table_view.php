@@ -141,7 +141,7 @@
 	$x->QuickSearch = 1;
 	$x->QuickSearchText = $Translation['quick search'];
 	$x->ScriptFileName = 'faculty_table_view.php';
-	$x->TableTitle = 'Faculty App';
+	$x->TableTitle = 'Faculties - App';
 	$x->TableIcon = 'table.gif';
 	$x->PrimaryKey = '`faculty_table`.`id`';
 	$x->DefaultSortField = '1';

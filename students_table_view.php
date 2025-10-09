@@ -146,7 +146,7 @@
 	$x->QuickSearch = 1;
 	$x->QuickSearchText = $Translation['quick search'];
 	$x->ScriptFileName = 'students_table_view.php';
-	$x->TableTitle = 'Students App';
+	$x->TableTitle = 'Students - App';
 	$x->TableIcon = 'table.gif';
 	$x->PrimaryKey = '`students_table`.`id`';
 	$x->DefaultSortField = '1';

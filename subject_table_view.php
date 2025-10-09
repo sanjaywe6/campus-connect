@@ -20,8 +20,8 @@
 	$x->QueryFieldsTV = [
 		"`subject_table`.`id`" => "id",
 		"`subject_table`.`subject_name`" => "subject_name",
-		"IF(    CHAR_LENGTH(`courses_table1`.`course_name`) || CHAR_LENGTH(if(`courses_table1`.`starting_date`,date_format(`courses_table1`.`starting_date`,'%d/%m/%Y'),'')), CONCAT_WS('',   `courses_table1`.`course_name`, ' ~ ', if(`courses_table1`.`starting_date`,date_format(`courses_table1`.`starting_date`,'%d/%m/%Y'),'')), '') /* Course Details */" => "course_details",
-		"IF(    CHAR_LENGTH(`faculty_table1`.`name`) || CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `faculty_table1`.`name`, ' ~ ', `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') /* Faculty Details */" => "faculty_details",
+		"IF(    CHAR_LENGTH(`courses_table1`.`id`) || CHAR_LENGTH(`courses_table1`.`course_name`), CONCAT_WS('',   `courses_table1`.`id`, ' ~ ', `courses_table1`.`course_name`), '') /* Course Details */" => "course_details",
+		"IF(    CHAR_LENGTH(`faculty_table1`.`id`) || CHAR_LENGTH(`faculty_table1`.`name`), CONCAT_WS('',   `faculty_table1`.`id`, ' ~ ', `faculty_table1`.`name`), '') /* Faculty Details */" => "faculty_details",
 		"`subject_table`.`created_by`" => "created_by",
 		"`subject_table`.`created_at`" => "created_at",
 		"`subject_table`.`last_updated_by`" => "last_updated_by",
@@ -47,8 +47,8 @@
 	$x->QueryFieldsCSV = [
 		"`subject_table`.`id`" => "id",
 		"`subject_table`.`subject_name`" => "subject_name",
-		"IF(    CHAR_LENGTH(`courses_table1`.`course_name`) || CHAR_LENGTH(if(`courses_table1`.`starting_date`,date_format(`courses_table1`.`starting_date`,'%d/%m/%Y'),'')), CONCAT_WS('',   `courses_table1`.`course_name`, ' ~ ', if(`courses_table1`.`starting_date`,date_format(`courses_table1`.`starting_date`,'%d/%m/%Y'),'')), '') /* Course Details */" => "course_details",
-		"IF(    CHAR_LENGTH(`faculty_table1`.`name`) || CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `faculty_table1`.`name`, ' ~ ', `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') /* Faculty Details */" => "faculty_details",
+		"IF(    CHAR_LENGTH(`courses_table1`.`id`) || CHAR_LENGTH(`courses_table1`.`course_name`), CONCAT_WS('',   `courses_table1`.`id`, ' ~ ', `courses_table1`.`course_name`), '') /* Course Details */" => "course_details",
+		"IF(    CHAR_LENGTH(`faculty_table1`.`id`) || CHAR_LENGTH(`faculty_table1`.`name`), CONCAT_WS('',   `faculty_table1`.`id`, ' ~ ', `faculty_table1`.`name`), '') /* Faculty Details */" => "faculty_details",
 		"`subject_table`.`created_by`" => "created_by",
 		"`subject_table`.`created_at`" => "created_at",
 		"`subject_table`.`last_updated_by`" => "last_updated_by",
@@ -60,8 +60,8 @@
 	$x->QueryFieldsFilters = [
 		"`subject_table`.`id`" => "ID",
 		"`subject_table`.`subject_name`" => "Subject Name",
-		"IF(    CHAR_LENGTH(`courses_table1`.`course_name`) || CHAR_LENGTH(if(`courses_table1`.`starting_date`,date_format(`courses_table1`.`starting_date`,'%d/%m/%Y'),'')), CONCAT_WS('',   `courses_table1`.`course_name`, ' ~ ', if(`courses_table1`.`starting_date`,date_format(`courses_table1`.`starting_date`,'%d/%m/%Y'),'')), '') /* Course Details */" => "Course Details",
-		"IF(    CHAR_LENGTH(`faculty_table1`.`name`) || CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `faculty_table1`.`name`, ' ~ ', `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') /* Faculty Details */" => "Faculty Details",
+		"IF(    CHAR_LENGTH(`courses_table1`.`id`) || CHAR_LENGTH(`courses_table1`.`course_name`), CONCAT_WS('',   `courses_table1`.`id`, ' ~ ', `courses_table1`.`course_name`), '') /* Course Details */" => "Course Details",
+		"IF(    CHAR_LENGTH(`faculty_table1`.`id`) || CHAR_LENGTH(`faculty_table1`.`name`), CONCAT_WS('',   `faculty_table1`.`id`, ' ~ ', `faculty_table1`.`name`), '') /* Faculty Details */" => "Faculty Details",
 		"`subject_table`.`created_by`" => "Created by",
 		"`subject_table`.`created_at`" => "Created At",
 		"`subject_table`.`last_updated_by`" => "Last Updated by",
@@ -74,8 +74,8 @@
 	$x->QueryFieldsQS = [
 		"`subject_table`.`id`" => "id",
 		"`subject_table`.`subject_name`" => "subject_name",
-		"IF(    CHAR_LENGTH(`courses_table1`.`course_name`) || CHAR_LENGTH(if(`courses_table1`.`starting_date`,date_format(`courses_table1`.`starting_date`,'%d/%m/%Y'),'')), CONCAT_WS('',   `courses_table1`.`course_name`, ' ~ ', if(`courses_table1`.`starting_date`,date_format(`courses_table1`.`starting_date`,'%d/%m/%Y'),'')), '') /* Course Details */" => "course_details",
-		"IF(    CHAR_LENGTH(`faculty_table1`.`name`) || CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `faculty_table1`.`name`, ' ~ ', `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') /* Faculty Details */" => "faculty_details",
+		"IF(    CHAR_LENGTH(`courses_table1`.`id`) || CHAR_LENGTH(`courses_table1`.`course_name`), CONCAT_WS('',   `courses_table1`.`id`, ' ~ ', `courses_table1`.`course_name`), '') /* Course Details */" => "course_details",
+		"IF(    CHAR_LENGTH(`faculty_table1`.`id`) || CHAR_LENGTH(`faculty_table1`.`name`), CONCAT_WS('',   `faculty_table1`.`id`, ' ~ ', `faculty_table1`.`name`), '') /* Faculty Details */" => "faculty_details",
 		"`subject_table`.`created_by`" => "created_by",
 		"`subject_table`.`created_at`" => "created_at",
 		"`subject_table`.`last_updated_by`" => "last_updated_by",
@@ -87,7 +87,7 @@
 	// Lookup fields that can be used as filterers
 	$x->filterers = ['course_details' => 'Course Details', 'faculty_details' => 'Faculty Details', ];
 
-	$x->QueryFrom = "`subject_table` LEFT JOIN `courses_table` as courses_table1 ON `courses_table1`.`id`=`subject_table`.`course_details` LEFT JOIN `faculty_table` as faculty_table1 ON `faculty_table1`.`id`=`subject_table`.`faculty_details` LEFT JOIN `departments_table` as departments_table1 ON `departments_table1`.`id`=`faculty_table1`.`department` ";
+	$x->QueryFrom = "`subject_table` LEFT JOIN `courses_table` as courses_table1 ON `courses_table1`.`id`=`subject_table`.`course_details` LEFT JOIN `faculty_table` as faculty_table1 ON `faculty_table1`.`id`=`subject_table`.`faculty_details` ";
 	$x->QueryWhere = '';
 	$x->QueryOrder = '';
 

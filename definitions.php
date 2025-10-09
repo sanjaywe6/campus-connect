@@ -46,7 +46,7 @@
 	@define('MULTI_TENANTS', false);
 	@define('FORCE_SETUP_CAPTCHA', true);
 	@define('HOMEPAGE_NAVMENUS', false);
-	@define('DEFAULT_THEME', 'slate');
-	@define('BOOTSTRAP_3D_EFFECTS', false); // if true, the 3D effects will be used for the bootstrap theme
+	@define('DEFAULT_THEME', 'bootstrap');
+	@define('BOOTSTRAP_3D_EFFECTS', true); // if true, the 3D effects will be used for the bootstrap theme
 	@define('THEME_COMPACT', true);
 	@define('NO_THEME_SELECTION', false); // if true, the theme selection will not be available in the user profile page
