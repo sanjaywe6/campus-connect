@@ -24,7 +24,7 @@ function students_table_insert(&$error_message = '') {
 		'address' => Request::val('address', ''),
 		'admission_date' => Request::dateComponents('admission_date', '1'),
 		'department' => Request::lookup('department', ''),
-		'course' => Request::val('course', ''),
+		'course' => Request::lookup('course', ''),
 		'year' => Request::val('year', ''),
 		'created_at' => parseCode('<%%creationDateTime%%>', true),
 		'created_by_username' => parseCode('<%%creatorUsername%%>', true),
@@ -102,7 +102,7 @@ function students_table_update(&$selected_id, &$error_message = '') {
 		'address' => Request::val('address', ''),
 		'admission_date' => Request::dateComponents('admission_date', ''),
 		'department' => Request::lookup('department', ''),
-		'course' => Request::val('course', ''),
+		'course' => Request::lookup('course', ''),
 		'year' => Request::val('year', ''),
 		'last_updated_at' => parseCode('<%%editingDateTime%%>', false),
 		'last_updated_by_username' => parseCode('<%%editorUsername%%>', false),
@@ -194,6 +194,7 @@ function students_table_form($selectedId = '', $allowUpdate = true, $allowInsert
 	$fieldsAreEditable = !$dvprint && (($allowInsert && !$hasSelectedId) || ($allowUpdate && $hasSelectedId) || $showSaveAsCopy);
 
 	$filterer_department = Request::val('filterer_department');
+	$filterer_course = Request::val('filterer_course');
 
 	// populate filterers, starting from children to grand-parents
 
@@ -232,6 +233,8 @@ function students_table_form($selectedId = '', $allowUpdate = true, $allowInsert
 	$combo_admission_date->NamePrefix = 'admission_date';
 	// combobox: department
 	$combo_department = new DataCombo;
+	// combobox: course
+	$combo_course = new DataCombo;
 	// combobox: year
 	$combo_year = new Combo;
 	$combo_year->ListType = 0;
@@ -256,6 +259,7 @@ function students_table_form($selectedId = '', $allowUpdate = true, $allowInsert
 		$combo_dob->DefaultDate = $row['dob'];
 		$combo_admission_date->DefaultDate = $row['admission_date'];
 		$combo_department->SelectedData = $row['department'];
+		$combo_course->SelectedData = $row['course'];
 		$combo_year->SelectedData = $row['year'];
 		$urow = $row; /* unsanitized data */
 		$row = array_map('safe_html', $row);
@@ -265,11 +269,14 @@ function students_table_form($selectedId = '', $allowUpdate = true, $allowInsert
 		$filterValue = Request::val('FilterValue');
 		$combo_gender->SelectedText = (isset($filterField[1]) && $filterField[1] == '3' && $filterOperator[1] == '<=>' ? $filterValue[1] : entitiesToUTF8('Male'));
 		$combo_department->SelectedData = $filterer_department;
+		$combo_course->SelectedData = $filterer_course;
 		$combo_year->SelectedText = (isset($filterField[1]) && $filterField[1] == '11' && $filterOperator[1] == '<=>' ? $filterValue[1] : entitiesToUTF8(''));
 	}
 	$combo_gender->Render();
 	$combo_department->HTML = '<span id="department-container' . $rnd1 . '"></span><input type="hidden" name="department" id="department' . $rnd1 . '" value="' . html_attr($combo_department->SelectedData) . '">';
 	$combo_department->MatchText = '<span id="department-container-readonly' . $rnd1 . '"></span><input type="hidden" name="department" id="department' . $rnd1 . '" value="' . html_attr($combo_department->SelectedData) . '">';
+	$combo_course->HTML = '<span id="course-container' . $rnd1 . '"></span><input type="hidden" name="course" id="course' . $rnd1 . '" value="' . html_attr($combo_course->SelectedData) . '">';
+	$combo_course->MatchText = '<span id="course-container-readonly' . $rnd1 . '"></span><input type="hidden" name="course" id="course' . $rnd1 . '" value="' . html_attr($combo_course->SelectedData) . '">';
 	$combo_year->Render();
 
 	ob_start();
@@ -278,10 +285,12 @@ function students_table_form($selectedId = '', $allowUpdate = true, $allowInsert
 	<script>
 		// initial lookup values
 		AppGini.current_department__RAND__ = { text: "", value: "<?php echo addslashes($hasSelectedId ? $urow['department'] : htmlspecialchars($filterer_department, ENT_QUOTES)); ?>"};
+		AppGini.current_course__RAND__ = { text: "", value: "<?php echo addslashes($hasSelectedId ? $urow['course'] : htmlspecialchars($filterer_course, ENT_QUOTES)); ?>"};
 
 		$j(function() {
 			setTimeout(function() {
 				if(typeof(department_reload__RAND__) == 'function') department_reload__RAND__();
+				if(typeof(course_reload__RAND__) == 'function') course_reload__RAND__();
 			}, 50); /* we need to slightly delay client-side execution of the above code to allow AppGini.ajaxCache to work */
 		});
 		function department_reload__RAND__() {
@@ -356,6 +365,83 @@ function students_table_form($selectedId = '', $allowUpdate = true, $allowInsert
 					if(resp.results[0].id == '<?php echo empty_lookup_value; ?>') { $j('.btn[id=departments_table_view_parent]').hide(); } else { $j('.btn[id=departments_table_view_parent]').show(); }
 
 					if(typeof(department_update_autofills__RAND__) == 'function') department_update_autofills__RAND__();
+				}
+			});
+		<?php } ?>
+
+		}
+		function course_reload__RAND__() {
+		<?php if($fieldsAreEditable) { ?>
+
+			$j("#course-container__RAND__").select2({
+				/* initial default value */
+				initSelection: function(e, c) {
+					$j.ajax({
+						url: 'ajax_combo.php',
+						dataType: 'json',
+						data: { id: AppGini.current_course__RAND__.value, t: 'students_table', f: 'course' },
+						success: function(resp) {
+							c({
+								id: resp.results[0].id,
+								text: resp.results[0].text
+							});
+							$j('[name="course"]').val(resp.results[0].id);
+							$j('[id=course-container-readonly__RAND__]').html('<span class="match-text" id="course-match-text">' + resp.results[0].text + '</span>');
+							if(resp.results[0].id == '<?php echo empty_lookup_value; ?>') { $j('.btn[id=courses_table_view_parent]').hide(); } else { $j('.btn[id=courses_table_view_parent]').show(); }
+
+
+							if(typeof(course_update_autofills__RAND__) == 'function') course_update_autofills__RAND__();
+						}
+					});
+				},
+				width: '100%',
+				formatNoMatches: function(term) { return '<?php echo addslashes($Translation['No matches found!']); ?>'; },
+				minimumResultsForSearch: 5,
+				loadMorePadding: 200,
+				ajax: {
+					url: 'ajax_combo.php',
+					dataType: 'json',
+					cache: true,
+					data: function(term, page) { return { s: term, p: page, t: 'students_table', f: 'course' }; },
+					results: function(resp, page) { return resp; }
+				},
+				escapeMarkup: function(str) { return str; }
+			}).on('change', function(e) {
+				AppGini.current_course__RAND__.value = e.added.id;
+				AppGini.current_course__RAND__.text = e.added.text;
+				$j('[name="course"]').val(e.added.id);
+				if(e.added.id == '<?php echo empty_lookup_value; ?>') { $j('.btn[id=courses_table_view_parent]').hide(); } else { $j('.btn[id=courses_table_view_parent]').show(); }
+
+
+				if(typeof(course_update_autofills__RAND__) == 'function') course_update_autofills__RAND__();
+			});
+
+			if(!$j("#course-container__RAND__").length) {
+				$j.ajax({
+					url: 'ajax_combo.php',
+					dataType: 'json',
+					data: { id: AppGini.current_course__RAND__.value, t: 'students_table', f: 'course' },
+					success: function(resp) {
+						$j('[name="course"]').val(resp.results[0].id);
+						$j('[id=course-container-readonly__RAND__]').html('<span class="match-text" id="course-match-text">' + resp.results[0].text + '</span>');
+						if(resp.results[0].id == '<?php echo empty_lookup_value; ?>') { $j('.btn[id=courses_table_view_parent]').hide(); } else { $j('.btn[id=courses_table_view_parent]').show(); }
+
+						if(typeof(course_update_autofills__RAND__) == 'function') course_update_autofills__RAND__();
+					}
+				});
+			}
+
+		<?php } else { ?>
+
+			$j.ajax({
+				url: 'ajax_combo.php',
+				dataType: 'json',
+				data: { id: AppGini.current_course__RAND__.value, t: 'students_table', f: 'course' },
+				success: function(resp) {
+					$j('[id=course-container__RAND__], [id=course-container-readonly__RAND__]').html('<span class="match-text" id="course-match-text">' + resp.results[0].text + '</span>');
+					if(resp.results[0].id == '<?php echo empty_lookup_value; ?>') { $j('.btn[id=courses_table_view_parent]').hide(); } else { $j('.btn[id=courses_table_view_parent]').show(); }
+
+					if(typeof(course_update_autofills__RAND__) == 'function') course_update_autofills__RAND__();
 				}
 			});
 		<?php } ?>
@@ -456,7 +542,8 @@ function students_table_form($selectedId = '', $allowUpdate = true, $allowInsert
 		$jsReadOnly .= "\t\$j('#admission_dateDay, #admission_dateMonth, #admission_dateYear').prop('disabled', true).css({ color: '#555', backgroundColor: '#fff' });\n";
 		$jsReadOnly .= "\t\$j('#department').prop('disabled', true).css({ color: '#555', backgroundColor: '#fff' });\n";
 		$jsReadOnly .= "\t\$j('#department_caption').prop('disabled', true).css({ color: '#555', backgroundColor: 'white' });\n";
-		$jsReadOnly .= "\t\$j('#course').replaceWith('<div class=\"form-control-static\" id=\"course\">' + (\$j('#course').val() || '') + '</div>');\n";
+		$jsReadOnly .= "\t\$j('#course').prop('disabled', true).css({ color: '#555', backgroundColor: '#fff' });\n";
+		$jsReadOnly .= "\t\$j('#course_caption').prop('disabled', true).css({ color: '#555', backgroundColor: 'white' });\n";
 		$jsReadOnly .= "\t\$j('#year').replaceWith('<div class=\"form-control-static\" id=\"year\">' + (\$j('#year').val() || '') + '</div>'); \$j('#year-multi-selection-help').hide();\n";
 		$jsReadOnly .= "\t\$j('.select2-container').hide();\n";
 
@@ -487,11 +574,14 @@ function students_table_form($selectedId = '', $allowUpdate = true, $allowInsert
 	$templateCode = str_replace('<%%COMBO(department)%%>', $combo_department->HTML, $templateCode);
 	$templateCode = str_replace('<%%COMBOTEXT(department)%%>', $combo_department->MatchText, $templateCode);
 	$templateCode = str_replace('<%%URLCOMBOTEXT(department)%%>', urlencode($combo_department->MatchText), $templateCode);
+	$templateCode = str_replace('<%%COMBO(course)%%>', $combo_course->HTML, $templateCode);
+	$templateCode = str_replace('<%%COMBOTEXT(course)%%>', $combo_course->MatchText, $templateCode);
+	$templateCode = str_replace('<%%URLCOMBOTEXT(course)%%>', urlencode($combo_course->MatchText), $templateCode);
 	$templateCode = str_replace('<%%COMBO(year)%%>', $combo_year->HTML, $templateCode);
 	$templateCode = str_replace('<%%COMBOTEXT(year)%%>', $combo_year->SelectedData, $templateCode);
 
 	/* lookup fields array: 'lookup field name' => ['parent table name', 'lookup field caption'] */
-	$lookup_fields = ['department' => ['departments_table', 'Department'], ];
+	$lookup_fields = ['department' => ['departments_table', 'Department'], 'course' => ['courses_table', 'Course'], ];
 	foreach($lookup_fields as $luf => $ptfc) {
 		$pt_perm = getTablePermissions($ptfc[0]);
 

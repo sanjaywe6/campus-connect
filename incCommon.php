@@ -105,10 +105,11 @@
 
 	function get_sql_fields($table_name) {
 		$sql_fields = [
-			'students_table' => "`students_table`.`id` as 'id', `students_table`.`name` as 'name', `students_table`.`gender` as 'gender', if(`students_table`.`dob`,date_format(`students_table`.`dob`,'%d/%m/%Y'),'') as 'dob', `students_table`.`email` as 'email', `students_table`.`phone` as 'phone', `students_table`.`address` as 'address', if(`students_table`.`admission_date`,date_format(`students_table`.`admission_date`,'%d/%m/%Y'),'') as 'admission_date', IF(    CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') as 'department', `students_table`.`course` as 'course', `students_table`.`year` as 'year', `students_table`.`created_by` as 'created_by', `students_table`.`created_at` as 'created_at', `students_table`.`last_updated_by` as 'last_updated_by', `students_table`.`last_updated_at` as 'last_updated_at', `students_table`.`created_by_username` as 'created_by_username', `students_table`.`last_updated_by_username` as 'last_updated_by_username'",
+			'students_table' => "`students_table`.`id` as 'id', `students_table`.`name` as 'name', `students_table`.`gender` as 'gender', if(`students_table`.`dob`,date_format(`students_table`.`dob`,'%d/%m/%Y'),'') as 'dob', `students_table`.`email` as 'email', `students_table`.`phone` as 'phone', `students_table`.`address` as 'address', if(`students_table`.`admission_date`,date_format(`students_table`.`admission_date`,'%d/%m/%Y'),'') as 'admission_date', IF(    CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') as 'department', IF(    CHAR_LENGTH(`courses_table1`.`id`), CONCAT_WS('',   `courses_table1`.`id`), '') as 'course', `students_table`.`year` as 'year', `students_table`.`created_by` as 'created_by', `students_table`.`created_at` as 'created_at', `students_table`.`last_updated_by` as 'last_updated_by', `students_table`.`last_updated_at` as 'last_updated_at', `students_table`.`created_by_username` as 'created_by_username', `students_table`.`last_updated_by_username` as 'last_updated_by_username'",
 			'faculty_table' => "`faculty_table`.`id` as 'id', `faculty_table`.`name` as 'name', `faculty_table`.`gender` as 'gender', if(`faculty_table`.`dob`,date_format(`faculty_table`.`dob`,'%d/%m/%Y'),'') as 'dob', `faculty_table`.`email` as 'email', `faculty_table`.`phone` as 'phone', `faculty_table`.`address` as 'address', if(`faculty_table`.`hire_date`,date_format(`faculty_table`.`hire_date`,'%d/%m/%Y'),'') as 'hire_date', IF(    CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') as 'department', `faculty_table`.`designation` as 'designation', `faculty_table`.`created_by` as 'created_by', `faculty_table`.`created_at` as 'created_at', `faculty_table`.`last_updated_by` as 'last_updated_by', `faculty_table`.`last_updated_at` as 'last_updated_at', `faculty_table`.`created_by_username` as 'created_by_username', `faculty_table`.`last_updated_by_username` as 'last_updated_by_username'",
 			'departments_table' => "`departments_table`.`id` as 'id', `departments_table`.`department_name` as 'department_name', `departments_table`.`hod` as 'hod', `departments_table`.`contact` as 'contact', `departments_table`.`created_by` as 'created_by', `departments_table`.`created_at` as 'created_at', `departments_table`.`last_updated_by` as 'last_updated_by', `departments_table`.`last_updated_at` as 'last_updated_at', `departments_table`.`created_by_username` as 'created_by_username', `departments_table`.`last_updated_by_username` as 'last_updated_by_username'",
 			'courses_table' => "`courses_table`.`id` as 'id', `courses_table`.`course_name` as 'course_name', IF(    CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') as 'department', if(`courses_table`.`starting_date`,date_format(`courses_table`.`starting_date`,'%d/%m/%Y'),'') as 'starting_date', if(`courses_table`.`ending_date`,date_format(`courses_table`.`ending_date`,'%d/%m/%Y'),'') as 'ending_date', `courses_table`.`duration` as 'duration', `courses_table`.`credits` as 'credits', `courses_table`.`created_by` as 'created_by', `courses_table`.`created_at` as 'created_at', `courses_table`.`last_updated_by` as 'last_updated_by', `courses_table`.`last_updated_at` as 'last_updated_at', `courses_table`.`created_by_username` as 'created_by_username', `courses_table`.`last_updated_by_username` as 'last_updated_by_username'",
+			'subject_table' => "`subject_table`.`id` as 'id', `subject_table`.`subject_name` as 'subject_name', IF(    CHAR_LENGTH(`courses_table1`.`course_name`) || CHAR_LENGTH(if(`courses_table1`.`starting_date`,date_format(`courses_table1`.`starting_date`,'%d/%m/%Y'),'')), CONCAT_WS('',   `courses_table1`.`course_name`, ' ~ ', if(`courses_table1`.`starting_date`,date_format(`courses_table1`.`starting_date`,'%d/%m/%Y'),'')), '') as 'course_details', IF(    CHAR_LENGTH(`faculty_table1`.`name`) || CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `faculty_table1`.`name`, ' ~ ', `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') as 'faculty_details', `subject_table`.`created_by` as 'created_by', `subject_table`.`created_at` as 'created_at', `subject_table`.`last_updated_by` as 'last_updated_by', `subject_table`.`last_updated_at` as 'last_updated_at', `subject_table`.`created_by_username` as 'created_by_username', `subject_table`.`last_updated_by_username` as 'last_updated_by_username'",
 		];
 
 		if(isset($sql_fields[$table_name])) return $sql_fields[$table_name];
@@ -120,10 +121,11 @@
 
 	function get_sql_from($table_name, $skip_permissions = false, $skip_joins = false, $lower_permissions = false) {
 		$sql_from = [
-			'students_table' => "`students_table` LEFT JOIN `departments_table` as departments_table1 ON `departments_table1`.`id`=`students_table`.`department` ",
+			'students_table' => "`students_table` LEFT JOIN `departments_table` as departments_table1 ON `departments_table1`.`id`=`students_table`.`department` LEFT JOIN `courses_table` as courses_table1 ON `courses_table1`.`id`=`students_table`.`course` ",
 			'faculty_table' => "`faculty_table` LEFT JOIN `departments_table` as departments_table1 ON `departments_table1`.`id`=`faculty_table`.`department` ",
 			'departments_table' => "`departments_table` ",
 			'courses_table' => "`courses_table` LEFT JOIN `departments_table` as departments_table1 ON `departments_table1`.`id`=`courses_table`.`department` ",
+			'subject_table' => "`subject_table` LEFT JOIN `courses_table` as courses_table1 ON `courses_table1`.`id`=`subject_table`.`course_details` LEFT JOIN `faculty_table` as faculty_table1 ON `faculty_table1`.`id`=`subject_table`.`faculty_details` LEFT JOIN `departments_table` as departments_table1 ON `departments_table1`.`id`=`faculty_table1`.`department` ",
 		];
 
 		$pkey = [
@@ -131,6 +133,7 @@
 			'faculty_table' => 'id',
 			'departments_table' => 'id',
 			'courses_table' => 'id',
+			'subject_table' => 'id',
 		];
 
 		if(!isset($sql_from[$table_name])) return false;
@@ -237,6 +240,18 @@
 				'ending_date' => '1',
 				'duration' => '',
 				'credits' => '',
+				'created_by' => '',
+				'created_at' => '',
+				'last_updated_by' => '',
+				'last_updated_at' => '',
+				'created_by_username' => '',
+				'last_updated_by_username' => '',
+			],
+			'subject_table' => [
+				'id' => '',
+				'subject_name' => '',
+				'course_details' => '',
+				'faculty_details' => '',
 				'created_by' => '',
 				'created_at' => '',
 				'last_updated_by' => '',
@@ -1066,7 +1081,7 @@
 		if(is_array($arrTables)) {
 			foreach($arrTables as $tn => $tc) {
 				/* ---- list of tables where hide link in nav menu is set ---- */
-				$tChkHL = array_search($tn, []);
+				$tChkHL = array_search($tn, ['subject_table']);
 
 				/* ---- list of tables where filter first is set ---- */
 				$tChkFF = array_search($tn, []);
@@ -1253,7 +1268,7 @@ EOT;
 					'forced-where' => '',
 					'display-fields' => [0 => 'ID', 1 => 'Name', 2 => 'Gender', 3 => 'Dob', 4 => 'Email', 5 => 'Phone', 6 => 'Address', 7 => 'Admission Date', 8 => 'Department', 9 => 'Course', 10 => 'Year', 11 => 'Created by', 12 => 'Created At', 13 => 'Last Updated by', 14 => 'Last Updated At'],
 					'display-field-names' => [0 => 'id', 1 => 'name', 2 => 'gender', 3 => 'dob', 4 => 'email', 5 => 'phone', 6 => 'address', 7 => 'admission_date', 8 => 'department', 9 => 'course', 10 => 'year', 11 => 'created_by', 12 => 'created_at', 13 => 'last_updated_by', 14 => 'last_updated_at'],
-					'sortable-fields' => [0 => '`students_table`.`id`', 1 => 2, 2 => 3, 3 => '`students_table`.`dob`', 4 => 5, 5 => 6, 6 => 7, 7 => '`students_table`.`admission_date`', 8 => 9, 9 => 10, 10 => 11, 11 => 12, 12 => 13, 13 => 14, 14 => 15, 15 => 16, 16 => 17],
+					'sortable-fields' => [0 => '`students_table`.`id`', 1 => 2, 2 => 3, 3 => '`students_table`.`dob`', 4 => 5, 5 => 6, 6 => 7, 7 => '`students_table`.`admission_date`', 8 => 9, 9 => '`courses_table1`.`id`', 10 => 11, 11 => 12, 12 => 13, 13 => 14, 14 => 15, 15 => 16, 16 => 17],
 					'records-per-page' => 10,
 					'default-sort-by' => 0,
 					'default-sort-direction' => 'desc',
@@ -1262,7 +1277,31 @@ EOT;
 					'show-page-progress' => true,
 					'template' => 'children-students_table',
 					'template-printable' => 'children-students_table-printable',
-					'query' => "SELECT `students_table`.`id` as 'id', `students_table`.`name` as 'name', `students_table`.`gender` as 'gender', if(`students_table`.`dob`,date_format(`students_table`.`dob`,'%d/%m/%Y'),'') as 'dob', `students_table`.`email` as 'email', `students_table`.`phone` as 'phone', `students_table`.`address` as 'address', if(`students_table`.`admission_date`,date_format(`students_table`.`admission_date`,'%d/%m/%Y'),'') as 'admission_date', IF(    CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') as 'department', `students_table`.`course` as 'course', `students_table`.`year` as 'year', `students_table`.`created_by` as 'created_by', `students_table`.`created_at` as 'created_at', `students_table`.`last_updated_by` as 'last_updated_by', `students_table`.`last_updated_at` as 'last_updated_at', `students_table`.`created_by_username` as 'created_by_username', `students_table`.`last_updated_by_username` as 'last_updated_by_username' FROM `students_table` LEFT JOIN `departments_table` as departments_table1 ON `departments_table1`.`id`=`students_table`.`department` "
+					'query' => "SELECT `students_table`.`id` as 'id', `students_table`.`name` as 'name', `students_table`.`gender` as 'gender', if(`students_table`.`dob`,date_format(`students_table`.`dob`,'%d/%m/%Y'),'') as 'dob', `students_table`.`email` as 'email', `students_table`.`phone` as 'phone', `students_table`.`address` as 'address', if(`students_table`.`admission_date`,date_format(`students_table`.`admission_date`,'%d/%m/%Y'),'') as 'admission_date', IF(    CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') as 'department', IF(    CHAR_LENGTH(`courses_table1`.`id`), CONCAT_WS('',   `courses_table1`.`id`), '') as 'course', `students_table`.`year` as 'year', `students_table`.`created_by` as 'created_by', `students_table`.`created_at` as 'created_at', `students_table`.`last_updated_by` as 'last_updated_by', `students_table`.`last_updated_at` as 'last_updated_at', `students_table`.`created_by_username` as 'created_by_username', `students_table`.`last_updated_by_username` as 'last_updated_by_username' FROM `students_table` LEFT JOIN `departments_table` as departments_table1 ON `departments_table1`.`id`=`students_table`.`department` LEFT JOIN `courses_table` as courses_table1 ON `courses_table1`.`id`=`students_table`.`course` "
+				],
+				'course' => [
+					'parent-table' => 'courses_table',
+					'parent-primary-key' => 'id',
+					'child-primary-key' => 'id',
+					'child-primary-key-index' => 0,
+					'tab-label' => 'Students App <span class="hidden child-label-students_table child-field-caption">(Course)</span>',
+					'auto-close' => false,
+					'table-icon' => 'table.gif',
+					'display-refresh' => true,
+					'display-add-new' => true,
+					'forced-where' => '',
+					'display-fields' => [0 => 'ID', 1 => 'Name', 2 => 'Gender', 3 => 'Dob', 4 => 'Email', 5 => 'Phone', 6 => 'Address', 7 => 'Admission Date', 8 => 'Department', 9 => 'Course', 10 => 'Year', 11 => 'Created by', 12 => 'Created At', 13 => 'Last Updated by', 14 => 'Last Updated At'],
+					'display-field-names' => [0 => 'id', 1 => 'name', 2 => 'gender', 3 => 'dob', 4 => 'email', 5 => 'phone', 6 => 'address', 7 => 'admission_date', 8 => 'department', 9 => 'course', 10 => 'year', 11 => 'created_by', 12 => 'created_at', 13 => 'last_updated_by', 14 => 'last_updated_at'],
+					'sortable-fields' => [0 => '`students_table`.`id`', 1 => 2, 2 => 3, 3 => '`students_table`.`dob`', 4 => 5, 5 => 6, 6 => 7, 7 => '`students_table`.`admission_date`', 8 => 9, 9 => '`courses_table1`.`id`', 10 => 11, 11 => 12, 12 => 13, 13 => 14, 14 => 15, 15 => 16, 16 => 17],
+					'records-per-page' => 10,
+					'default-sort-by' => 0,
+					'default-sort-direction' => 'desc',
+					'open-detail-view-on-click' => true,
+					'display-page-selector' => true,
+					'show-page-progress' => true,
+					'template' => 'children-students_table',
+					'template-printable' => 'children-students_table-printable',
+					'query' => "SELECT `students_table`.`id` as 'id', `students_table`.`name` as 'name', `students_table`.`gender` as 'gender', if(`students_table`.`dob`,date_format(`students_table`.`dob`,'%d/%m/%Y'),'') as 'dob', `students_table`.`email` as 'email', `students_table`.`phone` as 'phone', `students_table`.`address` as 'address', if(`students_table`.`admission_date`,date_format(`students_table`.`admission_date`,'%d/%m/%Y'),'') as 'admission_date', IF(    CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') as 'department', IF(    CHAR_LENGTH(`courses_table1`.`id`), CONCAT_WS('',   `courses_table1`.`id`), '') as 'course', `students_table`.`year` as 'year', `students_table`.`created_by` as 'created_by', `students_table`.`created_at` as 'created_at', `students_table`.`last_updated_by` as 'last_updated_by', `students_table`.`last_updated_at` as 'last_updated_at', `students_table`.`created_by_username` as 'created_by_username', `students_table`.`last_updated_by_username` as 'last_updated_by_username' FROM `students_table` LEFT JOIN `departments_table` as departments_table1 ON `departments_table1`.`id`=`students_table`.`department` LEFT JOIN `courses_table` as courses_table1 ON `courses_table1`.`id`=`students_table`.`course` "
 				],
 			],
 			'faculty_table' => [
@@ -1319,6 +1358,56 @@ EOT;
 					'query' => "SELECT `courses_table`.`id` as 'id', `courses_table`.`course_name` as 'course_name', IF(    CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') as 'department', if(`courses_table`.`starting_date`,date_format(`courses_table`.`starting_date`,'%d/%m/%Y'),'') as 'starting_date', if(`courses_table`.`ending_date`,date_format(`courses_table`.`ending_date`,'%d/%m/%Y'),'') as 'ending_date', `courses_table`.`duration` as 'duration', `courses_table`.`credits` as 'credits', `courses_table`.`created_by` as 'created_by', `courses_table`.`created_at` as 'created_at', `courses_table`.`last_updated_by` as 'last_updated_by', `courses_table`.`last_updated_at` as 'last_updated_at', `courses_table`.`created_by_username` as 'created_by_username', `courses_table`.`last_updated_by_username` as 'last_updated_by_username' FROM `courses_table` LEFT JOIN `departments_table` as departments_table1 ON `departments_table1`.`id`=`courses_table`.`department` "
 				],
 			],
+			'subject_table' => [
+				'course_details' => [
+					'parent-table' => 'courses_table',
+					'parent-primary-key' => 'id',
+					'child-primary-key' => 'id',
+					'child-primary-key-index' => 0,
+					'tab-label' => 'Subject Table - App <span class="hidden child-label-subject_table child-field-caption">(Course Details)</span>',
+					'auto-close' => false,
+					'table-icon' => 'table.gif',
+					'display-refresh' => true,
+					'display-add-new' => true,
+					'forced-where' => '',
+					'display-fields' => [1 => 'Subject Name', 2 => 'Course Details', 3 => 'Faculty Details', 4 => 'Created by', 5 => 'Created At', 6 => 'Last Updated by', 7 => 'Last Updated At'],
+					'display-field-names' => [1 => 'subject_name', 2 => 'course_details', 3 => 'faculty_details', 4 => 'created_by', 5 => 'created_at', 6 => 'last_updated_by', 7 => 'last_updated_at'],
+					'sortable-fields' => [0 => '`subject_table`.`id`', 1 => 2, 2 => 3, 3 => 4, 4 => 5, 5 => 6, 6 => 7, 7 => 8, 8 => 9, 9 => 10],
+					'records-per-page' => 10,
+					'default-sort-by' => 0,
+					'default-sort-direction' => 'desc',
+					'open-detail-view-on-click' => true,
+					'display-page-selector' => true,
+					'show-page-progress' => true,
+					'template' => 'children-subject_table',
+					'template-printable' => 'children-subject_table-printable',
+					'query' => "SELECT `subject_table`.`id` as 'id', `subject_table`.`subject_name` as 'subject_name', IF(    CHAR_LENGTH(`courses_table1`.`course_name`) || CHAR_LENGTH(if(`courses_table1`.`starting_date`,date_format(`courses_table1`.`starting_date`,'%d/%m/%Y'),'')), CONCAT_WS('',   `courses_table1`.`course_name`, ' ~ ', if(`courses_table1`.`starting_date`,date_format(`courses_table1`.`starting_date`,'%d/%m/%Y'),'')), '') as 'course_details', IF(    CHAR_LENGTH(`faculty_table1`.`name`) || CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `faculty_table1`.`name`, ' ~ ', `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') as 'faculty_details', `subject_table`.`created_by` as 'created_by', `subject_table`.`created_at` as 'created_at', `subject_table`.`last_updated_by` as 'last_updated_by', `subject_table`.`last_updated_at` as 'last_updated_at', `subject_table`.`created_by_username` as 'created_by_username', `subject_table`.`last_updated_by_username` as 'last_updated_by_username' FROM `subject_table` LEFT JOIN `courses_table` as courses_table1 ON `courses_table1`.`id`=`subject_table`.`course_details` LEFT JOIN `faculty_table` as faculty_table1 ON `faculty_table1`.`id`=`subject_table`.`faculty_details` LEFT JOIN `departments_table` as departments_table1 ON `departments_table1`.`id`=`faculty_table1`.`department` "
+				],
+				'faculty_details' => [
+					'parent-table' => 'faculty_table',
+					'parent-primary-key' => 'id',
+					'child-primary-key' => 'id',
+					'child-primary-key-index' => 0,
+					'tab-label' => 'Subject Table - App <span class="hidden child-label-subject_table child-field-caption">(Faculty Details)</span>',
+					'auto-close' => false,
+					'table-icon' => 'table.gif',
+					'display-refresh' => true,
+					'display-add-new' => true,
+					'forced-where' => '',
+					'display-fields' => [1 => 'Subject Name', 2 => 'Course Details', 3 => 'Faculty Details', 4 => 'Created by', 5 => 'Created At', 6 => 'Last Updated by', 7 => 'Last Updated At'],
+					'display-field-names' => [1 => 'subject_name', 2 => 'course_details', 3 => 'faculty_details', 4 => 'created_by', 5 => 'created_at', 6 => 'last_updated_by', 7 => 'last_updated_at'],
+					'sortable-fields' => [0 => '`subject_table`.`id`', 1 => 2, 2 => 3, 3 => 4, 4 => 5, 5 => 6, 6 => 7, 7 => 8, 8 => 9, 9 => 10],
+					'records-per-page' => 10,
+					'default-sort-by' => 0,
+					'default-sort-direction' => 'desc',
+					'open-detail-view-on-click' => true,
+					'display-page-selector' => true,
+					'show-page-progress' => true,
+					'template' => 'children-subject_table',
+					'template-printable' => 'children-subject_table-printable',
+					'query' => "SELECT `subject_table`.`id` as 'id', `subject_table`.`subject_name` as 'subject_name', IF(    CHAR_LENGTH(`courses_table1`.`course_name`) || CHAR_LENGTH(if(`courses_table1`.`starting_date`,date_format(`courses_table1`.`starting_date`,'%d/%m/%Y'),'')), CONCAT_WS('',   `courses_table1`.`course_name`, ' ~ ', if(`courses_table1`.`starting_date`,date_format(`courses_table1`.`starting_date`,'%d/%m/%Y'),'')), '') as 'course_details', IF(    CHAR_LENGTH(`faculty_table1`.`name`) || CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `faculty_table1`.`name`, ' ~ ', `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') as 'faculty_details', `subject_table`.`created_by` as 'created_by', `subject_table`.`created_at` as 'created_at', `subject_table`.`last_updated_by` as 'last_updated_by', `subject_table`.`last_updated_at` as 'last_updated_at', `subject_table`.`created_by_username` as 'created_by_username', `subject_table`.`last_updated_by_username` as 'last_updated_by_username' FROM `subject_table` LEFT JOIN `courses_table` as courses_table1 ON `courses_table1`.`id`=`subject_table`.`course_details` LEFT JOIN `faculty_table` as faculty_table1 ON `faculty_table1`.`id`=`subject_table`.`faculty_details` LEFT JOIN `departments_table` as departments_table1 ON `departments_table1`.`id`=`faculty_table1`.`department` "
+				],
+			],
 		];
 
 		if($skipPermissions) return $pcConfig;
@@ -1364,7 +1453,7 @@ EOT;
 	#########################################################
 
 	function isDetailViewEnabled($tn) {
-		$tables = ['students_table', 'faculty_table', 'departments_table', 'courses_table', ];
+		$tables = ['students_table', 'faculty_table', 'departments_table', 'courses_table', 'subject_table', ];
 		return in_array($tn, $tables);
 	}
 

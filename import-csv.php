@@ -8,6 +8,7 @@
 			if(isset($data['dob'])) $data['dob'] = guessMySQLDateTime($data['dob']);
 			if(isset($data['admission_date'])) $data['admission_date'] = guessMySQLDateTime($data['admission_date']);
 			if(isset($data['department'])) $data['department'] = pkGivenLookupText($data['department'], 'students_table', 'department');
+			if(isset($data['course'])) $data['course'] = pkGivenLookupText($data['course'], 'students_table', 'course');
 
 			return $data;
 		},
@@ -29,6 +30,12 @@
 
 			return $data;
 		},
+		'subject_table' => function($data, $options = []) {
+			if(isset($data['course_details'])) $data['course_details'] = pkGivenLookupText($data['course_details'], 'subject_table', 'course_details');
+			if(isset($data['faculty_details'])) $data['faculty_details'] = pkGivenLookupText($data['faculty_details'], 'subject_table', 'faculty_details');
+
+			return $data;
+		},
 	];
 
 	// accept a record as an assoc array, return a boolean indicating whether to import or skip record
@@ -37,6 +44,7 @@
 		'faculty_table' => function($data, $options = []) { return true; },
 		'departments_table' => function($data, $options = []) { return true; },
 		'courses_table' => function($data, $options = []) { return true; },
+		'subject_table' => function($data, $options = []) { return true; },
 	];
 
 	/*

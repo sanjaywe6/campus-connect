@@ -1,115 +1,48 @@
-<!-- To change the layout of the detail view form, we recommend using JS code in hooks/students_table-dv.js rather than editing this file -->
+<!-- To change the layout of the detail view form, we recommend using JS code in hooks/subject_table-dv.js rather than editing this file -->
 
 <div id="detail-view"></div>
 <div class="panel-heading"><h3 class="panel-title"><strong><%%DETAIL_VIEW_TITLE%%></strong></h3></div>
 
-<div id="students_table_dv_container-loading" class="text-center text-info text-bold vspacer-lg"><i class="glyphicon glyphicon-refresh loop-rotate"></i> <%%TRANSLATION(Loading ...)%%></div>
+<div id="subject_table_dv_container-loading" class="text-center text-info text-bold vspacer-lg"><i class="glyphicon glyphicon-refresh loop-rotate"></i> <%%TRANSLATION(Loading ...)%%></div>
 
-<div class="panel-body hidden" id="students_table_dv_container">
+<div class="panel-body hidden" id="subject_table_dv_container">
 	<!-- child links -->
 	<div class="row vspacer-md">
 		<div class="col-xs-12 children-links">
 			<div class="clearfix"></div>
 		</div>
 	</div>
+	<hr class="hidden-xs hidden-sm">
 
 	<div class="row">
 		<!-- form inputs -->
-		<div class="col-md-8 col-lg-10" id="students_table_dv_form">
+		<div class="col-md-8 col-lg-10" id="subject_table_dv_form">
 			<fieldset class="form-horizontal">
 
-				<!-- Field: Name -->
-				<div class="form-group students_table-name">
+				<!-- Field: Subject Name -->
+				<div class="form-group subject_table-subject_name">
 					<hr class="hidden-md hidden-lg">
-					<label class="control-label col-lg-3" for="name">Name</label>
+					<label class="control-label col-lg-3" for="subject_name">Subject Name</label>
 					<div class="col-lg-9">
-						<input maxlength="255" type="text" class="form-control" name="name" id="name" value="<%%VALUE(name)%%>">
+						<input maxlength="255" type="text" class="form-control" name="subject_name" id="subject_name" value="<%%VALUE(subject_name)%%>">
 					</div>
 				</div>
 
-				<!-- Field: Gender -->
-				<div class="form-group students_table-gender">
+				<!-- Field: Course Details -->
+				<div class="form-group subject_table-course_details">
 					<hr class="hidden-md hidden-lg">
-					<label class="control-label col-lg-3" for="gender">Gender</label>
+					<label class="control-label col-lg-3" for="course_details" data-parent_link="view_parent_modal">Course Details</label>
 					<div class="col-lg-9">
-						<%%COMBO(gender)%%>
+						<div class="lookup-flex"><%%COMBO(course_details)%%><%%PLINK(course_details)%%><%%ADDNEW(courses_table)%%></div>
 					</div>
 				</div>
 
-				<!-- Field: Dob -->
-				<div class="form-group students_table-dob">
+				<!-- Field: Faculty Details -->
+				<div class="form-group subject_table-faculty_details">
 					<hr class="hidden-md hidden-lg">
-					<label class="control-label col-lg-3" for="dob-dd">Dob</label>
+					<label class="control-label col-lg-3" for="faculty_details" data-parent_link="view_parent_modal">Faculty Details</label>
 					<div class="col-lg-9">
-						<%%COMBO(dob)%%>
-					</div>
-				</div>
-
-				<!-- Field: Email -->
-				<div class="form-group students_table-email">
-					<hr class="hidden-md hidden-lg">
-					<label class="control-label col-lg-3" for="email">Email</label>
-					<div class="col-lg-9">
-						<div class="input-group">
-							<input maxlength="80" type="text" class="form-control" name="email" id="email" value="<%%VALUE(email)%%>">
-							<span class="input-group-btn">
-								<button id="email-link" class="btn btn-default" type="button" title="<%%VALUE(email)%%>" onclick="if(this.title) window.open(`mailto:${this.title}`, '_blank')"><i class="glyphicon glyphicon-envelope"></i></button>
-							</span>
-						</div>
-					</div>
-				</div>
-
-				<!-- Field: Phone -->
-				<div class="form-group students_table-phone">
-					<hr class="hidden-md hidden-lg">
-					<label class="control-label col-lg-3" for="phone">Phone</label>
-					<div class="col-lg-9">
-						<input maxlength="255" type="text" class="form-control" name="phone" id="phone" value="<%%VALUE(phone)%%>">
-					</div>
-				</div>
-
-				<!-- Field: Address -->
-				<div class="form-group students_table-address">
-					<hr class="hidden-md hidden-lg">
-					<label class="control-label col-lg-3" for="address">Address</label>
-					<div class="col-lg-9 has-nicedit">
-						<%%HTMLAREA(address)%%>
-					</div>
-				</div>
-
-				<!-- Field: Admission Date -->
-				<div class="form-group students_table-admission_date">
-					<hr class="hidden-md hidden-lg">
-					<label class="control-label col-lg-3" for="admission_date-dd">Admission Date</label>
-					<div class="col-lg-9">
-						<%%COMBO(admission_date)%%>
-					</div>
-				</div>
-
-				<!-- Field: Department -->
-				<div class="form-group students_table-department">
-					<hr class="hidden-md hidden-lg">
-					<label class="control-label col-lg-3" for="department" data-parent_link="view_parent_modal">Department</label>
-					<div class="col-lg-9">
-						<div class="lookup-flex"><%%COMBO(department)%%><%%PLINK(department)%%><%%ADDNEW(departments_table)%%></div>
-					</div>
-				</div>
-
-				<!-- Field: Course -->
-				<div class="form-group students_table-course">
-					<hr class="hidden-md hidden-lg">
-					<label class="control-label col-lg-3" for="course" data-parent_link="view_parent_modal">Course</label>
-					<div class="col-lg-9">
-						<div class="lookup-flex"><%%COMBO(course)%%><%%PLINK(course)%%><%%ADDNEW(courses_table)%%></div>
-					</div>
-				</div>
-
-				<!-- Field: Year -->
-				<div class="form-group students_table-year">
-					<hr class="hidden-md hidden-lg">
-					<label class="control-label col-lg-3" for="year">Year</label>
-					<div class="col-lg-9">
-						<%%COMBO(year)%%>
+						<div class="lookup-flex"><%%COMBO(faculty_details)%%><%%PLINK(faculty_details)%%><%%ADDNEW(faculty_table)%%></div>
 					</div>
 				</div>
 
@@ -118,7 +51,7 @@
 
 		<!-- DV action buttons -->
 		<hr class="hidden-md hidden-lg">
-		<div class="col-md-4 col-lg-2 dv-action-buttons" id="students_table_dv_action_buttons">
+		<div class="col-md-4 col-lg-2 dv-action-buttons" id="subject_table_dv_action_buttons">
 			<div class="btn-toolbar">
 				<div class="btn-group-vertical btn-group-lg" style="width: 100%;">
 					<%%UPDATE_BUTTON%%>
@@ -150,22 +83,13 @@
 				setTimeout(AppGini.closeParentModal, 2000);
 			}
 
-			AppGini.once({
-				condition: function() { return bkLib != undefined; },
-				action: function() {
-					if($j('textarea#address').length) new nicEditor({ fullPanel : true }).panelInstance('address');
-				}
-			});
 
 			/* enable DV action buttons to float on scrolling down the form */
 			enable_dvab_floating();
 
-			$j('#students_table_dv_container-loading').addClass('hidden');
-			$j('#students_table_dv_container').removeClass('hidden');
-			if(!$j('.table_view').length || $j('[name=SelectedID]').val().length) AppGini.focusFormElement('students_table', 'name');
-
-			// try to detect rich text changes by adding 'input' handler after nicedit is loaded ...
-			AppGini.detectContentEditableChanges();
+			$j('#subject_table_dv_container-loading').addClass('hidden');
+			$j('#subject_table_dv_container').removeClass('hidden');
+			if(!$j('.table_view').length || $j('[name=SelectedID]').val().length) AppGini.focusFormElement('subject_table', 'subject_name');
 
 			$j('a[href="<%%BASE_UPLOAD_PATH%%>"]').click(function() { return false; });
 
@@ -186,7 +110,7 @@
 							localStorage.removeItem(pt + '_last_added_id');
 							AppGini.lookupText({
 								id: new_id,
-								table: 'students_table',
+								table: 'subject_table',
 								field: field_id,
 								callback: function(data) {
 									$j('#' + field_id + '-container').select2('data', data, true);
@@ -246,21 +170,21 @@
 				}
 			});
 
-			students_tableUniqueFields.forEach(fieldName => enforce_uniqueness('students_table', fieldName));
+			subject_tableUniqueFields.forEach(fieldName => enforce_uniqueness('subject_table', fieldName));
 
 			/* load admin tools for admin user */
 			if(!add_new_mode) {
 				$j('body').append('<div id="admin-tools-appendix"></div>');
 				$j('#admin-tools-appendix').load(
-					'ajax_admin_tools.php?table=students_table&id=<%%URLVALUE(id)%%>',
+					'ajax_admin_tools.php?table=subject_table&id=<%%URLVALUE(id)%%>',
 					function(resp) {
 						if(!resp.length) return;
-						$j.ajax('ajax_admin_tools.php?action=get_admin_tools_js&table=students_table&id=<%%URLVALUE(id)%%>');
+						$j.ajax('ajax_admin_tools.php?action=get_admin_tools_js&table=subject_table&id=<%%URLVALUE(id)%%>');
 					}
 				);
 			}
 		});
 
-		var students_tableUniqueFields = [
+		var subject_tableUniqueFields = [
 		];
 	</script>

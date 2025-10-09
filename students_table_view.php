@@ -27,7 +27,7 @@
 		"`students_table`.`address`" => "address",
 		"if(`students_table`.`admission_date`,date_format(`students_table`.`admission_date`,'%d/%m/%Y'),'')" => "admission_date",
 		"IF(    CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') /* Department */" => "department",
-		"`students_table`.`course`" => "course",
+		"IF(    CHAR_LENGTH(`courses_table1`.`id`), CONCAT_WS('',   `courses_table1`.`id`), '') /* Course */" => "course",
 		"`students_table`.`year`" => "year",
 		"`students_table`.`created_by`" => "created_by",
 		"`students_table`.`created_at`" => "created_at",
@@ -47,7 +47,7 @@
 		7 => 7,
 		8 => '`students_table`.`admission_date`',
 		9 => 9,
-		10 => 10,
+		10 => '`courses_table1`.`id`',
 		11 => 11,
 		12 => 12,
 		13 => 13,
@@ -68,7 +68,7 @@
 		"`students_table`.`address`" => "address",
 		"if(`students_table`.`admission_date`,date_format(`students_table`.`admission_date`,'%d/%m/%Y'),'')" => "admission_date",
 		"IF(    CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') /* Department */" => "department",
-		"`students_table`.`course`" => "course",
+		"IF(    CHAR_LENGTH(`courses_table1`.`id`), CONCAT_WS('',   `courses_table1`.`id`), '') /* Course */" => "course",
 		"`students_table`.`year`" => "year",
 		"`students_table`.`created_by`" => "created_by",
 		"`students_table`.`created_at`" => "created_at",
@@ -88,7 +88,7 @@
 		"`students_table`.`address`" => "Address",
 		"`students_table`.`admission_date`" => "Admission Date",
 		"IF(    CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') /* Department */" => "Department",
-		"`students_table`.`course`" => "Course",
+		"IF(    CHAR_LENGTH(`courses_table1`.`id`), CONCAT_WS('',   `courses_table1`.`id`), '') /* Course */" => "Course",
 		"`students_table`.`year`" => "Year",
 		"`students_table`.`created_by`" => "Created by",
 		"`students_table`.`created_at`" => "Created At",
@@ -109,7 +109,7 @@
 		"`students_table`.`address`" => "address",
 		"if(`students_table`.`admission_date`,date_format(`students_table`.`admission_date`,'%d/%m/%Y'),'')" => "admission_date",
 		"IF(    CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS('',   `departments_table1`.`department_name`, '-', `departments_table1`.`hod`), '') /* Department */" => "department",
-		"`students_table`.`course`" => "course",
+		"IF(    CHAR_LENGTH(`courses_table1`.`id`), CONCAT_WS('',   `courses_table1`.`id`), '') /* Course */" => "course",
 		"`students_table`.`year`" => "year",
 		"`students_table`.`created_by`" => "created_by",
 		"`students_table`.`created_at`" => "created_at",
@@ -120,9 +120,9 @@
 	];
 
 	// Lookup fields that can be used as filterers
-	$x->filterers = ['department' => 'Department', ];
+	$x->filterers = ['department' => 'Department', 'course' => 'Course', ];
 
-	$x->QueryFrom = "`students_table` LEFT JOIN `departments_table` as departments_table1 ON `departments_table1`.`id`=`students_table`.`department` ";
+	$x->QueryFrom = "`students_table` LEFT JOIN `departments_table` as departments_table1 ON `departments_table1`.`id`=`students_table`.`department` LEFT JOIN `courses_table` as courses_table1 ON `courses_table1`.`id`=`students_table`.`course` ";
 	$x->QueryWhere = '';
 	$x->QueryOrder = '';
 

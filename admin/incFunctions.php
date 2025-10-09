@@ -133,6 +133,13 @@
 					'group' => $tg[0],
 					'homepageShowCount' => 1
 				],
+				'subject_table' => [
+					'Caption' => 'Subject Table - App',
+					'Description' => '',
+					'tableIcon' => 'table.gif',
+					'group' => $tg[0],
+					'homepageShowCount' => 1
+				],
 		];
 
 		if($skip_authentication || getLoggedAdmin()) return $all_tables;
@@ -153,6 +160,7 @@
 			'faculty_table' => ['Faculty App', '', 'table.gif', 'Core Apps'],
 			'departments_table' => ['Departments App', '', 'table.gif', 'Core Apps'],
 			'courses_table' => ['Courses App', '', 'table.gif', 'Core Apps'],
+			'subject_table' => ['Subject Table - App', '', 'table.gif', 'Core Apps'],
 		];
 
 		if($skip_authentication || getLoggedAdmin()) {
@@ -972,7 +980,7 @@
 						],
 					],
 					'course' => [
-						'appgini' => "VARCHAR(255) NULL",
+						'appgini' => "INT UNSIGNED NULL",
 						'info' => [
 							'caption' => 'Course',
 							'description' => '',
@@ -1261,6 +1269,78 @@
 						'appgini' => "VARCHAR(255) NULL",
 						'info' => [
 							'caption' => 'Credits',
+							'description' => '',
+						],
+					],
+					'created_by' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Created by',
+							'description' => '',
+						],
+					],
+					'created_at' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Created At',
+							'description' => '',
+						],
+					],
+					'last_updated_by' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Last Updated by',
+							'description' => '',
+						],
+					],
+					'last_updated_at' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Last Updated At',
+							'description' => '',
+						],
+					],
+					'created_by_username' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Created by username',
+							'description' => '',
+						],
+					],
+					'last_updated_by_username' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Last Updated By',
+							'description' => '',
+						],
+					],
+				],
+				'subject_table' => [
+					'id' => [
+						'appgini' => "INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT",
+						'info' => [
+							'caption' => 'ID',
+							'description' => '',
+						],
+					],
+					'subject_name' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Subject Name',
+							'description' => '',
+						],
+					],
+					'course_details' => [
+						'appgini' => "INT UNSIGNED NULL",
+						'info' => [
+							'caption' => 'Course Details',
+							'description' => '',
+						],
+					],
+					'faculty_details' => [
+						'appgini' => "INT UNSIGNED NULL",
+						'info' => [
+							'caption' => 'Faculty Details',
 							'description' => '',
 						],
 					],
@@ -2477,12 +2557,17 @@
 		$parents = [
 			'students_table' => [
 				'departments_table' => ['department'],
+				'courses_table' => ['course'],
 			],
 			'faculty_table' => [
 				'departments_table' => ['department'],
 			],
 			'courses_table' => [
 				'departments_table' => ['department'],
+			],
+			'subject_table' => [
+				'courses_table' => ['course_details'],
+				'faculty_table' => ['faculty_details'],
 			],
 		];
 
@@ -2523,7 +2608,7 @@
 					INNER JOIN %TABLENAME%
 					  
 					ON membership_users.memberID = %TABLENAME%.created_by_username
-					WHERE %TABLENAME%.id = %ID%;',
+					WHERE %TABLENAME%.%PKFIELD% = %ID%;',
 				'last_updated_by' => 'SELECT CONCAT(
 					  
 					membership_users.memberID, \' : \',
@@ -2537,7 +2622,7 @@
 					INNER JOIN %TABLENAME%
 					  
 					ON membership_users.memberID = %TABLENAME%.last_updated_by_username
-					WHERE %TABLENAME%.id = %ID%;',
+					WHERE %TABLENAME%.%PKFIELD% = %ID%;',
 			],
 			'faculty_table' => [
 				'created_by' => 'SELECT CONCAT(
@@ -2553,7 +2638,7 @@
 					INNER JOIN %TABLENAME%
 					  
 					ON membership_users.memberID = %TABLENAME%.created_by_username
-					WHERE %TABLENAME%.id = %ID%;',
+					WHERE %TABLENAME%.%PKFIELD% = %ID%;',
 				'last_updated_by' => 'SELECT CONCAT(
 					  
 					membership_users.memberID, \' : \',
@@ -2567,7 +2652,7 @@
 					INNER JOIN %TABLENAME%
 					  
 					ON membership_users.memberID = %TABLENAME%.last_updated_by_username
-					WHERE %TABLENAME%.id = %ID%;',
+					WHERE %TABLENAME%.%PKFIELD% = %ID%;',
 			],
 			'departments_table' => [
 				'created_by' => 'SELECT CONCAT(
@@ -2583,7 +2668,7 @@
 					INNER JOIN %TABLENAME%
 					  
 					ON membership_users.memberID = %TABLENAME%.created_by_username
-					WHERE %TABLENAME%.id = %ID%;',
+					WHERE %TABLENAME%.%PKFIELD% = %ID%;',
 				'last_updated_by' => 'SELECT CONCAT(
 					  
 					membership_users.memberID, \' : \',
@@ -2597,7 +2682,7 @@
 					INNER JOIN %TABLENAME%
 					  
 					ON membership_users.memberID = %TABLENAME%.last_updated_by_username
-					WHERE %TABLENAME%.id = %ID%;',
+					WHERE %TABLENAME%.%PKFIELD% = %ID%;',
 			],
 			'courses_table' => [
 				'created_by' => 'SELECT CONCAT(
@@ -2613,7 +2698,7 @@
 					INNER JOIN %TABLENAME%
 					  
 					ON membership_users.memberID = %TABLENAME%.created_by_username
-					WHERE %TABLENAME%.id = %ID%;',
+					WHERE %TABLENAME%.%PKFIELD% = %ID%;',
 				'last_updated_by' => 'SELECT CONCAT(
 					  
 					membership_users.memberID, \' : \',
@@ -2627,7 +2712,37 @@
 					INNER JOIN %TABLENAME%
 					  
 					ON membership_users.memberID = %TABLENAME%.last_updated_by_username
-					WHERE %TABLENAME%.id = %ID%;',
+					WHERE %TABLENAME%.%PKFIELD% = %ID%;',
+			],
+			'subject_table' => [
+				'created_by' => 'SELECT CONCAT(
+					  
+					membership_users.memberID, \' : \',
+					  
+					membership_users.custom1
+					
+					)
+					
+					FROM membership_users
+					
+					INNER JOIN %TABLENAME%
+					  
+					ON membership_users.memberID = %TABLENAME%.created_by_username
+					WHERE %TABLENAME%.%PKFIELD% = %ID%;',
+				'last_updated_by' => 'SELECT CONCAT(
+					  
+					membership_users.memberID, \' : \',
+					  
+					membership_users.custom1
+					
+					)
+					
+					FROM membership_users
+					
+					INNER JOIN %TABLENAME%
+					  
+					ON membership_users.memberID = %TABLENAME%.last_updated_by_username
+					WHERE %TABLENAME%.%PKFIELD% = %ID%;',
 			],
 		];
 	}
@@ -2754,6 +2869,7 @@
 		$lookupQuery = [
 			'students_table' => [
 				'department' => 'SELECT `departments_table`.`id`, IF(CHAR_LENGTH(`departments_table`.`department_name`) || CHAR_LENGTH(`departments_table`.`hod`), CONCAT_WS(\'\', `departments_table`.`department_name`, \'-\', `departments_table`.`hod`), \'\') FROM `departments_table` ORDER BY 2',
+				'course' => 'SELECT `courses_table`.`id`, `courses_table`.`id` FROM `courses_table` LEFT JOIN `departments_table` as departments_table1 ON `departments_table1`.`id`=`courses_table`.`department` ORDER BY 2',
 			],
 			'faculty_table' => [
 				'department' => 'SELECT `departments_table`.`id`, IF(CHAR_LENGTH(`departments_table`.`department_name`) || CHAR_LENGTH(`departments_table`.`hod`), CONCAT_WS(\'\', `departments_table`.`department_name`, \'-\', `departments_table`.`hod`), \'\') FROM `departments_table` ORDER BY 2',
@@ -2762,6 +2878,10 @@
 			],
 			'courses_table' => [
 				'department' => 'SELECT `departments_table`.`id`, IF(CHAR_LENGTH(`departments_table`.`department_name`) || CHAR_LENGTH(`departments_table`.`hod`), CONCAT_WS(\'\', `departments_table`.`department_name`, \'-\', `departments_table`.`hod`), \'\') FROM `departments_table` ORDER BY 2',
+			],
+			'subject_table' => [
+				'course_details' => 'SELECT `courses_table`.`id`, IF(CHAR_LENGTH(`courses_table`.`course_name`) || CHAR_LENGTH(if(`courses_table`.`starting_date`,date_format(`courses_table`.`starting_date`,\'%d/%m/%Y\'),\'\')), CONCAT_WS(\'\', `courses_table`.`course_name`, \' ~ \', if(`courses_table`.`starting_date`,date_format(`courses_table`.`starting_date`,\'%d/%m/%Y\'),\'\')), \'\') FROM `courses_table` LEFT JOIN `departments_table` as departments_table1 ON `departments_table1`.`id`=`courses_table`.`department` ORDER BY 2',
+				'faculty_details' => 'SELECT `faculty_table`.`id`, IF(CHAR_LENGTH(`faculty_table`.`name`) || CHAR_LENGTH(`faculty_table`.`department`), CONCAT_WS(\'\', `faculty_table`.`name`, \' ~ \', IF(    CHAR_LENGTH(`departments_table1`.`department_name`) || CHAR_LENGTH(`departments_table1`.`hod`), CONCAT_WS(\'\',   `departments_table1`.`department_name`, \'-\', `departments_table1`.`hod`), \'\')), \'\') FROM `faculty_table` LEFT JOIN `departments_table` as departments_table1 ON `departments_table1`.`id`=`faculty_table`.`department` ORDER BY 2',
 			],
 		];
 

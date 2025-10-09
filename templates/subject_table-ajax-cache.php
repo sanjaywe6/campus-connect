@@ -4,12 +4,12 @@
 ?>
 <script>
 	$j(function() {
-		var tn = 'students_table';
+		var tn = 'subject_table';
 
 		/* data for selected record, or defaults if none is selected */
 		var data = {
-			department: <?php echo json_encode(['id' => $rdata['department'], 'value' => $rdata['department'], 'text' => $jdata['department']]); ?>,
-			course: <?php echo json_encode(['id' => $rdata['course'], 'value' => $rdata['course'], 'text' => $jdata['course']]); ?>
+			course_details: <?php echo json_encode(['id' => $rdata['course_details'], 'value' => $rdata['course_details'], 'text' => $jdata['course_details']]); ?>,
+			faculty_details: <?php echo json_encode(['id' => $rdata['faculty_details'], 'value' => $rdata['faculty_details'], 'text' => $jdata['faculty_details']]); ?>
 		};
 
 		/* initialize or continue using AppGini.cache for the current table */
@@ -17,19 +17,19 @@
 		AppGini.cache[tn] = AppGini.cache[tn] || AppGini.ajaxCache();
 		var cache = AppGini.cache[tn];
 
-		/* saved value for department */
+		/* saved value for course_details */
 		cache.addCheck(function(u, d) {
 			if(u != 'ajax_combo.php') return false;
-			if(d.t == tn && d.f == 'department' && d.id == data.department.id)
-				return { results: [ data.department ], more: false, elapsed: 0.01 };
+			if(d.t == tn && d.f == 'course_details' && d.id == data.course_details.id)
+				return { results: [ data.course_details ], more: false, elapsed: 0.01 };
 			return false;
 		});
 
-		/* saved value for course */
+		/* saved value for faculty_details */
 		cache.addCheck(function(u, d) {
 			if(u != 'ajax_combo.php') return false;
-			if(d.t == tn && d.f == 'course' && d.id == data.course.id)
-				return { results: [ data.course ], more: false, elapsed: 0.01 };
+			if(d.t == tn && d.f == 'faculty_details' && d.id == data.faculty_details.id)
+				return { results: [ data.faculty_details ], more: false, elapsed: 0.01 };
 			return false;
 		});
 

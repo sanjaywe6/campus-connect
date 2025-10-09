@@ -83,6 +83,24 @@ courses_table_delete1Tip=["",spacer+"This option allows each member of the group
 courses_table_delete2Tip=["",spacer+"This option allows each member of the group to delete any record owned by any member of the group in the 'Courses App' table."];
 courses_table_delete3Tip=["",spacer+"This option allows each member of the group to delete any records in the 'Courses App' table."];
 
+// subject_table table
+subject_table_addTip=["",spacer+"This option allows all members of the group to add records to the 'Subject Table - App' table. A member who adds a record to the table becomes the 'owner' of that record."];
+
+subject_table_view0Tip=["",spacer+"This option prohibits all members of the group from viewing any record in the 'Subject Table - App' table."];
+subject_table_view1Tip=["",spacer+"This option allows each member of the group to view only his own records in the 'Subject Table - App' table."];
+subject_table_view2Tip=["",spacer+"This option allows each member of the group to view any record owned by any member of the group in the 'Subject Table - App' table."];
+subject_table_view3Tip=["",spacer+"This option allows each member of the group to view all records in the 'Subject Table - App' table."];
+
+subject_table_edit0Tip=["",spacer+"This option prohibits all members of the group from modifying any record in the 'Subject Table - App' table."];
+subject_table_edit1Tip=["",spacer+"This option allows each member of the group to edit only his own records in the 'Subject Table - App' table."];
+subject_table_edit2Tip=["",spacer+"This option allows each member of the group to edit any record owned by any member of the group in the 'Subject Table - App' table."];
+subject_table_edit3Tip=["",spacer+"This option allows each member of the group to edit any records in the 'Subject Table - App' table, regardless of their owner."];
+
+subject_table_delete0Tip=["",spacer+"This option prohibits all members of the group from deleting any record in the 'Subject Table - App' table."];
+subject_table_delete1Tip=["",spacer+"This option allows each member of the group to delete only his own records in the 'Subject Table - App' table."];
+subject_table_delete2Tip=["",spacer+"This option allows each member of the group to delete any record owned by any member of the group in the 'Subject Table - App' table."];
+subject_table_delete3Tip=["",spacer+"This option allows each member of the group to delete any records in the 'Subject Table - App' table."];
+
 /*
 	Style syntax:
 	-------------
