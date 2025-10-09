@@ -156,6 +156,30 @@
 				'not_null' => false,
 			],
 		],
+		'results_table' => [
+			'exam_details' => [
+				'parent_table' => 'exams_table',
+				'parent_pk_field' => 'id',
+				'parent_caption' => 'IF(CHAR_LENGTH(`exams_table`.`subject_details`) || CHAR_LENGTH(if(`exams_table`.`exam_date`,date_format(`exams_table`.`exam_date`,\'%d/%m/%Y\'),\'\')), CONCAT_WS(\'\', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS(\'\',   `subject_table1`.`id`, \' ~ \', `subject_table1`.`subject_name`), \'\'), \' ~ \', if(`exams_table`.`exam_date`,date_format(`exams_table`.`exam_date`,\'%d/%m/%Y\'),\'\')), \'\')',
+				'parent_from' => '`exams_table` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`exams_table`.`subject_details` ',
+				'filterers' => [],
+				'custom_query' => '',
+				'inherit_permissions' => false,
+				'list_type' => 0,
+				'not_null' => false,
+			],
+			'student_details' => [
+				'parent_table' => 'students_table',
+				'parent_pk_field' => 'id',
+				'parent_caption' => 'IF(CHAR_LENGTH(`students_table`.`id`) || CHAR_LENGTH(`students_table`.`name`), CONCAT_WS(\'\', `students_table`.`id`, \' ~ \', `students_table`.`name`), \'\')',
+				'parent_from' => '`students_table` LEFT JOIN `departments_table` as departments_table1 ON `departments_table1`.`id`=`students_table`.`department` LEFT JOIN `courses_table` as courses_table1 ON `courses_table1`.`id`=`students_table`.`course` ',
+				'filterers' => [],
+				'custom_query' => '',
+				'inherit_permissions' => false,
+				'list_type' => 0,
+				'not_null' => false,
+			],
+		],
 	];
 
 	// XSS prevention

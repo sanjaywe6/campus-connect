@@ -110,8 +110,9 @@
 			'departments_table' => "`departments_table`.`id` as 'id', `departments_table`.`department_name` as 'department_name', `departments_table`.`hod` as 'hod', `departments_table`.`contact` as 'contact', `departments_table`.`created_by` as 'created_by', `departments_table`.`created_at` as 'created_at', `departments_table`.`last_updated_by` as 'last_updated_by', `departments_table`.`last_updated_at` as 'last_updated_at', `departments_table`.`created_by_username` as 'created_by_username', `departments_table`.`last_updated_by_username` as 'last_updated_by_username'",
 			'courses_table' => "`courses_table`.`id` as 'id', `courses_table`.`course_name` as 'course_name', IF(    CHAR_LENGTH(`departments_table1`.`id`) || CHAR_LENGTH(`departments_table1`.`department_name`), CONCAT_WS('',   `departments_table1`.`id`, '-', `departments_table1`.`department_name`), '') as 'department', if(`courses_table`.`starting_date`,date_format(`courses_table`.`starting_date`,'%d/%m/%Y'),'') as 'starting_date', if(`courses_table`.`ending_date`,date_format(`courses_table`.`ending_date`,'%d/%m/%Y'),'') as 'ending_date', `courses_table`.`duration` as 'duration', `courses_table`.`credits` as 'credits', `courses_table`.`created_by` as 'created_by', `courses_table`.`created_at` as 'created_at', `courses_table`.`last_updated_by` as 'last_updated_by', `courses_table`.`last_updated_at` as 'last_updated_at', `courses_table`.`created_by_username` as 'created_by_username', `courses_table`.`last_updated_by_username` as 'last_updated_by_username'",
 			'subject_table' => "`subject_table`.`id` as 'id', `subject_table`.`subject_name` as 'subject_name', IF(    CHAR_LENGTH(`courses_table1`.`id`) || CHAR_LENGTH(`courses_table1`.`course_name`), CONCAT_WS('',   `courses_table1`.`id`, ' ~ ', `courses_table1`.`course_name`), '') as 'course_details', IF(    CHAR_LENGTH(`faculty_table1`.`id`) || CHAR_LENGTH(`faculty_table1`.`name`), CONCAT_WS('',   `faculty_table1`.`id`, ' ~ ', `faculty_table1`.`name`), '') as 'faculty_details', `subject_table`.`created_by` as 'created_by', `subject_table`.`created_at` as 'created_at', `subject_table`.`last_updated_by` as 'last_updated_by', `subject_table`.`last_updated_at` as 'last_updated_at', `subject_table`.`created_by_username` as 'created_by_username', `subject_table`.`last_updated_by_username` as 'last_updated_by_username'",
-			'enrollment_table' => "`enrollment_table`.`id` as 'id', IF(    CHAR_LENGTH(`students_table1`.`id`) || CHAR_LENGTH(`students_table1`.`name`), CONCAT_WS('',   `students_table1`.`id`, ' ~ ', `students_table1`.`name`), '') as 'student_details', IF(    CHAR_LENGTH(`courses_table1`.`id`) || CHAR_LENGTH(`courses_table1`.`course_name`), CONCAT_WS('',   `courses_table1`.`id`, ' ~ ', `courses_table1`.`course_name`), '') as 'course_details', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`), '') as 'subject_details', `enrollment_table`.`semester` as 'semester', `enrollment_table`.`year` as 'year', `enrollment_table`.`created_by` as 'created_by', `enrollment_table`.`created_at` as 'created_at', `enrollment_table`.`last_updated_by` as 'last_updated_by', `enrollment_table`.`created_by_username` as 'created_by_username', `enrollment_table`.`last_updated_by_username` as 'last_updated_by_username'",
-			'exams_table' => "`exams_table`.`id` as 'id', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`), '') as 'subject_details', if(`exams_table`.`exam_date`,date_format(`exams_table`.`exam_date`,'%d/%m/%Y'),'') as 'exam_date', `exams_table`.`exam_type` as 'exam_type', `exams_table`.`created_by` as 'created_by', `exams_table`.`created_at` as 'created_at', `exams_table`.`last_updated_by` as 'last_updated_by', `exams_table`.`created_by_username` as 'created_by_username', `exams_table`.`last_updated_by_username` as 'last_updated_by_username'",
+			'enrollment_table' => "`enrollment_table`.`id` as 'id', IF(    CHAR_LENGTH(`students_table1`.`id`) || CHAR_LENGTH(`students_table1`.`name`), CONCAT_WS('',   `students_table1`.`id`, ' ~ ', `students_table1`.`name`), '') as 'student_details', IF(    CHAR_LENGTH(`courses_table1`.`id`) || CHAR_LENGTH(`courses_table1`.`course_name`), CONCAT_WS('',   `courses_table1`.`id`, ' ~ ', `courses_table1`.`course_name`), '') as 'course_details', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`), '') as 'subject_details', `enrollment_table`.`semester` as 'semester', `enrollment_table`.`year` as 'year', `enrollment_table`.`created_by` as 'created_by', `enrollment_table`.`created_at` as 'created_at', `enrollment_table`.`last_updated_by` as 'last_updated_by', `enrollment_table`.`last_updated_at` as 'last_updated_at', `enrollment_table`.`created_by_username` as 'created_by_username', `enrollment_table`.`last_updated_by_username` as 'last_updated_by_username'",
+			'exams_table' => "`exams_table`.`id` as 'id', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`), '') as 'subject_details', if(`exams_table`.`exam_date`,date_format(`exams_table`.`exam_date`,'%d/%m/%Y'),'') as 'exam_date', `exams_table`.`exam_type` as 'exam_type', `exams_table`.`created_by` as 'created_by', `exams_table`.`created_at` as 'created_at', `exams_table`.`last_updated_by` as 'last_updated_by', `exams_table`.`last_updated_at` as 'last_updated_at', `exams_table`.`created_by_username` as 'created_by_username', `exams_table`.`last_updated_by_username` as 'last_updated_by_username'",
+			'results_table' => "`results_table`.`id` as 'id', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`) || CHAR_LENGTH(if(`exams_table1`.`exam_date`,date_format(`exams_table1`.`exam_date`,'%d/%m/%Y'),'')), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`, ' ~ ', if(`exams_table1`.`exam_date`,date_format(`exams_table1`.`exam_date`,'%d/%m/%Y'),'')), '') as 'exam_details', IF(    CHAR_LENGTH(`students_table1`.`id`) || CHAR_LENGTH(`students_table1`.`name`), CONCAT_WS('',   `students_table1`.`id`, ' ~ ', `students_table1`.`name`), '') as 'student_details', `results_table`.`marks_obtained` as 'marks_obtained', `results_table`.`grade` as 'grade', `results_table`.`created_by` as 'created_by', `results_table`.`created_at` as 'created_at', `results_table`.`last_updated_by` as 'last_updated_by', `results_table`.`last_updated_at` as 'last_updated_at', `results_table`.`created_by_username` as 'created_by_username', `results_table`.`last_updated_by_username` as 'last_updated_by_username'",
 		];
 
 		if(isset($sql_fields[$table_name])) return $sql_fields[$table_name];
@@ -130,6 +131,7 @@
 			'subject_table' => "`subject_table` LEFT JOIN `courses_table` as courses_table1 ON `courses_table1`.`id`=`subject_table`.`course_details` LEFT JOIN `faculty_table` as faculty_table1 ON `faculty_table1`.`id`=`subject_table`.`faculty_details` ",
 			'enrollment_table' => "`enrollment_table` LEFT JOIN `students_table` as students_table1 ON `students_table1`.`id`=`enrollment_table`.`student_details` LEFT JOIN `courses_table` as courses_table1 ON `courses_table1`.`id`=`enrollment_table`.`course_details` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`enrollment_table`.`subject_details` ",
 			'exams_table' => "`exams_table` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`exams_table`.`subject_details` ",
+			'results_table' => "`results_table` LEFT JOIN `exams_table` as exams_table1 ON `exams_table1`.`id`=`results_table`.`exam_details` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`exams_table1`.`subject_details` LEFT JOIN `students_table` as students_table1 ON `students_table1`.`id`=`results_table`.`student_details` ",
 		];
 
 		$pkey = [
@@ -140,6 +142,7 @@
 			'subject_table' => 'id',
 			'enrollment_table' => 'id',
 			'exams_table' => 'id',
+			'results_table' => 'id',
 		];
 
 		if(!isset($sql_from[$table_name])) return false;
@@ -275,6 +278,7 @@
 				'created_by' => '',
 				'created_at' => '',
 				'last_updated_by' => '',
+				'last_updated_at' => '',
 				'created_by_username' => '',
 				'last_updated_by_username' => '',
 			],
@@ -286,6 +290,20 @@
 				'created_by' => '',
 				'created_at' => '',
 				'last_updated_by' => '',
+				'last_updated_at' => '',
+				'created_by_username' => '',
+				'last_updated_by_username' => '',
+			],
+			'results_table' => [
+				'id' => '',
+				'exam_details' => '',
+				'student_details' => '',
+				'marks_obtained' => '',
+				'grade' => '',
+				'created_by' => '',
+				'created_at' => '',
+				'last_updated_by' => '',
+				'last_updated_at' => '',
 				'created_by_username' => '',
 				'last_updated_by_username' => '',
 			],
@@ -1450,9 +1468,9 @@ EOT;
 					'display-refresh' => true,
 					'display-add-new' => true,
 					'forced-where' => '',
-					'display-fields' => [0 => 'ID', 1 => 'Student Details', 2 => 'Course Details', 3 => 'Subject Details', 4 => 'Semester', 5 => 'Year', 6 => 'Created by', 7 => 'Created At', 8 => 'Last Updated by'],
-					'display-field-names' => [0 => 'id', 1 => 'student_details', 2 => 'course_details', 3 => 'subject_details', 4 => 'semester', 5 => 'year', 6 => 'created_by', 7 => 'created_at', 8 => 'last_updated_by'],
-					'sortable-fields' => [0 => '`enrollment_table`.`id`', 1 => 2, 2 => 3, 3 => 4, 4 => 5, 5 => 6, 6 => 7, 7 => 8, 8 => 9, 9 => 10, 10 => 11],
+					'display-fields' => [0 => 'ID', 1 => 'Student Details', 2 => 'Course Details', 3 => 'Subject Details', 4 => 'Semester', 5 => 'Year', 6 => 'Created by', 7 => 'Created At', 8 => 'Last Updated by', 9 => 'Last Updated At'],
+					'display-field-names' => [0 => 'id', 1 => 'student_details', 2 => 'course_details', 3 => 'subject_details', 4 => 'semester', 5 => 'year', 6 => 'created_by', 7 => 'created_at', 8 => 'last_updated_by', 9 => 'last_updated_at'],
+					'sortable-fields' => [0 => '`enrollment_table`.`id`', 1 => 2, 2 => 3, 3 => 4, 4 => 5, 5 => 6, 6 => 7, 7 => 8, 8 => 9, 9 => 10, 10 => 11, 11 => 12],
 					'records-per-page' => 10,
 					'default-sort-by' => 0,
 					'default-sort-direction' => 'desc',
@@ -1461,7 +1479,7 @@ EOT;
 					'show-page-progress' => true,
 					'template' => 'children-enrollment_table',
 					'template-printable' => 'children-enrollment_table-printable',
-					'query' => "SELECT `enrollment_table`.`id` as 'id', IF(    CHAR_LENGTH(`students_table1`.`id`) || CHAR_LENGTH(`students_table1`.`name`), CONCAT_WS('',   `students_table1`.`id`, ' ~ ', `students_table1`.`name`), '') as 'student_details', IF(    CHAR_LENGTH(`courses_table1`.`id`) || CHAR_LENGTH(`courses_table1`.`course_name`), CONCAT_WS('',   `courses_table1`.`id`, ' ~ ', `courses_table1`.`course_name`), '') as 'course_details', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`), '') as 'subject_details', `enrollment_table`.`semester` as 'semester', `enrollment_table`.`year` as 'year', `enrollment_table`.`created_by` as 'created_by', `enrollment_table`.`created_at` as 'created_at', `enrollment_table`.`last_updated_by` as 'last_updated_by', `enrollment_table`.`created_by_username` as 'created_by_username', `enrollment_table`.`last_updated_by_username` as 'last_updated_by_username' FROM `enrollment_table` LEFT JOIN `students_table` as students_table1 ON `students_table1`.`id`=`enrollment_table`.`student_details` LEFT JOIN `courses_table` as courses_table1 ON `courses_table1`.`id`=`enrollment_table`.`course_details` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`enrollment_table`.`subject_details` "
+					'query' => "SELECT `enrollment_table`.`id` as 'id', IF(    CHAR_LENGTH(`students_table1`.`id`) || CHAR_LENGTH(`students_table1`.`name`), CONCAT_WS('',   `students_table1`.`id`, ' ~ ', `students_table1`.`name`), '') as 'student_details', IF(    CHAR_LENGTH(`courses_table1`.`id`) || CHAR_LENGTH(`courses_table1`.`course_name`), CONCAT_WS('',   `courses_table1`.`id`, ' ~ ', `courses_table1`.`course_name`), '') as 'course_details', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`), '') as 'subject_details', `enrollment_table`.`semester` as 'semester', `enrollment_table`.`year` as 'year', `enrollment_table`.`created_by` as 'created_by', `enrollment_table`.`created_at` as 'created_at', `enrollment_table`.`last_updated_by` as 'last_updated_by', `enrollment_table`.`last_updated_at` as 'last_updated_at', `enrollment_table`.`created_by_username` as 'created_by_username', `enrollment_table`.`last_updated_by_username` as 'last_updated_by_username' FROM `enrollment_table` LEFT JOIN `students_table` as students_table1 ON `students_table1`.`id`=`enrollment_table`.`student_details` LEFT JOIN `courses_table` as courses_table1 ON `courses_table1`.`id`=`enrollment_table`.`course_details` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`enrollment_table`.`subject_details` "
 				],
 				'course_details' => [
 					'parent-table' => 'courses_table',
@@ -1474,9 +1492,9 @@ EOT;
 					'display-refresh' => true,
 					'display-add-new' => true,
 					'forced-where' => '',
-					'display-fields' => [0 => 'ID', 1 => 'Student Details', 2 => 'Course Details', 3 => 'Subject Details', 4 => 'Semester', 5 => 'Year', 6 => 'Created by', 7 => 'Created At', 8 => 'Last Updated by'],
-					'display-field-names' => [0 => 'id', 1 => 'student_details', 2 => 'course_details', 3 => 'subject_details', 4 => 'semester', 5 => 'year', 6 => 'created_by', 7 => 'created_at', 8 => 'last_updated_by'],
-					'sortable-fields' => [0 => '`enrollment_table`.`id`', 1 => 2, 2 => 3, 3 => 4, 4 => 5, 5 => 6, 6 => 7, 7 => 8, 8 => 9, 9 => 10, 10 => 11],
+					'display-fields' => [0 => 'ID', 1 => 'Student Details', 2 => 'Course Details', 3 => 'Subject Details', 4 => 'Semester', 5 => 'Year', 6 => 'Created by', 7 => 'Created At', 8 => 'Last Updated by', 9 => 'Last Updated At'],
+					'display-field-names' => [0 => 'id', 1 => 'student_details', 2 => 'course_details', 3 => 'subject_details', 4 => 'semester', 5 => 'year', 6 => 'created_by', 7 => 'created_at', 8 => 'last_updated_by', 9 => 'last_updated_at'],
+					'sortable-fields' => [0 => '`enrollment_table`.`id`', 1 => 2, 2 => 3, 3 => 4, 4 => 5, 5 => 6, 6 => 7, 7 => 8, 8 => 9, 9 => 10, 10 => 11, 11 => 12],
 					'records-per-page' => 10,
 					'default-sort-by' => 0,
 					'default-sort-direction' => 'desc',
@@ -1485,7 +1503,7 @@ EOT;
 					'show-page-progress' => true,
 					'template' => 'children-enrollment_table',
 					'template-printable' => 'children-enrollment_table-printable',
-					'query' => "SELECT `enrollment_table`.`id` as 'id', IF(    CHAR_LENGTH(`students_table1`.`id`) || CHAR_LENGTH(`students_table1`.`name`), CONCAT_WS('',   `students_table1`.`id`, ' ~ ', `students_table1`.`name`), '') as 'student_details', IF(    CHAR_LENGTH(`courses_table1`.`id`) || CHAR_LENGTH(`courses_table1`.`course_name`), CONCAT_WS('',   `courses_table1`.`id`, ' ~ ', `courses_table1`.`course_name`), '') as 'course_details', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`), '') as 'subject_details', `enrollment_table`.`semester` as 'semester', `enrollment_table`.`year` as 'year', `enrollment_table`.`created_by` as 'created_by', `enrollment_table`.`created_at` as 'created_at', `enrollment_table`.`last_updated_by` as 'last_updated_by', `enrollment_table`.`created_by_username` as 'created_by_username', `enrollment_table`.`last_updated_by_username` as 'last_updated_by_username' FROM `enrollment_table` LEFT JOIN `students_table` as students_table1 ON `students_table1`.`id`=`enrollment_table`.`student_details` LEFT JOIN `courses_table` as courses_table1 ON `courses_table1`.`id`=`enrollment_table`.`course_details` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`enrollment_table`.`subject_details` "
+					'query' => "SELECT `enrollment_table`.`id` as 'id', IF(    CHAR_LENGTH(`students_table1`.`id`) || CHAR_LENGTH(`students_table1`.`name`), CONCAT_WS('',   `students_table1`.`id`, ' ~ ', `students_table1`.`name`), '') as 'student_details', IF(    CHAR_LENGTH(`courses_table1`.`id`) || CHAR_LENGTH(`courses_table1`.`course_name`), CONCAT_WS('',   `courses_table1`.`id`, ' ~ ', `courses_table1`.`course_name`), '') as 'course_details', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`), '') as 'subject_details', `enrollment_table`.`semester` as 'semester', `enrollment_table`.`year` as 'year', `enrollment_table`.`created_by` as 'created_by', `enrollment_table`.`created_at` as 'created_at', `enrollment_table`.`last_updated_by` as 'last_updated_by', `enrollment_table`.`last_updated_at` as 'last_updated_at', `enrollment_table`.`created_by_username` as 'created_by_username', `enrollment_table`.`last_updated_by_username` as 'last_updated_by_username' FROM `enrollment_table` LEFT JOIN `students_table` as students_table1 ON `students_table1`.`id`=`enrollment_table`.`student_details` LEFT JOIN `courses_table` as courses_table1 ON `courses_table1`.`id`=`enrollment_table`.`course_details` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`enrollment_table`.`subject_details` "
 				],
 				'subject_details' => [
 					'parent-table' => 'subject_table',
@@ -1498,9 +1516,9 @@ EOT;
 					'display-refresh' => true,
 					'display-add-new' => true,
 					'forced-where' => '',
-					'display-fields' => [0 => 'ID', 1 => 'Student Details', 2 => 'Course Details', 3 => 'Subject Details', 4 => 'Semester', 5 => 'Year', 6 => 'Created by', 7 => 'Created At', 8 => 'Last Updated by'],
-					'display-field-names' => [0 => 'id', 1 => 'student_details', 2 => 'course_details', 3 => 'subject_details', 4 => 'semester', 5 => 'year', 6 => 'created_by', 7 => 'created_at', 8 => 'last_updated_by'],
-					'sortable-fields' => [0 => '`enrollment_table`.`id`', 1 => 2, 2 => 3, 3 => 4, 4 => 5, 5 => 6, 6 => 7, 7 => 8, 8 => 9, 9 => 10, 10 => 11],
+					'display-fields' => [0 => 'ID', 1 => 'Student Details', 2 => 'Course Details', 3 => 'Subject Details', 4 => 'Semester', 5 => 'Year', 6 => 'Created by', 7 => 'Created At', 8 => 'Last Updated by', 9 => 'Last Updated At'],
+					'display-field-names' => [0 => 'id', 1 => 'student_details', 2 => 'course_details', 3 => 'subject_details', 4 => 'semester', 5 => 'year', 6 => 'created_by', 7 => 'created_at', 8 => 'last_updated_by', 9 => 'last_updated_at'],
+					'sortable-fields' => [0 => '`enrollment_table`.`id`', 1 => 2, 2 => 3, 3 => 4, 4 => 5, 5 => 6, 6 => 7, 7 => 8, 8 => 9, 9 => 10, 10 => 11, 11 => 12],
 					'records-per-page' => 10,
 					'default-sort-by' => 0,
 					'default-sort-direction' => 'desc',
@@ -1509,7 +1527,7 @@ EOT;
 					'show-page-progress' => true,
 					'template' => 'children-enrollment_table',
 					'template-printable' => 'children-enrollment_table-printable',
-					'query' => "SELECT `enrollment_table`.`id` as 'id', IF(    CHAR_LENGTH(`students_table1`.`id`) || CHAR_LENGTH(`students_table1`.`name`), CONCAT_WS('',   `students_table1`.`id`, ' ~ ', `students_table1`.`name`), '') as 'student_details', IF(    CHAR_LENGTH(`courses_table1`.`id`) || CHAR_LENGTH(`courses_table1`.`course_name`), CONCAT_WS('',   `courses_table1`.`id`, ' ~ ', `courses_table1`.`course_name`), '') as 'course_details', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`), '') as 'subject_details', `enrollment_table`.`semester` as 'semester', `enrollment_table`.`year` as 'year', `enrollment_table`.`created_by` as 'created_by', `enrollment_table`.`created_at` as 'created_at', `enrollment_table`.`last_updated_by` as 'last_updated_by', `enrollment_table`.`created_by_username` as 'created_by_username', `enrollment_table`.`last_updated_by_username` as 'last_updated_by_username' FROM `enrollment_table` LEFT JOIN `students_table` as students_table1 ON `students_table1`.`id`=`enrollment_table`.`student_details` LEFT JOIN `courses_table` as courses_table1 ON `courses_table1`.`id`=`enrollment_table`.`course_details` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`enrollment_table`.`subject_details` "
+					'query' => "SELECT `enrollment_table`.`id` as 'id', IF(    CHAR_LENGTH(`students_table1`.`id`) || CHAR_LENGTH(`students_table1`.`name`), CONCAT_WS('',   `students_table1`.`id`, ' ~ ', `students_table1`.`name`), '') as 'student_details', IF(    CHAR_LENGTH(`courses_table1`.`id`) || CHAR_LENGTH(`courses_table1`.`course_name`), CONCAT_WS('',   `courses_table1`.`id`, ' ~ ', `courses_table1`.`course_name`), '') as 'course_details', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`), '') as 'subject_details', `enrollment_table`.`semester` as 'semester', `enrollment_table`.`year` as 'year', `enrollment_table`.`created_by` as 'created_by', `enrollment_table`.`created_at` as 'created_at', `enrollment_table`.`last_updated_by` as 'last_updated_by', `enrollment_table`.`last_updated_at` as 'last_updated_at', `enrollment_table`.`created_by_username` as 'created_by_username', `enrollment_table`.`last_updated_by_username` as 'last_updated_by_username' FROM `enrollment_table` LEFT JOIN `students_table` as students_table1 ON `students_table1`.`id`=`enrollment_table`.`student_details` LEFT JOIN `courses_table` as courses_table1 ON `courses_table1`.`id`=`enrollment_table`.`course_details` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`enrollment_table`.`subject_details` "
 				],
 			],
 			'exams_table' => [
@@ -1524,9 +1542,9 @@ EOT;
 					'display-refresh' => true,
 					'display-add-new' => true,
 					'forced-where' => '',
-					'display-fields' => [0 => 'ID', 1 => 'Subject Details', 2 => 'Exam Date', 3 => 'Exam Type', 4 => 'Created by', 5 => 'Created At', 6 => 'Last Updated by'],
-					'display-field-names' => [0 => 'id', 1 => 'subject_details', 2 => 'exam_date', 3 => 'exam_type', 4 => 'created_by', 5 => 'created_at', 6 => 'last_updated_by'],
-					'sortable-fields' => [0 => '`exams_table`.`id`', 1 => 2, 2 => '`exams_table`.`exam_date`', 3 => 4, 4 => 5, 5 => 6, 6 => 7, 7 => 8, 8 => 9],
+					'display-fields' => [0 => 'ID', 1 => 'Subject Details', 2 => 'Exam Date', 3 => 'Exam Type', 4 => 'Created by', 5 => 'Created At', 6 => 'Last Updated by', 7 => 'Last Updated At'],
+					'display-field-names' => [0 => 'id', 1 => 'subject_details', 2 => 'exam_date', 3 => 'exam_type', 4 => 'created_by', 5 => 'created_at', 6 => 'last_updated_by', 7 => 'last_updated_at'],
+					'sortable-fields' => [0 => '`exams_table`.`id`', 1 => 2, 2 => '`exams_table`.`exam_date`', 3 => 4, 4 => 5, 5 => 6, 6 => 7, 7 => 8, 8 => 9, 9 => 10],
 					'records-per-page' => 10,
 					'default-sort-by' => 0,
 					'default-sort-direction' => 'desc',
@@ -1535,7 +1553,57 @@ EOT;
 					'show-page-progress' => true,
 					'template' => 'children-exams_table',
 					'template-printable' => 'children-exams_table-printable',
-					'query' => "SELECT `exams_table`.`id` as 'id', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`), '') as 'subject_details', if(`exams_table`.`exam_date`,date_format(`exams_table`.`exam_date`,'%d/%m/%Y'),'') as 'exam_date', `exams_table`.`exam_type` as 'exam_type', `exams_table`.`created_by` as 'created_by', `exams_table`.`created_at` as 'created_at', `exams_table`.`last_updated_by` as 'last_updated_by', `exams_table`.`created_by_username` as 'created_by_username', `exams_table`.`last_updated_by_username` as 'last_updated_by_username' FROM `exams_table` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`exams_table`.`subject_details` "
+					'query' => "SELECT `exams_table`.`id` as 'id', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`), '') as 'subject_details', if(`exams_table`.`exam_date`,date_format(`exams_table`.`exam_date`,'%d/%m/%Y'),'') as 'exam_date', `exams_table`.`exam_type` as 'exam_type', `exams_table`.`created_by` as 'created_by', `exams_table`.`created_at` as 'created_at', `exams_table`.`last_updated_by` as 'last_updated_by', `exams_table`.`last_updated_at` as 'last_updated_at', `exams_table`.`created_by_username` as 'created_by_username', `exams_table`.`last_updated_by_username` as 'last_updated_by_username' FROM `exams_table` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`exams_table`.`subject_details` "
+				],
+			],
+			'results_table' => [
+				'exam_details' => [
+					'parent-table' => 'exams_table',
+					'parent-primary-key' => 'id',
+					'child-primary-key' => 'id',
+					'child-primary-key-index' => 0,
+					'tab-label' => 'Results - App <span class="hidden child-label-results_table child-field-caption">(Exam Details)</span>',
+					'auto-close' => false,
+					'table-icon' => 'table.gif',
+					'display-refresh' => true,
+					'display-add-new' => true,
+					'forced-where' => '',
+					'display-fields' => [1 => 'Exam Details', 2 => 'Student Details', 3 => 'Marks Obtained', 4 => 'Grade', 5 => 'Created by', 6 => 'Created At', 7 => 'Last Updated by', 8 => 'Last Updated At'],
+					'display-field-names' => [1 => 'exam_details', 2 => 'student_details', 3 => 'marks_obtained', 4 => 'grade', 5 => 'created_by', 6 => 'created_at', 7 => 'last_updated_by', 8 => 'last_updated_at'],
+					'sortable-fields' => [0 => '`results_table`.`id`', 1 => 2, 2 => 3, 3 => 4, 4 => 5, 5 => 6, 6 => 7, 7 => 8, 8 => 9, 9 => 10, 10 => 11],
+					'records-per-page' => 10,
+					'default-sort-by' => false,
+					'default-sort-direction' => 'asc',
+					'open-detail-view-on-click' => true,
+					'display-page-selector' => true,
+					'show-page-progress' => true,
+					'template' => 'children-results_table',
+					'template-printable' => 'children-results_table-printable',
+					'query' => "SELECT `results_table`.`id` as 'id', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`) || CHAR_LENGTH(if(`exams_table1`.`exam_date`,date_format(`exams_table1`.`exam_date`,'%d/%m/%Y'),'')), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`, ' ~ ', if(`exams_table1`.`exam_date`,date_format(`exams_table1`.`exam_date`,'%d/%m/%Y'),'')), '') as 'exam_details', IF(    CHAR_LENGTH(`students_table1`.`id`) || CHAR_LENGTH(`students_table1`.`name`), CONCAT_WS('',   `students_table1`.`id`, ' ~ ', `students_table1`.`name`), '') as 'student_details', `results_table`.`marks_obtained` as 'marks_obtained', `results_table`.`grade` as 'grade', `results_table`.`created_by` as 'created_by', `results_table`.`created_at` as 'created_at', `results_table`.`last_updated_by` as 'last_updated_by', `results_table`.`last_updated_at` as 'last_updated_at', `results_table`.`created_by_username` as 'created_by_username', `results_table`.`last_updated_by_username` as 'last_updated_by_username' FROM `results_table` LEFT JOIN `exams_table` as exams_table1 ON `exams_table1`.`id`=`results_table`.`exam_details` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`exams_table1`.`subject_details` LEFT JOIN `students_table` as students_table1 ON `students_table1`.`id`=`results_table`.`student_details` "
+				],
+				'student_details' => [
+					'parent-table' => 'students_table',
+					'parent-primary-key' => 'id',
+					'child-primary-key' => 'id',
+					'child-primary-key-index' => 0,
+					'tab-label' => 'Results - App <span class="hidden child-label-results_table child-field-caption">(Student Details)</span>',
+					'auto-close' => false,
+					'table-icon' => 'table.gif',
+					'display-refresh' => true,
+					'display-add-new' => true,
+					'forced-where' => '',
+					'display-fields' => [1 => 'Exam Details', 2 => 'Student Details', 3 => 'Marks Obtained', 4 => 'Grade', 5 => 'Created by', 6 => 'Created At', 7 => 'Last Updated by', 8 => 'Last Updated At'],
+					'display-field-names' => [1 => 'exam_details', 2 => 'student_details', 3 => 'marks_obtained', 4 => 'grade', 5 => 'created_by', 6 => 'created_at', 7 => 'last_updated_by', 8 => 'last_updated_at'],
+					'sortable-fields' => [0 => '`results_table`.`id`', 1 => 2, 2 => 3, 3 => 4, 4 => 5, 5 => 6, 6 => 7, 7 => 8, 8 => 9, 9 => 10, 10 => 11],
+					'records-per-page' => 10,
+					'default-sort-by' => false,
+					'default-sort-direction' => 'asc',
+					'open-detail-view-on-click' => true,
+					'display-page-selector' => true,
+					'show-page-progress' => true,
+					'template' => 'children-results_table',
+					'template-printable' => 'children-results_table-printable',
+					'query' => "SELECT `results_table`.`id` as 'id', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`) || CHAR_LENGTH(if(`exams_table1`.`exam_date`,date_format(`exams_table1`.`exam_date`,'%d/%m/%Y'),'')), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`, ' ~ ', if(`exams_table1`.`exam_date`,date_format(`exams_table1`.`exam_date`,'%d/%m/%Y'),'')), '') as 'exam_details', IF(    CHAR_LENGTH(`students_table1`.`id`) || CHAR_LENGTH(`students_table1`.`name`), CONCAT_WS('',   `students_table1`.`id`, ' ~ ', `students_table1`.`name`), '') as 'student_details', `results_table`.`marks_obtained` as 'marks_obtained', `results_table`.`grade` as 'grade', `results_table`.`created_by` as 'created_by', `results_table`.`created_at` as 'created_at', `results_table`.`last_updated_by` as 'last_updated_by', `results_table`.`last_updated_at` as 'last_updated_at', `results_table`.`created_by_username` as 'created_by_username', `results_table`.`last_updated_by_username` as 'last_updated_by_username' FROM `results_table` LEFT JOIN `exams_table` as exams_table1 ON `exams_table1`.`id`=`results_table`.`exam_details` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`exams_table1`.`subject_details` LEFT JOIN `students_table` as students_table1 ON `students_table1`.`id`=`results_table`.`student_details` "
 				],
 			],
 		];
@@ -1583,7 +1651,7 @@ EOT;
 	#########################################################
 
 	function isDetailViewEnabled($tn) {
-		$tables = ['students_table', 'faculty_table', 'departments_table', 'courses_table', 'subject_table', 'enrollment_table', 'exams_table', ];
+		$tables = ['students_table', 'faculty_table', 'departments_table', 'courses_table', 'subject_table', 'enrollment_table', 'exams_table', 'results_table', ];
 		return in_array($tn, $tables);
 	}
 

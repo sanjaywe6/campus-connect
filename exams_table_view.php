@@ -25,6 +25,7 @@
 		"`exams_table`.`created_by`" => "created_by",
 		"`exams_table`.`created_at`" => "created_at",
 		"`exams_table`.`last_updated_by`" => "last_updated_by",
+		"`exams_table`.`last_updated_at`" => "last_updated_at",
 		"`exams_table`.`created_by_username`" => "created_by_username",
 		"`exams_table`.`last_updated_by_username`" => "last_updated_by_username",
 	];
@@ -39,6 +40,7 @@
 		7 => 7,
 		8 => 8,
 		9 => 9,
+		10 => 10,
 	];
 
 	// Fields that can be displayed in the csv file
@@ -50,6 +52,7 @@
 		"`exams_table`.`created_by`" => "created_by",
 		"`exams_table`.`created_at`" => "created_at",
 		"`exams_table`.`last_updated_by`" => "last_updated_by",
+		"`exams_table`.`last_updated_at`" => "last_updated_at",
 		"`exams_table`.`created_by_username`" => "created_by_username",
 		"`exams_table`.`last_updated_by_username`" => "last_updated_by_username",
 	];
@@ -62,6 +65,7 @@
 		"`exams_table`.`created_by`" => "Created by",
 		"`exams_table`.`created_at`" => "Created At",
 		"`exams_table`.`last_updated_by`" => "Last Updated by",
+		"`exams_table`.`last_updated_at`" => "Last Updated At",
 		"`exams_table`.`created_by_username`" => "Created by username",
 		"`exams_table`.`last_updated_by_username`" => "Last Updated By",
 	];
@@ -75,6 +79,7 @@
 		"`exams_table`.`created_by`" => "created_by",
 		"`exams_table`.`created_at`" => "created_at",
 		"`exams_table`.`last_updated_by`" => "last_updated_by",
+		"`exams_table`.`last_updated_at`" => "last_updated_at",
 		"`exams_table`.`created_by_username`" => "created_by_username",
 		"`exams_table`.`last_updated_by_username`" => "last_updated_by_username",
 	];
@@ -112,10 +117,10 @@
 	$x->DefaultSortField = '1';
 	$x->DefaultSortDirection = 'desc';
 
-	$x->ColWidth = [150, 150, 150, 150, 150, 150, 150, ];
-	$x->ColCaption = ['ID', 'Subject Details', 'Exam Date', 'Exam Type', 'Created by', 'Created At', 'Last Updated by', ];
-	$x->ColFieldName = ['id', 'subject_details', 'exam_date', 'exam_type', 'created_by', 'created_at', 'last_updated_by', ];
-	$x->ColNumber  = [1, 2, 3, 4, 5, 6, 7, ];
+	$x->ColWidth = [150, 150, 150, 150, 150, 150, 150, 150, ];
+	$x->ColCaption = ['ID', 'Subject Details', 'Exam Date', 'Exam Type', 'Created by', 'Created At', 'Last Updated by', 'Last Updated At', ];
+	$x->ColFieldName = ['id', 'subject_details', 'exam_date', 'exam_type', 'created_by', 'created_at', 'last_updated_by', 'last_updated_at', ];
+	$x->ColNumber  = [1, 2, 3, 4, 5, 6, 7, 8, ];
 
 	// template paths below are based on the app main directory
 	$x->Template = 'templates/exams_table_templateTV.html';
