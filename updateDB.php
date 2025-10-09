@@ -23,31 +23,11 @@
 		setupTable('subject_table', []);
 		setupIndexes('subject_table', ['course_details','faculty_details',]);
 
-		setupTable('enrollment_table', [
-				"ALTER TABLE `table6` RENAME `enrollment_table`",
-				"UPDATE `membership_userrecords` SET `tableName`='enrollment_table' WHERE `tableName`='table6'",
-				"UPDATE `membership_userpermissions` SET `tableName`='enrollment_table' WHERE `tableName`='table6'",
-				"UPDATE `membership_grouppermissions` SET `tableName`='enrollment_table' WHERE `tableName`='table6'",
-				"ALTER TABLE enrollment_table ADD `field1` VARCHAR(40)",
-				"ALTER TABLE `enrollment_table` CHANGE `id` `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ",
-				"ALTER TABLE `enrollment_table` CHANGE `field1` `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ",
-				"ALTER TABLE enrollment_table ADD `field1` VARCHAR(40)",
-				"ALTER TABLE `enrollment_table` CHANGE `field1` `student_details` VARCHAR(255) NULL ",
-				"ALTER TABLE enrollment_table ADD `field1` VARCHAR(40)",
-				"ALTER TABLE `enrollment_table` CHANGE `field1` `course_details` VARCHAR(255) NULL ",
-				"ALTER TABLE enrollment_table ADD `field1` VARCHAR(40)",
-				"ALTER TABLE `enrollment_table` CHANGE `field1` `subject_details` VARCHAR(255) NULL ",
-				"ALTER TABLE enrollment_table ADD `field1` VARCHAR(40)",
-				"ALTER TABLE `enrollment_table` CHANGE `field1` `semester` VARCHAR(255) NULL ",
-				"ALTER TABLE enrollment_table ADD `field1` VARCHAR(40)",
-				"ALTER TABLE `enrollment_table` CHANGE `field1` `year` VARCHAR(255) NULL ",
-				"ALTER TABLE `enrollment_table` ADD `created_by` VARCHAR(255) NULL ",
-				"ALTER TABLE `enrollment_table` ADD `created_at` VARCHAR(255) NULL ",
-				"ALTER TABLE `enrollment_table` ADD `last_updated_by` VARCHAR(255) NULL ",
-				"ALTER TABLE `enrollment_table` ADD `created_by_username` VARCHAR(255) NULL ",
-				"ALTER TABLE `enrollment_table` ADD `last_updated_by_username` VARCHAR(255) NULL ",
-			]);
+		setupTable('enrollment_table', []);
 		setupIndexes('enrollment_table', ['student_details','course_details','subject_details',]);
+
+		setupTable('exams_table', []);
+		setupIndexes('exams_table', ['subject_details',]);
 
 
 

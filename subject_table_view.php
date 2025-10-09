@@ -117,10 +117,10 @@
 	$x->DefaultSortField = '1';
 	$x->DefaultSortDirection = 'desc';
 
-	$x->ColWidth = [150, 150, 150, 150, 150, 150, 150, ];
-	$x->ColCaption = ['Subject Name', 'Course Details', 'Faculty Details', 'Created by', 'Created At', 'Last Updated by', 'Last Updated At', ];
-	$x->ColFieldName = ['subject_name', 'course_details', 'faculty_details', 'created_by', 'created_at', 'last_updated_by', 'last_updated_at', ];
-	$x->ColNumber  = [2, 3, 4, 5, 6, 7, 8, ];
+	$x->ColWidth = [150, 150, 150, 150, 150, 150, 150, 150, ];
+	$x->ColCaption = ['ID', 'Subject Name', 'Course Details', 'Faculty Details', 'Created by', 'Created At', 'Last Updated by', 'Last Updated At', ];
+	$x->ColFieldName = ['id', 'subject_name', 'course_details', 'faculty_details', 'created_by', 'created_at', 'last_updated_by', 'last_updated_at', ];
+	$x->ColNumber  = [1, 2, 3, 4, 5, 6, 7, 8, ];
 
 	// template paths below are based on the app main directory
 	$x->Template = 'templates/subject_table_templateTV.html';

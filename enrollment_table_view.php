@@ -122,10 +122,10 @@
 	$x->DefaultSortField = '1';
 	$x->DefaultSortDirection = 'desc';
 
-	$x->ColWidth = [150, 150, 150, 150, 150, 150, 150, 150, ];
-	$x->ColCaption = ['Student Details', 'Course Details', 'Subject Details', 'Semester', 'Year', 'Created by', 'Created At', 'Last Updated by', ];
-	$x->ColFieldName = ['student_details', 'course_details', 'subject_details', 'semester', 'year', 'created_by', 'created_at', 'last_updated_by', ];
-	$x->ColNumber  = [2, 3, 4, 5, 6, 7, 8, 9, ];
+	$x->ColWidth = [150, 150, 150, 150, 150, 150, 150, 150, 150, ];
+	$x->ColCaption = ['ID', 'Student Details', 'Course Details', 'Subject Details', 'Semester', 'Year', 'Created by', 'Created At', 'Last Updated by', ];
+	$x->ColFieldName = ['id', 'student_details', 'course_details', 'subject_details', 'semester', 'year', 'created_by', 'created_at', 'last_updated_by', ];
+	$x->ColNumber  = [1, 2, 3, 4, 5, 6, 7, 8, 9, ];
 
 	// template paths below are based on the app main directory
 	$x->Template = 'templates/enrollment_table_templateTV.html';

@@ -43,6 +43,12 @@
 
 			return $data;
 		},
+		'exams_table' => function($data, $options = []) {
+			if(isset($data['subject_details'])) $data['subject_details'] = pkGivenLookupText($data['subject_details'], 'exams_table', 'subject_details');
+			if(isset($data['exam_date'])) $data['exam_date'] = guessMySQLDateTime($data['exam_date']);
+
+			return $data;
+		},
 	];
 
 	// accept a record as an assoc array, return a boolean indicating whether to import or skip record
@@ -53,6 +59,7 @@
 		'courses_table' => function($data, $options = []) { return true; },
 		'subject_table' => function($data, $options = []) { return true; },
 		'enrollment_table' => function($data, $options = []) { return true; },
+		'exams_table' => function($data, $options = []) { return true; },
 	];
 
 	/*

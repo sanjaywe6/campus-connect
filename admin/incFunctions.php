@@ -148,6 +148,13 @@
 					'group' => $tg[1],
 					'homepageShowCount' => 1
 				],
+				'exams_table' => [
+					'Caption' => 'Exams - App',
+					'Description' => '',
+					'tableIcon' => 'table.gif',
+					'group' => $tg[1],
+					'homepageShowCount' => 1
+				],
 		];
 
 		if($skip_authentication || getLoggedAdmin()) return $all_tables;
@@ -170,6 +177,7 @@
 			'courses_table' => ['Courses - App', '', 'table.gif', 'Core Apps'],
 			'subject_table' => ['Subject Table - App', '', 'table.gif', 'Core Apps'],
 			'enrollment_table' => ['Enrollment - App', '', 'table.gif', 'Academic &amp; Examination'],
+			'exams_table' => ['Exams - App', '', 'table.gif', 'Academic &amp; Examination'],
 		];
 
 		if($skip_authentication || getLoggedAdmin()) {
@@ -1475,6 +1483,71 @@
 						],
 					],
 				],
+				'exams_table' => [
+					'id' => [
+						'appgini' => "INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT",
+						'info' => [
+							'caption' => 'ID',
+							'description' => '',
+						],
+					],
+					'subject_details' => [
+						'appgini' => "INT UNSIGNED NULL",
+						'info' => [
+							'caption' => 'Subject Details',
+							'description' => '',
+						],
+					],
+					'exam_date' => [
+						'appgini' => "DATE NULL",
+						'info' => [
+							'caption' => 'Exam Date',
+							'description' => '',
+						],
+					],
+					'exam_type' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Exam Type',
+							'description' => '(midterm, final, etc.)',
+						],
+					],
+					'created_by' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Created by',
+							'description' => '',
+						],
+					],
+					'created_at' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Created At',
+							'description' => '',
+						],
+					],
+					'last_updated_by' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Last Updated by',
+							'description' => '',
+						],
+					],
+					'created_by_username' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Created by username',
+							'description' => '',
+						],
+					],
+					'last_updated_by_username' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Last Updated By',
+							'description' => '',
+						],
+					],
+				],
 			];
 
 			$internalTablesSimple = [
@@ -2662,6 +2735,9 @@
 				'courses_table' => ['course_details'],
 				'subject_table' => ['subject_details'],
 			],
+			'exams_table' => [
+				'subject_table' => ['subject_details'],
+			],
 		];
 
 		return isset($parents[$table]) ? $parents[$table] : [];
@@ -2867,6 +2943,36 @@
 					ON membership_users.memberID = %TABLENAME%.last_updated_by_username
 					WHERE %TABLENAME%.%PKFIELD% = %ID%;',
 			],
+			'exams_table' => [
+				'created_by' => 'SELECT CONCAT(
+					  
+					membership_users.memberID, \' : \',
+					  
+					membership_users.custom1
+					
+					)
+					
+					FROM membership_users
+					
+					INNER JOIN %TABLENAME%
+					  
+					ON membership_users.memberID = %TABLENAME%.created_by_username
+					WHERE %TABLENAME%.%PKFIELD% = %ID%;',
+				'last_updated_by' => 'SELECT CONCAT(
+					  
+					membership_users.memberID, \' : \',
+					  
+					membership_users.custom1
+					
+					)
+					
+					FROM membership_users
+					
+					INNER JOIN %TABLENAME%
+					  
+					ON membership_users.memberID = %TABLENAME%.last_updated_by_username
+					WHERE %TABLENAME%.%PKFIELD% = %ID%;',
+			],
 		];
 	}
 	#########################################################
@@ -3009,6 +3115,9 @@
 			'enrollment_table' => [
 				'student_details' => 'SELECT `students_table`.`id`, IF(CHAR_LENGTH(`students_table`.`id`) || CHAR_LENGTH(`students_table`.`name`), CONCAT_WS(\'\', `students_table`.`id`, \' ~ \', `students_table`.`name`), \'\') FROM `students_table` LEFT JOIN `departments_table` as departments_table1 ON `departments_table1`.`id`=`students_table`.`department` LEFT JOIN `courses_table` as courses_table1 ON `courses_table1`.`id`=`students_table`.`course` ORDER BY 2',
 				'course_details' => 'SELECT `courses_table`.`id`, IF(CHAR_LENGTH(`courses_table`.`id`) || CHAR_LENGTH(`courses_table`.`course_name`), CONCAT_WS(\'\', `courses_table`.`id`, \' ~ \', `courses_table`.`course_name`), \'\') FROM `courses_table` LEFT JOIN `departments_table` as departments_table1 ON `departments_table1`.`id`=`courses_table`.`department` ORDER BY 2',
+				'subject_details' => 'SELECT `subject_table`.`id`, IF(CHAR_LENGTH(`subject_table`.`id`) || CHAR_LENGTH(`subject_table`.`subject_name`), CONCAT_WS(\'\', `subject_table`.`id`, \' ~ \', `subject_table`.`subject_name`), \'\') FROM `subject_table` LEFT JOIN `courses_table` as courses_table1 ON `courses_table1`.`id`=`subject_table`.`course_details` LEFT JOIN `faculty_table` as faculty_table1 ON `faculty_table1`.`id`=`subject_table`.`faculty_details` ORDER BY 2',
+			],
+			'exams_table' => [
 				'subject_details' => 'SELECT `subject_table`.`id`, IF(CHAR_LENGTH(`subject_table`.`id`) || CHAR_LENGTH(`subject_table`.`subject_name`), CONCAT_WS(\'\', `subject_table`.`id`, \' ~ \', `subject_table`.`subject_name`), \'\') FROM `subject_table` LEFT JOIN `courses_table` as courses_table1 ON `courses_table1`.`id`=`subject_table`.`course_details` LEFT JOIN `faculty_table` as faculty_table1 ON `faculty_table1`.`id`=`subject_table`.`faculty_details` ORDER BY 2',
 			],
 		];

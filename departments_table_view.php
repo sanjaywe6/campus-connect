@@ -115,10 +115,10 @@
 	$x->TableIcon = 'table.gif';
 	$x->PrimaryKey = '`departments_table`.`id`';
 
-	$x->ColWidth = [150, 150, 150, 150, 150, 150, 150, ];
-	$x->ColCaption = ['Department Name', 'Head of Department (HOD)', 'Contact', 'Created by', 'Created At', 'Last Updated by', 'Last Updated At', ];
-	$x->ColFieldName = ['department_name', 'hod', 'contact', 'created_by', 'created_at', 'last_updated_by', 'last_updated_at', ];
-	$x->ColNumber  = [2, 3, 4, 5, 6, 7, 8, ];
+	$x->ColWidth = [150, 150, 150, 150, 150, 150, 150, 150, ];
+	$x->ColCaption = ['ID', 'Department Name', 'Head of Department (HOD)', 'Contact', 'Created by', 'Created At', 'Last Updated by', 'Last Updated At', ];
+	$x->ColFieldName = ['id', 'department_name', 'hod', 'contact', 'created_by', 'created_at', 'last_updated_by', 'last_updated_at', ];
+	$x->ColNumber  = [1, 2, 3, 4, 5, 6, 7, 8, ];
 
 	// template paths below are based on the app main directory
 	$x->Template = 'templates/departments_table_templateTV.html';
