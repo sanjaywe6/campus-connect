@@ -62,6 +62,12 @@
 
 			return $data;
 		},
+		'timetable_table' => function($data, $options = []) {
+			if(isset($data['subject_details'])) $data['subject_details'] = pkGivenLookupText($data['subject_details'], 'timetable_table', 'subject_details');
+			if(isset($data['faculty_details'])) $data['faculty_details'] = pkGivenLookupText($data['faculty_details'], 'timetable_table', 'faculty_details');
+
+			return $data;
+		},
 	];
 
 	// accept a record as an assoc array, return a boolean indicating whether to import or skip record
@@ -75,6 +81,7 @@
 		'exams_table' => function($data, $options = []) { return true; },
 		'results_table' => function($data, $options = []) { return true; },
 		'attendance_table' => function($data, $options = []) { return true; },
+		'timetable_table' => function($data, $options = []) { return true; },
 	];
 
 	/*

@@ -88,7 +88,7 @@
 			/* hide current table in homepage? */
 			$tChkHL = array_search($tn, []);
 			/* allow homepage 'add new' for current table? */
-			$tChkAHAN = array_search($tn, ['students_table','faculty_table','departments_table','courses_table','subject_table','enrollment_table','exams_table','results_table','attendance_table']);
+			$tChkAHAN = array_search($tn, ['students_table','faculty_table','departments_table','courses_table','subject_table','enrollment_table','exams_table','results_table','attendance_table','timetable_table']);
 
 			/* homepageShowCount for current table? */
 			$count_badge = '';

@@ -38,7 +38,7 @@
 
 	function get_table_groups($skip_authentication = false) {
 		$tables = getTableList($skip_authentication);
-		$all_groups = ['Core Apps', 'Academic &amp; Examination'];
+		$all_groups = ['Core Apps', 'Academic &amp; Examination', 'Attendance &amp; Timetable'];
 
 		$groups = [];
 		foreach($all_groups as $grp) {
@@ -114,6 +114,7 @@
 			'exams_table' => "`exams_table`.`id` as 'id', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`), '') as 'subject_details', if(`exams_table`.`exam_date`,date_format(`exams_table`.`exam_date`,'%d/%m/%Y'),'') as 'exam_date', `exams_table`.`exam_type` as 'exam_type', `exams_table`.`created_by` as 'created_by', `exams_table`.`created_at` as 'created_at', `exams_table`.`last_updated_by` as 'last_updated_by', `exams_table`.`last_updated_at` as 'last_updated_at', `exams_table`.`created_by_username` as 'created_by_username', `exams_table`.`last_updated_by_username` as 'last_updated_by_username'",
 			'results_table' => "`results_table`.`id` as 'id', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`) || CHAR_LENGTH(if(`exams_table1`.`exam_date`,date_format(`exams_table1`.`exam_date`,'%d/%m/%Y'),'')), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`, ' ~ ', if(`exams_table1`.`exam_date`,date_format(`exams_table1`.`exam_date`,'%d/%m/%Y'),'')), '') as 'exam_details', IF(    CHAR_LENGTH(`students_table1`.`id`) || CHAR_LENGTH(`students_table1`.`name`), CONCAT_WS('',   `students_table1`.`id`, ' ~ ', `students_table1`.`name`), '') as 'student_details', `results_table`.`marks_obtained` as 'marks_obtained', `results_table`.`grade` as 'grade', `results_table`.`created_by` as 'created_by', `results_table`.`created_at` as 'created_at', `results_table`.`last_updated_by` as 'last_updated_by', `results_table`.`last_updated_at` as 'last_updated_at', `results_table`.`created_by_username` as 'created_by_username', `results_table`.`last_updated_by_username` as 'last_updated_by_username'",
 			'attendance_table' => "`attendance_table`.`id` as 'id', IF(    CHAR_LENGTH(`students_table1`.`id`) || CHAR_LENGTH(`students_table1`.`name`), CONCAT_WS('',   `students_table1`.`id`, ' ~ ', `students_table1`.`name`), '') as 'student_details', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`), '') as 'subject_details', if(`attendance_table`.`date`,date_format(`attendance_table`.`date`,'%d/%m/%Y'),'') as 'date', `attendance_table`.`status` as 'status'",
+			'timetable_table' => "`timetable_table`.`id` as 'id', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`), '') as 'subject_details', IF(    CHAR_LENGTH(`faculty_table1`.`id`) || CHAR_LENGTH(`faculty_table1`.`name`), CONCAT_WS('',   `faculty_table1`.`id`, ' ~ ', `faculty_table1`.`name`), '') as 'faculty_details', `timetable_table`.`room_details` as 'room_details', `timetable_table`.`day` as 'day', `timetable_table`.`start_time` as 'start_time', `timetable_table`.`end_time` as 'end_time'",
 		];
 
 		if(isset($sql_fields[$table_name])) return $sql_fields[$table_name];
@@ -134,6 +135,7 @@
 			'exams_table' => "`exams_table` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`exams_table`.`subject_details` ",
 			'results_table' => "`results_table` LEFT JOIN `exams_table` as exams_table1 ON `exams_table1`.`id`=`results_table`.`exam_details` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`exams_table1`.`subject_details` LEFT JOIN `students_table` as students_table1 ON `students_table1`.`id`=`results_table`.`student_details` ",
 			'attendance_table' => "`attendance_table` LEFT JOIN `students_table` as students_table1 ON `students_table1`.`id`=`attendance_table`.`student_details` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`attendance_table`.`subject_details` ",
+			'timetable_table' => "`timetable_table` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`timetable_table`.`subject_details` LEFT JOIN `faculty_table` as faculty_table1 ON `faculty_table1`.`id`=`timetable_table`.`faculty_details` ",
 		];
 
 		$pkey = [
@@ -146,6 +148,7 @@
 			'exams_table' => 'id',
 			'results_table' => 'id',
 			'attendance_table' => 'id',
+			'timetable_table' => 'id',
 		];
 
 		if(!isset($sql_from[$table_name])) return false;
@@ -316,6 +319,15 @@
 				'subject_details' => '',
 				'date' => '1',
 				'status' => '',
+			],
+			'timetable_table' => [
+				'id' => '',
+				'subject_details' => '',
+				'faculty_details' => '',
+				'room_details' => '',
+				'day' => '',
+				'start_time' => '',
+				'end_time' => '',
 			],
 		];
 
@@ -1666,6 +1678,56 @@ EOT;
 					'query' => "SELECT `attendance_table`.`id` as 'id', IF(    CHAR_LENGTH(`students_table1`.`id`) || CHAR_LENGTH(`students_table1`.`name`), CONCAT_WS('',   `students_table1`.`id`, ' ~ ', `students_table1`.`name`), '') as 'student_details', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`), '') as 'subject_details', if(`attendance_table`.`date`,date_format(`attendance_table`.`date`,'%d/%m/%Y'),'') as 'date', `attendance_table`.`status` as 'status' FROM `attendance_table` LEFT JOIN `students_table` as students_table1 ON `students_table1`.`id`=`attendance_table`.`student_details` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`attendance_table`.`subject_details` "
 				],
 			],
+			'timetable_table' => [
+				'subject_details' => [
+					'parent-table' => 'subject_table',
+					'parent-primary-key' => 'id',
+					'child-primary-key' => 'id',
+					'child-primary-key-index' => 0,
+					'tab-label' => 'Timetable - App <span class="hidden child-label-timetable_table child-field-caption">(Subject Details)</span>',
+					'auto-close' => false,
+					'table-icon' => 'table.gif',
+					'display-refresh' => true,
+					'display-add-new' => true,
+					'forced-where' => '',
+					'display-fields' => [1 => 'Subject Details', 2 => 'Faculty Details', 3 => 'Room details', 4 => 'Day', 5 => 'Start time', 6 => 'End time'],
+					'display-field-names' => [1 => 'subject_details', 2 => 'faculty_details', 3 => 'room_details', 4 => 'day', 5 => 'start_time', 6 => 'end_time'],
+					'sortable-fields' => [0 => '`timetable_table`.`id`', 1 => 2, 2 => 3, 3 => 4, 4 => 5, 5 => '`timetable_table`.`start_time`', 6 => '`timetable_table`.`end_time`'],
+					'records-per-page' => 10,
+					'default-sort-by' => 0,
+					'default-sort-direction' => 'desc',
+					'open-detail-view-on-click' => true,
+					'display-page-selector' => true,
+					'show-page-progress' => true,
+					'template' => 'children-timetable_table',
+					'template-printable' => 'children-timetable_table-printable',
+					'query' => "SELECT `timetable_table`.`id` as 'id', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`), '') as 'subject_details', IF(    CHAR_LENGTH(`faculty_table1`.`id`) || CHAR_LENGTH(`faculty_table1`.`name`), CONCAT_WS('',   `faculty_table1`.`id`, ' ~ ', `faculty_table1`.`name`), '') as 'faculty_details', `timetable_table`.`room_details` as 'room_details', `timetable_table`.`day` as 'day', `timetable_table`.`start_time` as 'start_time', `timetable_table`.`end_time` as 'end_time' FROM `timetable_table` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`timetable_table`.`subject_details` LEFT JOIN `faculty_table` as faculty_table1 ON `faculty_table1`.`id`=`timetable_table`.`faculty_details` "
+				],
+				'faculty_details' => [
+					'parent-table' => 'faculty_table',
+					'parent-primary-key' => 'id',
+					'child-primary-key' => 'id',
+					'child-primary-key-index' => 0,
+					'tab-label' => 'Timetable - App <span class="hidden child-label-timetable_table child-field-caption">(Faculty Details)</span>',
+					'auto-close' => false,
+					'table-icon' => 'table.gif',
+					'display-refresh' => true,
+					'display-add-new' => true,
+					'forced-where' => '',
+					'display-fields' => [1 => 'Subject Details', 2 => 'Faculty Details', 3 => 'Room details', 4 => 'Day', 5 => 'Start time', 6 => 'End time'],
+					'display-field-names' => [1 => 'subject_details', 2 => 'faculty_details', 3 => 'room_details', 4 => 'day', 5 => 'start_time', 6 => 'end_time'],
+					'sortable-fields' => [0 => '`timetable_table`.`id`', 1 => 2, 2 => 3, 3 => 4, 4 => 5, 5 => '`timetable_table`.`start_time`', 6 => '`timetable_table`.`end_time`'],
+					'records-per-page' => 10,
+					'default-sort-by' => 0,
+					'default-sort-direction' => 'desc',
+					'open-detail-view-on-click' => true,
+					'display-page-selector' => true,
+					'show-page-progress' => true,
+					'template' => 'children-timetable_table',
+					'template-printable' => 'children-timetable_table-printable',
+					'query' => "SELECT `timetable_table`.`id` as 'id', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`), '') as 'subject_details', IF(    CHAR_LENGTH(`faculty_table1`.`id`) || CHAR_LENGTH(`faculty_table1`.`name`), CONCAT_WS('',   `faculty_table1`.`id`, ' ~ ', `faculty_table1`.`name`), '') as 'faculty_details', `timetable_table`.`room_details` as 'room_details', `timetable_table`.`day` as 'day', `timetable_table`.`start_time` as 'start_time', `timetable_table`.`end_time` as 'end_time' FROM `timetable_table` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`timetable_table`.`subject_details` LEFT JOIN `faculty_table` as faculty_table1 ON `faculty_table1`.`id`=`timetable_table`.`faculty_details` "
+				],
+			],
 		];
 
 		if($skipPermissions) return $pcConfig;
@@ -1711,7 +1773,7 @@ EOT;
 	#########################################################
 
 	function isDetailViewEnabled($tn) {
-		$tables = ['students_table', 'faculty_table', 'departments_table', 'courses_table', 'subject_table', 'enrollment_table', 'exams_table', 'results_table', 'attendance_table', ];
+		$tables = ['students_table', 'faculty_table', 'departments_table', 'courses_table', 'subject_table', 'enrollment_table', 'exams_table', 'results_table', 'attendance_table', 'timetable_table', ];
 		return in_array($tn, $tables);
 	}
 

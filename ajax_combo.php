@@ -204,6 +204,30 @@
 				'not_null' => false,
 			],
 		],
+		'timetable_table' => [
+			'subject_details' => [
+				'parent_table' => 'subject_table',
+				'parent_pk_field' => 'id',
+				'parent_caption' => 'IF(CHAR_LENGTH(`subject_table`.`id`) || CHAR_LENGTH(`subject_table`.`subject_name`), CONCAT_WS(\'\', `subject_table`.`id`, \' ~ \', `subject_table`.`subject_name`), \'\')',
+				'parent_from' => '`subject_table` LEFT JOIN `courses_table` as courses_table1 ON `courses_table1`.`id`=`subject_table`.`course_details` LEFT JOIN `faculty_table` as faculty_table1 ON `faculty_table1`.`id`=`subject_table`.`faculty_details` ',
+				'filterers' => [],
+				'custom_query' => '',
+				'inherit_permissions' => false,
+				'list_type' => 0,
+				'not_null' => false,
+			],
+			'faculty_details' => [
+				'parent_table' => 'faculty_table',
+				'parent_pk_field' => 'id',
+				'parent_caption' => 'IF(CHAR_LENGTH(`faculty_table`.`id`) || CHAR_LENGTH(`faculty_table`.`name`), CONCAT_WS(\'\', `faculty_table`.`id`, \' ~ \', `faculty_table`.`name`), \'\')',
+				'parent_from' => '`faculty_table` LEFT JOIN `departments_table` as departments_table1 ON `departments_table1`.`id`=`faculty_table`.`department` ',
+				'filterers' => [],
+				'custom_query' => '',
+				'inherit_permissions' => false,
+				'list_type' => 0,
+				'not_null' => false,
+			],
+		],
 	];
 
 	// XSS prevention

@@ -494,6 +494,12 @@ function attendance_table_validateData(insertMode) {
 
 	return !errors;
 }
+function timetable_table_validateData(insertMode) {
+	$j('.has-error').removeClass('has-error');
+	var errors = false;
+
+	return !errors;
+}
 
 function post(url, params, update, disable, loading, success_callback) {
 	$j.ajax({
