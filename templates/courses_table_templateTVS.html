@@ -5,6 +5,7 @@
 <!-- add the following to the courses_table_init() hook (in hooks/courses_table.php file) -->
 <!--     $options->ShowTableHeader = 0;     -->
 
+		<td id="courses_table-id-<%%VALUE(id)%%>" class="courses_table-id text-right text-bold"><%%VALUE(id)%%></td>
 		<td id="courses_table-course_name-<%%VALUE(id)%%>" class="courses_table-course_name text-bold"><%%VALUE(course_name)%%></td>
 		<td id="courses_table-department-<%%VALUE(id)%%>" class="courses_table-department text-bold"><%%VALUE(department)%%></td>
 		<td id="courses_table-starting_date-<%%VALUE(id)%%>" class="courses_table-starting_date text-bold"><%%VALUE(starting_date)%%></td>

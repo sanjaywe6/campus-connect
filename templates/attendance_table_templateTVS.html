@@ -1,0 +1,11 @@
+<!-- Edit this file to change the layout of each record in the table view -->
+<!-- To disable clicking of a field, remove the <%%SELECT%%> and <%%ENDSELECT%%> formatters around it-->
+
+<!-- If you wish to hide the table view header that contains the column titles, -->
+<!-- add the following to the attendance_table_init() hook (in hooks/attendance_table.php file) -->
+<!--     $options->ShowTableHeader = 0;     -->
+
+		<td id="attendance_table-student_details-<%%VALUE(id)%%>" class="attendance_table-student_details text-bold"><%%VALUE(student_details)%%></td>
+		<td id="attendance_table-subject_details-<%%VALUE(id)%%>" class="attendance_table-subject_details text-bold"><%%VALUE(subject_details)%%></td>
+		<td id="attendance_table-date-<%%VALUE(id)%%>" class="attendance_table-date text-bold"><%%VALUE(date)%%></td>
+		<td id="attendance_table-status-<%%VALUE(id)%%>" class="attendance_table-status text-bold"><%%VALUE(status)%%></td>

@@ -113,6 +113,7 @@
 			'enrollment_table' => "`enrollment_table`.`id` as 'id', IF(    CHAR_LENGTH(`students_table1`.`id`) || CHAR_LENGTH(`students_table1`.`name`), CONCAT_WS('',   `students_table1`.`id`, ' ~ ', `students_table1`.`name`), '') as 'student_details', IF(    CHAR_LENGTH(`courses_table1`.`id`) || CHAR_LENGTH(`courses_table1`.`course_name`), CONCAT_WS('',   `courses_table1`.`id`, ' ~ ', `courses_table1`.`course_name`), '') as 'course_details', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`), '') as 'subject_details', `enrollment_table`.`semester` as 'semester', `enrollment_table`.`year` as 'year', `enrollment_table`.`created_by` as 'created_by', `enrollment_table`.`created_at` as 'created_at', `enrollment_table`.`last_updated_by` as 'last_updated_by', `enrollment_table`.`last_updated_at` as 'last_updated_at', `enrollment_table`.`created_by_username` as 'created_by_username', `enrollment_table`.`last_updated_by_username` as 'last_updated_by_username'",
 			'exams_table' => "`exams_table`.`id` as 'id', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`), '') as 'subject_details', if(`exams_table`.`exam_date`,date_format(`exams_table`.`exam_date`,'%d/%m/%Y'),'') as 'exam_date', `exams_table`.`exam_type` as 'exam_type', `exams_table`.`created_by` as 'created_by', `exams_table`.`created_at` as 'created_at', `exams_table`.`last_updated_by` as 'last_updated_by', `exams_table`.`last_updated_at` as 'last_updated_at', `exams_table`.`created_by_username` as 'created_by_username', `exams_table`.`last_updated_by_username` as 'last_updated_by_username'",
 			'results_table' => "`results_table`.`id` as 'id', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`) || CHAR_LENGTH(if(`exams_table1`.`exam_date`,date_format(`exams_table1`.`exam_date`,'%d/%m/%Y'),'')), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`, ' ~ ', if(`exams_table1`.`exam_date`,date_format(`exams_table1`.`exam_date`,'%d/%m/%Y'),'')), '') as 'exam_details', IF(    CHAR_LENGTH(`students_table1`.`id`) || CHAR_LENGTH(`students_table1`.`name`), CONCAT_WS('',   `students_table1`.`id`, ' ~ ', `students_table1`.`name`), '') as 'student_details', `results_table`.`marks_obtained` as 'marks_obtained', `results_table`.`grade` as 'grade', `results_table`.`created_by` as 'created_by', `results_table`.`created_at` as 'created_at', `results_table`.`last_updated_by` as 'last_updated_by', `results_table`.`last_updated_at` as 'last_updated_at', `results_table`.`created_by_username` as 'created_by_username', `results_table`.`last_updated_by_username` as 'last_updated_by_username'",
+			'attendance_table' => "`attendance_table`.`id` as 'id', IF(    CHAR_LENGTH(`students_table1`.`id`) || CHAR_LENGTH(`students_table1`.`name`), CONCAT_WS('',   `students_table1`.`id`, ' ~ ', `students_table1`.`name`), '') as 'student_details', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`), '') as 'subject_details', if(`attendance_table`.`date`,date_format(`attendance_table`.`date`,'%d/%m/%Y'),'') as 'date', `attendance_table`.`status` as 'status'",
 		];
 
 		if(isset($sql_fields[$table_name])) return $sql_fields[$table_name];
@@ -132,6 +133,7 @@
 			'enrollment_table' => "`enrollment_table` LEFT JOIN `students_table` as students_table1 ON `students_table1`.`id`=`enrollment_table`.`student_details` LEFT JOIN `courses_table` as courses_table1 ON `courses_table1`.`id`=`enrollment_table`.`course_details` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`enrollment_table`.`subject_details` ",
 			'exams_table' => "`exams_table` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`exams_table`.`subject_details` ",
 			'results_table' => "`results_table` LEFT JOIN `exams_table` as exams_table1 ON `exams_table1`.`id`=`results_table`.`exam_details` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`exams_table1`.`subject_details` LEFT JOIN `students_table` as students_table1 ON `students_table1`.`id`=`results_table`.`student_details` ",
+			'attendance_table' => "`attendance_table` LEFT JOIN `students_table` as students_table1 ON `students_table1`.`id`=`attendance_table`.`student_details` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`attendance_table`.`subject_details` ",
 		];
 
 		$pkey = [
@@ -143,6 +145,7 @@
 			'enrollment_table' => 'id',
 			'exams_table' => 'id',
 			'results_table' => 'id',
+			'attendance_table' => 'id',
 		];
 
 		if(!isset($sql_from[$table_name])) return false;
@@ -306,6 +309,13 @@
 				'last_updated_at' => '',
 				'created_by_username' => '',
 				'last_updated_by_username' => '',
+			],
+			'attendance_table' => [
+				'id' => '',
+				'student_details' => '',
+				'subject_details' => '',
+				'date' => '1',
+				'status' => '',
 			],
 		];
 
@@ -1606,6 +1616,56 @@ EOT;
 					'query' => "SELECT `results_table`.`id` as 'id', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`) || CHAR_LENGTH(if(`exams_table1`.`exam_date`,date_format(`exams_table1`.`exam_date`,'%d/%m/%Y'),'')), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`, ' ~ ', if(`exams_table1`.`exam_date`,date_format(`exams_table1`.`exam_date`,'%d/%m/%Y'),'')), '') as 'exam_details', IF(    CHAR_LENGTH(`students_table1`.`id`) || CHAR_LENGTH(`students_table1`.`name`), CONCAT_WS('',   `students_table1`.`id`, ' ~ ', `students_table1`.`name`), '') as 'student_details', `results_table`.`marks_obtained` as 'marks_obtained', `results_table`.`grade` as 'grade', `results_table`.`created_by` as 'created_by', `results_table`.`created_at` as 'created_at', `results_table`.`last_updated_by` as 'last_updated_by', `results_table`.`last_updated_at` as 'last_updated_at', `results_table`.`created_by_username` as 'created_by_username', `results_table`.`last_updated_by_username` as 'last_updated_by_username' FROM `results_table` LEFT JOIN `exams_table` as exams_table1 ON `exams_table1`.`id`=`results_table`.`exam_details` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`exams_table1`.`subject_details` LEFT JOIN `students_table` as students_table1 ON `students_table1`.`id`=`results_table`.`student_details` "
 				],
 			],
+			'attendance_table' => [
+				'student_details' => [
+					'parent-table' => 'students_table',
+					'parent-primary-key' => 'id',
+					'child-primary-key' => 'id',
+					'child-primary-key-index' => 0,
+					'tab-label' => 'Attendance - App <span class="hidden child-label-attendance_table child-field-caption">(Student Details)</span>',
+					'auto-close' => false,
+					'table-icon' => 'table.gif',
+					'display-refresh' => true,
+					'display-add-new' => true,
+					'forced-where' => '',
+					'display-fields' => [1 => 'Student Details', 2 => 'Subject Details', 3 => 'Date', 4 => 'Status'],
+					'display-field-names' => [1 => 'student_details', 2 => 'subject_details', 3 => 'date', 4 => 'status'],
+					'sortable-fields' => [0 => '`attendance_table`.`id`', 1 => 2, 2 => 3, 3 => '`attendance_table`.`date`', 4 => 5],
+					'records-per-page' => 10,
+					'default-sort-by' => 0,
+					'default-sort-direction' => 'desc',
+					'open-detail-view-on-click' => true,
+					'display-page-selector' => true,
+					'show-page-progress' => true,
+					'template' => 'children-attendance_table',
+					'template-printable' => 'children-attendance_table-printable',
+					'query' => "SELECT `attendance_table`.`id` as 'id', IF(    CHAR_LENGTH(`students_table1`.`id`) || CHAR_LENGTH(`students_table1`.`name`), CONCAT_WS('',   `students_table1`.`id`, ' ~ ', `students_table1`.`name`), '') as 'student_details', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`), '') as 'subject_details', if(`attendance_table`.`date`,date_format(`attendance_table`.`date`,'%d/%m/%Y'),'') as 'date', `attendance_table`.`status` as 'status' FROM `attendance_table` LEFT JOIN `students_table` as students_table1 ON `students_table1`.`id`=`attendance_table`.`student_details` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`attendance_table`.`subject_details` "
+				],
+				'subject_details' => [
+					'parent-table' => 'subject_table',
+					'parent-primary-key' => 'id',
+					'child-primary-key' => 'id',
+					'child-primary-key-index' => 0,
+					'tab-label' => 'Attendance - App <span class="hidden child-label-attendance_table child-field-caption">(Subject Details)</span>',
+					'auto-close' => false,
+					'table-icon' => 'table.gif',
+					'display-refresh' => true,
+					'display-add-new' => true,
+					'forced-where' => '',
+					'display-fields' => [1 => 'Student Details', 2 => 'Subject Details', 3 => 'Date', 4 => 'Status'],
+					'display-field-names' => [1 => 'student_details', 2 => 'subject_details', 3 => 'date', 4 => 'status'],
+					'sortable-fields' => [0 => '`attendance_table`.`id`', 1 => 2, 2 => 3, 3 => '`attendance_table`.`date`', 4 => 5],
+					'records-per-page' => 10,
+					'default-sort-by' => 0,
+					'default-sort-direction' => 'desc',
+					'open-detail-view-on-click' => true,
+					'display-page-selector' => true,
+					'show-page-progress' => true,
+					'template' => 'children-attendance_table',
+					'template-printable' => 'children-attendance_table-printable',
+					'query' => "SELECT `attendance_table`.`id` as 'id', IF(    CHAR_LENGTH(`students_table1`.`id`) || CHAR_LENGTH(`students_table1`.`name`), CONCAT_WS('',   `students_table1`.`id`, ' ~ ', `students_table1`.`name`), '') as 'student_details', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`), '') as 'subject_details', if(`attendance_table`.`date`,date_format(`attendance_table`.`date`,'%d/%m/%Y'),'') as 'date', `attendance_table`.`status` as 'status' FROM `attendance_table` LEFT JOIN `students_table` as students_table1 ON `students_table1`.`id`=`attendance_table`.`student_details` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`attendance_table`.`subject_details` "
+				],
+			],
 		];
 
 		if($skipPermissions) return $pcConfig;
@@ -1651,7 +1711,7 @@ EOT;
 	#########################################################
 
 	function isDetailViewEnabled($tn) {
-		$tables = ['students_table', 'faculty_table', 'departments_table', 'courses_table', 'subject_table', 'enrollment_table', 'exams_table', 'results_table', ];
+		$tables = ['students_table', 'faculty_table', 'departments_table', 'courses_table', 'subject_table', 'enrollment_table', 'exams_table', 'results_table', 'attendance_table', ];
 		return in_array($tn, $tables);
 	}
 

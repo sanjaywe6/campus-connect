@@ -162,6 +162,13 @@
 					'group' => $tg[1],
 					'homepageShowCount' => 1
 				],
+				'attendance_table' => [
+					'Caption' => 'Attendance - App',
+					'Description' => '',
+					'tableIcon' => 'table.gif',
+					'group' => $tg[0],
+					'homepageShowCount' => 1
+				],
 		];
 
 		if($skip_authentication || getLoggedAdmin()) return $all_tables;
@@ -186,6 +193,7 @@
 			'enrollment_table' => ['Enrollment - App', '', 'table.gif', 'Academic &amp; Examination'],
 			'exams_table' => ['Exams - App', '', 'table.gif', 'Academic &amp; Examination'],
 			'results_table' => ['Results - App', '', 'table.gif', 'Academic &amp; Examination'],
+			'attendance_table' => ['Attendance - App', '', 'table.gif', 'Core Apps'],
 		];
 
 		if($skip_authentication || getLoggedAdmin()) {
@@ -1649,6 +1657,43 @@
 						],
 					],
 				],
+				'attendance_table' => [
+					'id' => [
+						'appgini' => "INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT",
+						'info' => [
+							'caption' => 'ID',
+							'description' => '',
+						],
+					],
+					'student_details' => [
+						'appgini' => "INT UNSIGNED NULL",
+						'info' => [
+							'caption' => 'Student Details',
+							'description' => '',
+						],
+					],
+					'subject_details' => [
+						'appgini' => "INT UNSIGNED NULL",
+						'info' => [
+							'caption' => 'Subject Details',
+							'description' => '',
+						],
+					],
+					'date' => [
+						'appgini' => "DATE NULL",
+						'info' => [
+							'caption' => 'Date',
+							'description' => '',
+						],
+					],
+					'status' => [
+						'appgini' => "VARCHAR(255) NULL",
+						'info' => [
+							'caption' => 'Status',
+							'description' => '',
+						],
+					],
+				],
 			];
 
 			$internalTablesSimple = [
@@ -2843,6 +2888,10 @@
 				'exams_table' => ['exam_details'],
 				'students_table' => ['student_details'],
 			],
+			'attendance_table' => [
+				'students_table' => ['student_details'],
+				'subject_table' => ['subject_details'],
+			],
 		];
 
 		return isset($parents[$table]) ? $parents[$table] : [];
@@ -3108,6 +3157,7 @@
 					ON membership_users.memberID = %TABLENAME%.last_updated_by_username
 					WHERE %TABLENAME%.%PKFIELD% = %ID%;',
 			],
+			'attendance_table' => [],
 		];
 	}
 	#########################################################
@@ -3258,6 +3308,10 @@
 			'results_table' => [
 				'exam_details' => 'SELECT `exams_table`.`id`, IF(CHAR_LENGTH(`exams_table`.`subject_details`) || CHAR_LENGTH(if(`exams_table`.`exam_date`,date_format(`exams_table`.`exam_date`,\'%d/%m/%Y\'),\'\')), CONCAT_WS(\'\', IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS(\'\',   `subject_table1`.`id`, \' ~ \', `subject_table1`.`subject_name`), \'\'), \' ~ \', if(`exams_table`.`exam_date`,date_format(`exams_table`.`exam_date`,\'%d/%m/%Y\'),\'\')), \'\') FROM `exams_table` LEFT JOIN `subject_table` as subject_table1 ON `subject_table1`.`id`=`exams_table`.`subject_details` ORDER BY 2',
 				'student_details' => 'SELECT `students_table`.`id`, IF(CHAR_LENGTH(`students_table`.`id`) || CHAR_LENGTH(`students_table`.`name`), CONCAT_WS(\'\', `students_table`.`id`, \' ~ \', `students_table`.`name`), \'\') FROM `students_table` LEFT JOIN `departments_table` as departments_table1 ON `departments_table1`.`id`=`students_table`.`department` LEFT JOIN `courses_table` as courses_table1 ON `courses_table1`.`id`=`students_table`.`course` ORDER BY 2',
+			],
+			'attendance_table' => [
+				'student_details' => 'SELECT `students_table`.`id`, IF(CHAR_LENGTH(`students_table`.`id`) || CHAR_LENGTH(`students_table`.`name`), CONCAT_WS(\'\', `students_table`.`id`, \' ~ \', `students_table`.`name`), \'\') FROM `students_table` LEFT JOIN `departments_table` as departments_table1 ON `departments_table1`.`id`=`students_table`.`department` LEFT JOIN `courses_table` as courses_table1 ON `courses_table1`.`id`=`students_table`.`course` ORDER BY 2',
+				'subject_details' => 'SELECT `subject_table`.`id`, IF(CHAR_LENGTH(`subject_table`.`id`) || CHAR_LENGTH(`subject_table`.`subject_name`), CONCAT_WS(\'\', `subject_table`.`id`, \' ~ \', `subject_table`.`subject_name`), \'\') FROM `subject_table` LEFT JOIN `courses_table` as courses_table1 ON `courses_table1`.`id`=`subject_table`.`course_details` LEFT JOIN `faculty_table` as faculty_table1 ON `faculty_table1`.`id`=`subject_table`.`faculty_details` ORDER BY 2',
 			],
 		];
 

@@ -1,17 +1,14 @@
-<!-- To change the layout of the detail view form, we recommend using JS code in hooks/exams_table-dv.js rather than editing this file -->
+<!-- To change the layout of the detail view form, we recommend using JS code in hooks/attendance_table-dv.js rather than editing this file -->
 
 <div id="detail-view"></div>
 <div class="panel-heading"><h3 class="panel-title"><strong><%%DETAIL_VIEW_TITLE%%></strong></h3></div>
 
-<div id="exams_table_dv_container-loading" class="text-center text-info text-bold vspacer-lg"><i class="glyphicon glyphicon-refresh loop-rotate"></i> <%%TRANSLATION(Loading ...)%%></div>
+<div id="attendance_table_dv_container-loading" class="text-center text-info text-bold vspacer-lg"><i class="glyphicon glyphicon-refresh loop-rotate"></i> <%%TRANSLATION(Loading ...)%%></div>
 
-<div class="panel-body hidden" id="exams_table_dv_container">
+<div class="panel-body hidden" id="attendance_table_dv_container">
 	<!-- child links -->
 	<div class="row vspacer-md">
 		<div class="col-xs-12 children-links">
-			<a class="hidden-xs btn btn-default btn-lg pull-right hidden hspacer-sm vspacer-sm" href="results_table_view.php?filterer_exam_details=<%%URLVALUE(id)%%>&<%%EMBEDDED%%>" id="results_table_link"><img src="table.gif"> Results - App</a>
-			<a class="visible-xs btn btn-default btn-lg btn-block hidden vspacer-sm" href="results_table_view.php?filterer_exam_details=<%%URLVALUE(id)%%>&<%%EMBEDDED%%>" id="xs_results_table_link"><img src="table.gif"> Results - App</a>
-			<input type="hidden" id="results_table_hclink" value="results_table_view.php?filterer_exam_details=<%%URLVALUE(id)%%>&<%%EMBEDDED%%>">
 			<div class="clearfix"></div>
 		</div>
 	</div>
@@ -19,11 +16,20 @@
 
 	<div class="row">
 		<!-- form inputs -->
-		<div class="col-md-8 col-lg-10" id="exams_table_dv_form">
+		<div class="col-md-8 col-lg-10" id="attendance_table_dv_form">
 			<fieldset class="form-horizontal">
 
+				<!-- Field: Student Details -->
+				<div class="form-group attendance_table-student_details">
+					<hr class="hidden-md hidden-lg">
+					<label class="control-label col-lg-3" for="student_details" data-parent_link="view_parent_modal">Student Details</label>
+					<div class="col-lg-9">
+						<div class="lookup-flex"><%%COMBO(student_details)%%><%%PLINK(student_details)%%><%%ADDNEW(students_table)%%></div>
+					</div>
+				</div>
+
 				<!-- Field: Subject Details -->
-				<div class="form-group exams_table-subject_details">
+				<div class="form-group attendance_table-subject_details">
 					<hr class="hidden-md hidden-lg">
 					<label class="control-label col-lg-3" for="subject_details" data-parent_link="view_parent_modal">Subject Details</label>
 					<div class="col-lg-9">
@@ -31,22 +37,21 @@
 					</div>
 				</div>
 
-				<!-- Field: Exam Date -->
-				<div class="form-group exams_table-exam_date">
+				<!-- Field: Date -->
+				<div class="form-group attendance_table-date">
 					<hr class="hidden-md hidden-lg">
-					<label class="control-label col-lg-3" for="exam_date-dd">Exam Date</label>
+					<label class="control-label col-lg-3" for="date-dd">Date</label>
 					<div class="col-lg-9">
-						<%%COMBO(exam_date)%%>
+						<%%COMBO(date)%%>
 					</div>
 				</div>
 
-				<!-- Field: Exam Type -->
-				<div class="form-group exams_table-exam_type">
+				<!-- Field: Status -->
+				<div class="form-group attendance_table-status">
 					<hr class="hidden-md hidden-lg">
-					<label class="control-label col-lg-3" for="exam_type">Exam Type <i class="glyphicon glyphicon-info-sign text-info" data-toggle="collapse" data-target="#exam_type-description"></i></label>
+					<label class="control-label col-lg-3" for="status">Status</label>
 					<div class="col-lg-9">
-						<span class="help-block bspacer-xs collapse" id="exam_type-description"><div class="alert alert-info bspacer-xs">(midterm, final, etc.)</div></span>
-						<input maxlength="255" type="text" class="form-control" name="exam_type" id="exam_type" value="<%%VALUE(exam_type)%%>">
+						<%%COMBO(status)%%>
 					</div>
 				</div>
 
@@ -55,7 +60,7 @@
 
 		<!-- DV action buttons -->
 		<hr class="hidden-md hidden-lg">
-		<div class="col-md-4 col-lg-2 dv-action-buttons" id="exams_table_dv_action_buttons">
+		<div class="col-md-4 col-lg-2 dv-action-buttons" id="attendance_table_dv_action_buttons">
 			<div class="btn-toolbar">
 				<div class="btn-group-vertical btn-group-lg" style="width: 100%;">
 					<%%UPDATE_BUTTON%%>
@@ -72,16 +77,6 @@
 		</div>
 	</div>
 
-
-	<!-- child records -->
-	<hr>
-	<div class="row">
-		<div class="col-lg-10 col-lg-offset-1">
-			<div id="exams_table-children" class="children-tabs">
-				<div class="text-center"><i class="glyphicon glyphicon-refresh loop-rotate"></i> <%%TRANSLATION(Loading ...)%%></div>
-			</div>
-		</div>
-	</div>
 
 </div><!-- /div class="panel-body" -->
 	<script>
@@ -104,59 +99,27 @@
 			if(!$j('.table_view').length || $j('[name=SelectedID]').val().length) {
 				AppGini.once({
 					condition: function() {
-						return $j('.form-group.exams_table-subject_details')
+						return $j('.form-group.attendance_table-student_details')
 									.find('.nicEdit-main, .select2-container, input[type=radio]')
 									.length > 0
 								// or read-only DV
 								|| (!$j('#update').length && !$j('#insert').length);
 					},
 					action: function() {
-						$j('#exams_table_dv_container-loading').addClass('hidden');
-						$j('#exams_table_dv_container').removeClass('hidden');
-						AppGini.focusFormElement('exams_table', 'subject_details');
+						$j('#attendance_table_dv_container-loading').addClass('hidden');
+						$j('#attendance_table_dv_container').removeClass('hidden');
+						AppGini.focusFormElement('attendance_table', 'student_details');
 					},
 					timeout:  5000,
 					doActionOnTimeout:  true
 				});
 			} else {
-				$j('#exams_table_dv_container-loading').addClass('hidden');
-				$j('#exams_table_dv_container').removeClass('hidden');
+				$j('#attendance_table_dv_container-loading').addClass('hidden');
+				$j('#attendance_table_dv_container').removeClass('hidden');
 			}
 
 			$j('a[href="<%%BASE_UPLOAD_PATH%%>"]').click(function() { return false; });
 
-			if(embedded_mode) {
-				/* hide links to children tables in embedded mode */
-				$j('.detail_view a[id$=_link]').remove();
-
-				/* append embedded mode to all links */
-				var append_embedded = function() {
-					$j('a[href]:not([href^="#"]):not([href^="javascript"]):not([href$="Embedded=1"]):not([href*="link.php?t="]):not([href^="mailto:"]):not([href$=".jpg"]):not([href$=".png"]):not([href$=".gif"])').each(
-						function() {
-							$j(this).attr('href', $j(this).attr('href') + '&Embedded=1');
-						}
-					);
-				}
-				setTimeout(append_embedded, 500);
-				setTimeout(append_embedded, 1500);
-				setTimeout(append_embedded, 2500);
-				setTimeout(append_embedded, 3500);
-			}
-
-			/* when no record is selected ('add new' mode) */
-			if(add_new_mode) {
-				/* hide links to children tables */
-				$j('.detail_view a[id$=_link]').remove();
-			} else {
-				post(
-					'parent-children.php', {
-						ParentTable: 'exams_table',
-						SelectedID: '<%%VALUE(id)%%>',
-						Operation: 'show-children'
-					},
-					'exams_table-children'
-				);
-			}
 
 			if(true /* !embedded_mode */) {
 				$j('.add_new_parent').click(function() {
@@ -174,7 +137,7 @@
 							localStorage.removeItem(pt + '_last_added_id');
 							AppGini.lookupText({
 								id: new_id,
-								table: 'exams_table',
+								table: 'attendance_table',
 								field: field_id,
 								callback: function(data) {
 									$j('#' + field_id + '-container').select2('data', data, true);
@@ -234,21 +197,21 @@
 				}
 			});
 
-			exams_tableUniqueFields.forEach(fieldName => enforce_uniqueness('exams_table', fieldName));
+			attendance_tableUniqueFields.forEach(fieldName => enforce_uniqueness('attendance_table', fieldName));
 
 			/* load admin tools for admin user */
 			if(!add_new_mode) {
 				$j('body').append('<div id="admin-tools-appendix"></div>');
 				$j('#admin-tools-appendix').load(
-					'ajax_admin_tools.php?table=exams_table&id=<%%URLVALUE(id)%%>',
+					'ajax_admin_tools.php?table=attendance_table&id=<%%URLVALUE(id)%%>',
 					function(resp) {
 						if(!resp.length) return;
-						$j.ajax('ajax_admin_tools.php?action=get_admin_tools_js&table=exams_table&id=<%%URLVALUE(id)%%>');
+						$j.ajax('ajax_admin_tools.php?action=get_admin_tools_js&table=attendance_table&id=<%%URLVALUE(id)%%>');
 					}
 				);
 			}
 		});
 
-		var exams_tableUniqueFields = [
+		var attendance_tableUniqueFields = [
 		];
 	</script>

@@ -5,6 +5,7 @@
 <!-- add the following to the departments_table_init() hook (in hooks/departments_table.php file) -->
 <!--     $options->ShowTableHeader = 0;     -->
 
+		<td id="departments_table-id-<%%VALUE(id)%%>" class="departments_table-id text-right text-bold"><%%VALUE(id)%%></td>
 		<td id="departments_table-department_name-<%%VALUE(id)%%>" class="departments_table-department_name text-bold"><%%VALUE(department_name)%%></td>
 		<td id="departments_table-hod-<%%VALUE(id)%%>" class="departments_table-hod text-bold"><%%VALUE(hod)%%></td>
 		<td id="departments_table-contact-<%%VALUE(id)%%>" class="departments_table-contact text-bold"><%%VALUE(contact)%%></td>

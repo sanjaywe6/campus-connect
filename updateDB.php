@@ -23,40 +23,34 @@
 		setupTable('subject_table', []);
 		setupIndexes('subject_table', ['course_details','faculty_details',]);
 
-		setupTable('enrollment_table', [
-				"ALTER TABLE `enrollment_table` ADD `last_updated_at` VARCHAR(255) NULL ",
-			]);
+		setupTable('enrollment_table', []);
 		setupIndexes('enrollment_table', ['student_details','course_details','subject_details',]);
 
-		setupTable('exams_table', [
-				"ALTER TABLE `exams_table` ADD `last_updated_at` VARCHAR(255) NULL ",
-			]);
+		setupTable('exams_table', []);
 		setupIndexes('exams_table', ['subject_details',]);
 
-		setupTable('results_table', [
-				"ALTER TABLE `table8` RENAME `results_table`",
-				"UPDATE `membership_userrecords` SET `tableName`='results_table' WHERE `tableName`='table8'",
-				"UPDATE `membership_userpermissions` SET `tableName`='results_table' WHERE `tableName`='table8'",
-				"UPDATE `membership_grouppermissions` SET `tableName`='results_table' WHERE `tableName`='table8'",
-				"ALTER TABLE results_table ADD `field1` VARCHAR(40)",
-				"ALTER TABLE `results_table` CHANGE `id` `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ",
-				"ALTER TABLE `results_table` CHANGE `field1` `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ",
-				"ALTER TABLE results_table ADD `field1` VARCHAR(40)",
-				"ALTER TABLE `results_table` CHANGE `field1` `exam_details` VARCHAR(255) NULL ",
-				"ALTER TABLE `results_table` ADD `student_details` INT UNSIGNED NULL ",
-				"ALTER TABLE `results_table` ADD INDEX `student_details`",
-				"ALTER TABLE results_table ADD `field1` VARCHAR(40)",
-				"ALTER TABLE `results_table` CHANGE `field1` `marks_obtained` VARCHAR(255) NULL ",
-				"ALTER TABLE results_table ADD `field1` VARCHAR(40)",
-				"ALTER TABLE `results_table` CHANGE `field1` `grade` VARCHAR(255) NULL ",
-				"ALTER TABLE `results_table` ADD `created_by` VARCHAR(255) NULL ",
-				"ALTER TABLE `results_table` ADD `created_at` VARCHAR(255) NULL ",
-				"ALTER TABLE `results_table` ADD `last_updated_by` VARCHAR(255) NULL ",
-				"ALTER TABLE `results_table` ADD `last_updated_at` VARCHAR(255) NULL ",
-				"ALTER TABLE `results_table` ADD `created_by_username` VARCHAR(255) NULL ",
-				"ALTER TABLE `results_table` ADD `last_updated_by_username` VARCHAR(255) NULL ",
-			]);
+		setupTable('results_table', []);
 		setupIndexes('results_table', ['exam_details','student_details',]);
+
+		setupTable('attendance_table', [
+				"ALTER TABLE `table9` RENAME `attendance_table`",
+				"UPDATE `membership_userrecords` SET `tableName`='attendance_table' WHERE `tableName`='table9'",
+				"UPDATE `membership_userpermissions` SET `tableName`='attendance_table' WHERE `tableName`='table9'",
+				"UPDATE `membership_grouppermissions` SET `tableName`='attendance_table' WHERE `tableName`='table9'",
+				"ALTER TABLE attendance_table ADD `field1` VARCHAR(40)",
+				"ALTER TABLE `attendance_table` CHANGE `id` `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ",
+				"ALTER TABLE `attendance_table` CHANGE `field1` `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ",
+				"ALTER TABLE `attendance_table` ADD `student_details` INT UNSIGNED NULL ",
+				"ALTER TABLE `attendance_table` ADD INDEX `student_details`",
+				"ALTER TABLE `attendance_table` ADD `subject_details` INT UNSIGNED NULL ",
+				"ALTER TABLE `attendance_table` ADD INDEX `subject_details`",
+				"ALTER TABLE attendance_table ADD `field1` VARCHAR(40)",
+				"ALTER TABLE `attendance_table` CHANGE `date` `date` DATE NULL ",
+				"ALTER TABLE `attendance_table` CHANGE `field1` `date` DATE NULL ",
+				"ALTER TABLE attendance_table ADD `field1` VARCHAR(40)",
+				"ALTER TABLE `attendance_table` CHANGE `field1` `status` VARCHAR(255) NULL ",
+			]);
+		setupIndexes('attendance_table', ['student_details','subject_details',]);
 
 
 

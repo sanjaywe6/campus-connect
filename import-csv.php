@@ -55,6 +55,13 @@
 
 			return $data;
 		},
+		'attendance_table' => function($data, $options = []) {
+			if(isset($data['student_details'])) $data['student_details'] = pkGivenLookupText($data['student_details'], 'attendance_table', 'student_details');
+			if(isset($data['subject_details'])) $data['subject_details'] = pkGivenLookupText($data['subject_details'], 'attendance_table', 'subject_details');
+			if(isset($data['date'])) $data['date'] = guessMySQLDateTime($data['date']);
+
+			return $data;
+		},
 	];
 
 	// accept a record as an assoc array, return a boolean indicating whether to import or skip record
@@ -67,6 +74,7 @@
 		'enrollment_table' => function($data, $options = []) { return true; },
 		'exams_table' => function($data, $options = []) { return true; },
 		'results_table' => function($data, $options = []) { return true; },
+		'attendance_table' => function($data, $options = []) { return true; },
 	];
 
 	/*

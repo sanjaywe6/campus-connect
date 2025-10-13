@@ -5,6 +5,7 @@
 <!-- add the following to the subject_table_init() hook (in hooks/subject_table.php file) -->
 <!--     $options->ShowTableHeader = 0;     -->
 
+		<td id="subject_table-id-<%%VALUE(id)%%>" class="subject_table-id text-right text-bold"><%%VALUE(id)%%></td>
 		<td id="subject_table-subject_name-<%%VALUE(id)%%>" class="subject_table-subject_name text-bold"><%%VALUE(subject_name)%%></td>
 		<td id="subject_table-course_details-<%%VALUE(id)%%>" class="subject_table-course_details text-bold"><%%VALUE(course_details)%%></td>
 		<td id="subject_table-faculty_details-<%%VALUE(id)%%>" class="subject_table-faculty_details text-bold"><%%VALUE(faculty_details)%%></td>

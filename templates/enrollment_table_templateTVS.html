@@ -5,6 +5,7 @@
 <!-- add the following to the enrollment_table_init() hook (in hooks/enrollment_table.php file) -->
 <!--     $options->ShowTableHeader = 0;     -->
 
+		<td id="enrollment_table-id-<%%VALUE(id)%%>" class="enrollment_table-id text-right text-bold"><%%VALUE(id)%%></td>
 		<td id="enrollment_table-student_details-<%%VALUE(id)%%>" class="enrollment_table-student_details text-bold"><%%VALUE(student_details)%%></td>
 		<td id="enrollment_table-course_details-<%%VALUE(id)%%>" class="enrollment_table-course_details text-bold"><%%VALUE(course_details)%%></td>
 		<td id="enrollment_table-subject_details-<%%VALUE(id)%%>" class="enrollment_table-subject_details text-bold"><%%VALUE(subject_details)%%></td>
@@ -13,3 +14,4 @@
 		<td id="enrollment_table-created_by-<%%VALUE(id)%%>" class="enrollment_table-created_by text-bold"><%%VALUE(created_by)%%></td>
 		<td id="enrollment_table-created_at-<%%VALUE(id)%%>" class="enrollment_table-created_at text-bold"><%%VALUE(created_at)%%></td>
 		<td id="enrollment_table-last_updated_by-<%%VALUE(id)%%>" class="enrollment_table-last_updated_by text-bold"><%%VALUE(last_updated_by)%%></td>
+		<td id="enrollment_table-last_updated_at-<%%VALUE(id)%%>" class="enrollment_table-last_updated_at text-bold"><%%VALUE(last_updated_at)%%></td>
