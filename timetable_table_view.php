@@ -25,6 +25,12 @@
 		"`timetable_table`.`day`" => "day",
 		"`timetable_table`.`start_time`" => "start_time",
 		"`timetable_table`.`end_time`" => "end_time",
+		"`timetable_table`.`created_by`" => "created_by",
+		"`timetable_table`.`created_at`" => "created_at",
+		"`timetable_table`.`last_updated_by`" => "last_updated_by",
+		"`timetable_table`.`last_updated_at`" => "last_updated_at",
+		"`timetable_table`.`created_by_username`" => "created_by_username",
+		"`timetable_table`.`last_updated_by_username`" => "last_updated_by_username",
 	];
 	// mapping incoming sort by requests to actual query fields
 	$x->SortFields = [
@@ -35,6 +41,12 @@
 		5 => 5,
 		6 => '`timetable_table`.`start_time`',
 		7 => '`timetable_table`.`end_time`',
+		8 => 8,
+		9 => 9,
+		10 => 10,
+		11 => 11,
+		12 => 12,
+		13 => 13,
 	];
 
 	// Fields that can be displayed in the csv file
@@ -46,6 +58,12 @@
 		"`timetable_table`.`day`" => "day",
 		"`timetable_table`.`start_time`" => "start_time",
 		"`timetable_table`.`end_time`" => "end_time",
+		"`timetable_table`.`created_by`" => "created_by",
+		"`timetable_table`.`created_at`" => "created_at",
+		"`timetable_table`.`last_updated_by`" => "last_updated_by",
+		"`timetable_table`.`last_updated_at`" => "last_updated_at",
+		"`timetable_table`.`created_by_username`" => "created_by_username",
+		"`timetable_table`.`last_updated_by_username`" => "last_updated_by_username",
 	];
 	// Fields that can be filtered
 	$x->QueryFieldsFilters = [
@@ -56,6 +74,12 @@
 		"`timetable_table`.`day`" => "Day",
 		"`timetable_table`.`start_time`" => "Start time",
 		"`timetable_table`.`end_time`" => "End time",
+		"`timetable_table`.`created_by`" => "Created by",
+		"`timetable_table`.`created_at`" => "Created At",
+		"`timetable_table`.`last_updated_by`" => "Last Updated by",
+		"`timetable_table`.`last_updated_at`" => "Last Updated At",
+		"`timetable_table`.`created_by_username`" => "Created by username",
+		"`timetable_table`.`last_updated_by_username`" => "Last Updated By",
 	];
 
 	// Fields that can be quick searched
@@ -67,6 +91,12 @@
 		"`timetable_table`.`day`" => "day",
 		"`timetable_table`.`start_time`" => "start_time",
 		"`timetable_table`.`end_time`" => "end_time",
+		"`timetable_table`.`created_by`" => "created_by",
+		"`timetable_table`.`created_at`" => "created_at",
+		"`timetable_table`.`last_updated_by`" => "last_updated_by",
+		"`timetable_table`.`last_updated_at`" => "last_updated_at",
+		"`timetable_table`.`created_by_username`" => "created_by_username",
+		"`timetable_table`.`last_updated_by_username`" => "last_updated_by_username",
 	];
 
 	// Lookup fields that can be used as filterers
@@ -102,10 +132,10 @@
 	$x->DefaultSortField = '1';
 	$x->DefaultSortDirection = 'desc';
 
-	$x->ColWidth = [150, 150, 150, 150, 150, 150, ];
-	$x->ColCaption = ['Subject Details', 'Faculty Details', 'Room details', 'Day', 'Start time', 'End time', ];
-	$x->ColFieldName = ['subject_details', 'faculty_details', 'room_details', 'day', 'start_time', 'end_time', ];
-	$x->ColNumber  = [2, 3, 4, 5, 6, 7, ];
+	$x->ColWidth = [150, 150, 150, 150, 150, 150, 150, 150, 150, 150, ];
+	$x->ColCaption = ['Subject Details', 'Faculty Details', 'Room details', 'Day', 'Start time', 'End time', 'Created by', 'Created At', 'Last Updated by', 'Last Updated At', ];
+	$x->ColFieldName = ['subject_details', 'faculty_details', 'room_details', 'day', 'start_time', 'end_time', 'created_by', 'created_at', 'last_updated_by', 'last_updated_at', ];
+	$x->ColNumber  = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ];
 
 	// template paths below are based on the app main directory
 	$x->Template = 'templates/timetable_table_templateTV.html';
@@ -116,7 +146,7 @@
 	$x->ShowTableHeader = 1;
 	$x->TVClasses = "";
 	$x->DVClasses = "";
-	$x->HasCalculatedFields = false;
+	$x->HasCalculatedFields = true;
 	$x->AllowConsoleLog = false;
 	$x->AllowDVNavigation = true;
 

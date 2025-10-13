@@ -23,6 +23,12 @@
 		"IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`), '') /* Subject Details */" => "subject_details",
 		"if(`attendance_table`.`date`,date_format(`attendance_table`.`date`,'%d/%m/%Y'),'')" => "date",
 		"`attendance_table`.`status`" => "status",
+		"`attendance_table`.`created_by`" => "created_by",
+		"`attendance_table`.`created_at`" => "created_at",
+		"`attendance_table`.`last_updated_by`" => "last_updated_by",
+		"`attendance_table`.`last_updated_at`" => "last_updated_at",
+		"`attendance_table`.`created_by_username`" => "created_by_username",
+		"`attendance_table`.`last_updated_by_username`" => "last_updated_by_username",
 	];
 	// mapping incoming sort by requests to actual query fields
 	$x->SortFields = [
@@ -31,6 +37,12 @@
 		3 => 3,
 		4 => '`attendance_table`.`date`',
 		5 => 5,
+		6 => 6,
+		7 => 7,
+		8 => 8,
+		9 => 9,
+		10 => 10,
+		11 => 11,
 	];
 
 	// Fields that can be displayed in the csv file
@@ -40,6 +52,12 @@
 		"IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`), '') /* Subject Details */" => "subject_details",
 		"if(`attendance_table`.`date`,date_format(`attendance_table`.`date`,'%d/%m/%Y'),'')" => "date",
 		"`attendance_table`.`status`" => "status",
+		"`attendance_table`.`created_by`" => "created_by",
+		"`attendance_table`.`created_at`" => "created_at",
+		"`attendance_table`.`last_updated_by`" => "last_updated_by",
+		"`attendance_table`.`last_updated_at`" => "last_updated_at",
+		"`attendance_table`.`created_by_username`" => "created_by_username",
+		"`attendance_table`.`last_updated_by_username`" => "last_updated_by_username",
 	];
 	// Fields that can be filtered
 	$x->QueryFieldsFilters = [
@@ -48,6 +66,12 @@
 		"IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`), '') /* Subject Details */" => "Subject Details",
 		"`attendance_table`.`date`" => "Date",
 		"`attendance_table`.`status`" => "Status",
+		"`attendance_table`.`created_by`" => "Created by",
+		"`attendance_table`.`created_at`" => "Created At",
+		"`attendance_table`.`last_updated_by`" => "Last Updated by",
+		"`attendance_table`.`last_updated_at`" => "Last Updated At",
+		"`attendance_table`.`created_by_username`" => "Created by username",
+		"`attendance_table`.`last_updated_by_username`" => "Last Updated By",
 	];
 
 	// Fields that can be quick searched
@@ -57,6 +81,12 @@
 		"IF(    CHAR_LENGTH(`subject_table1`.`id`) || CHAR_LENGTH(`subject_table1`.`subject_name`), CONCAT_WS('',   `subject_table1`.`id`, ' ~ ', `subject_table1`.`subject_name`), '') /* Subject Details */" => "subject_details",
 		"if(`attendance_table`.`date`,date_format(`attendance_table`.`date`,'%d/%m/%Y'),'')" => "date",
 		"`attendance_table`.`status`" => "status",
+		"`attendance_table`.`created_by`" => "created_by",
+		"`attendance_table`.`created_at`" => "created_at",
+		"`attendance_table`.`last_updated_by`" => "last_updated_by",
+		"`attendance_table`.`last_updated_at`" => "last_updated_at",
+		"`attendance_table`.`created_by_username`" => "created_by_username",
+		"`attendance_table`.`last_updated_by_username`" => "last_updated_by_username",
 	];
 
 	// Lookup fields that can be used as filterers
@@ -92,10 +122,10 @@
 	$x->DefaultSortField = '1';
 	$x->DefaultSortDirection = 'desc';
 
-	$x->ColWidth = [150, 150, 150, 150, ];
-	$x->ColCaption = ['Student Details', 'Subject Details', 'Date', 'Status', ];
-	$x->ColFieldName = ['student_details', 'subject_details', 'date', 'status', ];
-	$x->ColNumber  = [2, 3, 4, 5, ];
+	$x->ColWidth = [150, 150, 150, 150, 150, 150, 150, 150, ];
+	$x->ColCaption = ['Student Details', 'Subject Details', 'Date', 'Status', 'Created by', 'Created At', 'Last Updated by', 'Last Updated At', ];
+	$x->ColFieldName = ['student_details', 'subject_details', 'date', 'status', 'created_by', 'created_at', 'last_updated_by', 'last_updated_at', ];
+	$x->ColNumber  = [2, 3, 4, 5, 6, 7, 8, 9, ];
 
 	// template paths below are based on the app main directory
 	$x->Template = 'templates/attendance_table_templateTV.html';
@@ -106,7 +136,7 @@
 	$x->ShowTableHeader = 1;
 	$x->TVClasses = "";
 	$x->DVClasses = "";
-	$x->HasCalculatedFields = false;
+	$x->HasCalculatedFields = true;
 	$x->AllowConsoleLog = false;
 	$x->AllowDVNavigation = true;
 

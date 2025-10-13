@@ -22,6 +22,8 @@ function timetable_table_insert(&$error_message = '') {
 		'day' => Request::val('day', ''),
 		'start_time' => Request::val('start_time', ''),
 		'end_time' => Request::val('end_time', ''),
+		'created_at' => parseCode('<%%creationDateTime%%>', true),
+		'created_by_username' => parseCode('<%%creatorUsername%%>', true),
 	];
 
 	// record owner is current user
@@ -94,6 +96,8 @@ function timetable_table_update(&$selected_id, &$error_message = '') {
 		'day' => Request::val('day', ''),
 		'start_time' => Request::val('start_time', ''),
 		'end_time' => Request::val('end_time', ''),
+		'last_updated_at' => parseCode('<%%editingDateTime%%>', false),
+		'last_updated_by_username' => parseCode('<%%editorUsername%%>', false),
 	];
 
 	// get existing values
@@ -537,6 +541,12 @@ function timetable_table_form($selectedId = '', $allowUpdate = true, $allowInser
 	$templateCode = str_replace('<%%UPLOADFILE(day)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(start_time)%%>', '', $templateCode);
 	$templateCode = str_replace('<%%UPLOADFILE(end_time)%%>', '', $templateCode);
+	$templateCode = str_replace('<%%UPLOADFILE(created_by)%%>', '', $templateCode);
+	$templateCode = str_replace('<%%UPLOADFILE(created_at)%%>', '', $templateCode);
+	$templateCode = str_replace('<%%UPLOADFILE(last_updated_by)%%>', '', $templateCode);
+	$templateCode = str_replace('<%%UPLOADFILE(last_updated_at)%%>', '', $templateCode);
+	$templateCode = str_replace('<%%UPLOADFILE(created_by_username)%%>', '', $templateCode);
+	$templateCode = str_replace('<%%UPLOADFILE(last_updated_by_username)%%>', '', $templateCode);
 
 	// process values
 	if($hasSelectedId) {
@@ -560,6 +570,18 @@ function timetable_table_form($selectedId = '', $allowUpdate = true, $allowInser
 		if( $dvprint) $templateCode = str_replace('<%%VALUE(end_time)%%>', safe_html($urow['end_time']), $templateCode);
 		if(!$dvprint) $templateCode = str_replace('<%%VALUE(end_time)%%>', html_attr($row['end_time']), $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(end_time)%%>', urlencode($urow['end_time']), $templateCode);
+		$templateCode = str_replace('<%%VALUE(created_by)%%>', safe_html($urow['created_by']), $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(created_by)%%>', urlencode($urow['created_by']), $templateCode);
+		$templateCode = str_replace('<%%VALUE(created_at)%%>', safe_html($urow['created_at']), $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(created_at)%%>', urlencode($urow['created_at']), $templateCode);
+		$templateCode = str_replace('<%%VALUE(last_updated_by)%%>', safe_html($urow['last_updated_by']), $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(last_updated_by)%%>', urlencode($urow['last_updated_by']), $templateCode);
+		$templateCode = str_replace('<%%VALUE(last_updated_at)%%>', safe_html($urow['last_updated_at']), $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(last_updated_at)%%>', urlencode($urow['last_updated_at']), $templateCode);
+		$templateCode = str_replace('<%%VALUE(created_by_username)%%>', safe_html($urow['created_by_username']), $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(created_by_username)%%>', urlencode($urow['created_by_username']), $templateCode);
+		$templateCode = str_replace('<%%VALUE(last_updated_by_username)%%>', safe_html($urow['last_updated_by_username']), $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(last_updated_by_username)%%>', urlencode($urow['last_updated_by_username']), $templateCode);
 	} else {
 		$templateCode = str_replace('<%%VALUE(id)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(id)%%>', urlencode(''), $templateCode);
@@ -575,6 +597,18 @@ function timetable_table_form($selectedId = '', $allowUpdate = true, $allowInser
 		$templateCode = str_replace('<%%URLVALUE(start_time)%%>', urlencode(''), $templateCode);
 		$templateCode = str_replace('<%%VALUE(end_time)%%>', '', $templateCode);
 		$templateCode = str_replace('<%%URLVALUE(end_time)%%>', urlencode(''), $templateCode);
+		$templateCode = str_replace('<%%VALUE(created_by)%%>', '', $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(created_by)%%>', urlencode(''), $templateCode);
+		$templateCode = str_replace('<%%VALUE(created_at)%%>', '<%%creationDateTime%%>', $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(created_at)%%>', urlencode('<%%creationDateTime%%>'), $templateCode);
+		$templateCode = str_replace('<%%VALUE(last_updated_by)%%>', '', $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(last_updated_by)%%>', urlencode(''), $templateCode);
+		$templateCode = str_replace('<%%VALUE(last_updated_at)%%>', '<%%editingDateTime%%>', $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(last_updated_at)%%>', urlencode('<%%editingDateTime%%>'), $templateCode);
+		$templateCode = str_replace('<%%VALUE(created_by_username)%%>', '<%%creatorUsername%%>', $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(created_by_username)%%>', urlencode('<%%creatorUsername%%>'), $templateCode);
+		$templateCode = str_replace('<%%VALUE(last_updated_by_username)%%>', '<%%editorUsername%%>', $templateCode);
+		$templateCode = str_replace('<%%URLVALUE(last_updated_by_username)%%>', urlencode('<%%editorUsername%%>'), $templateCode);
 	}
 
 	// process translations

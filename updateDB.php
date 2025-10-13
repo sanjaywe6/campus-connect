@@ -32,31 +32,23 @@
 		setupTable('results_table', []);
 		setupIndexes('results_table', ['exam_details','student_details',]);
 
-		setupTable('attendance_table', []);
+		setupTable('attendance_table', [
+				"ALTER TABLE `attendance_table` ADD `created_by` VARCHAR(255) NULL ",
+				"ALTER TABLE `attendance_table` ADD `created_at` VARCHAR(255) NULL ",
+				"ALTER TABLE `attendance_table` ADD `last_updated_by` VARCHAR(255) NULL ",
+				"ALTER TABLE `attendance_table` ADD `last_updated_at` VARCHAR(255) NULL ",
+				"ALTER TABLE `attendance_table` ADD `created_by_username` VARCHAR(255) NULL ",
+				"ALTER TABLE `attendance_table` ADD `last_updated_by_username` VARCHAR(255) NULL ",
+			]);
 		setupIndexes('attendance_table', ['student_details','subject_details',]);
 
 		setupTable('timetable_table', [
-				"ALTER TABLE `table10` RENAME `timetable_table`",
-				"UPDATE `membership_userrecords` SET `tableName`='timetable_table' WHERE `tableName`='table10'",
-				"UPDATE `membership_userpermissions` SET `tableName`='timetable_table' WHERE `tableName`='table10'",
-				"UPDATE `membership_grouppermissions` SET `tableName`='timetable_table' WHERE `tableName`='table10'",
-				"ALTER TABLE timetable_table ADD `field1` VARCHAR(40)",
-				"ALTER TABLE `timetable_table` CHANGE `id` `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ",
-				"ALTER TABLE `timetable_table` CHANGE `field1` `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ",
-				"ALTER TABLE `timetable_table` ADD `subject_details` INT UNSIGNED NULL ",
-				"ALTER TABLE `timetable_table` ADD INDEX `subject_details`",
-				"ALTER TABLE `timetable_table` ADD `faculty_details` INT UNSIGNED NULL ",
-				"ALTER TABLE `timetable_table` ADD INDEX `faculty_details`",
-				"ALTER TABLE timetable_table ADD `field1` VARCHAR(40)",
-				"ALTER TABLE `timetable_table` CHANGE `field1` `room_details` VARCHAR(255) NULL ",
-				"ALTER TABLE timetable_table ADD `field1` VARCHAR(40)",
-				"ALTER TABLE `timetable_table` CHANGE `field1` `day` VARCHAR(255) NULL ",
-				"ALTER TABLE timetable_table ADD `field1` VARCHAR(40)",
-				"ALTER TABLE `timetable_table` CHANGE `time` `time` TIME NULL ",
-				"ALTER TABLE `timetable_table` CHANGE `field1` `start_time` TIME NULL ",
-				"ALTER TABLE timetable_table ADD `field1` VARCHAR(40)",
-				"ALTER TABLE `timetable_table` CHANGE `time` `time` TIME NULL ",
-				"ALTER TABLE `timetable_table` CHANGE `field1` `end_time` TIME NULL ",
+				"ALTER TABLE `timetable_table` ADD `created_by` VARCHAR(255) NULL ",
+				"ALTER TABLE `timetable_table` ADD `created_at` VARCHAR(255) NULL ",
+				"ALTER TABLE `timetable_table` ADD `last_updated_by` VARCHAR(255) NULL ",
+				"ALTER TABLE `timetable_table` ADD `last_updated_at` VARCHAR(255) NULL ",
+				"ALTER TABLE `timetable_table` ADD `created_by_username` VARCHAR(255) NULL ",
+				"ALTER TABLE `timetable_table` ADD `last_updated_by_username` VARCHAR(255) NULL ",
 			]);
 		setupIndexes('timetable_table', ['subject_details','faculty_details',]);
 
